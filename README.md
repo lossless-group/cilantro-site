@@ -2,6 +2,29 @@
 
 Seed site for new AI core technology, which parses documents and creates a Context AST. 
 
+# Stack
+![Cilantro Site Screenshot](https://ik.imagekit.io/xvpgfijuw/parslee/Screenshot%202025-10-06%20at%207.20.12%E2%80%AFPM.png?updatedAt=1759771396800)
+
+<p align="center">
+  <a href="https://astro.build" target="_blank" rel="noopener">
+    <img src="https://astro.build/assets/press/astro-logo-light-gradient.png" alt="Astro" height="48" />
+  </a>
+  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+  <a href="https://svelte.dev" target="_blank" rel="noopener">
+    <img src="https://ik.imagekit.io/xvpgfijuw/parslee/trademark__Svelte--Lightest.svg?updatedAt=1759772187122" alt="Svelte" height="48" />
+  </a>
+  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+  <a href="https://tailwindcss.com" target="_blank" rel="noopener">
+    <img src="https://ik.imagekit.io/xvpgfijuw/uploads/lossless/trademarks/trademark__TailwindCSS--Lighter.webp?updatedAt=1758016076289" height="42" />
+  </a>
+  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+  <a href="https://vitest.dev" target="_blank" rel="noopener">
+    <span style="display:inline-flex;align-items:center;gap:8px">
+      <img src="https://ik.imagekit.io/xvpgfijuw/uploads/lossless/trademarks/trademark__Vitest.webp?updatedAt=1758016614303" alt="Vitest" height="48" />
+    </span>
+  </a>
+</p>
+
 ## Made with Astro Knots. 
 [The Lossless Group](https://www.lossless.group/)’s multi‑site Astro starter is called [Astro Knots](https://github.com/lossless-group/astro-knots.git). 
 
@@ -22,7 +45,8 @@ To run the site locally, clone the repo and run `pnpm dev`.
 
 - Built with Astro, using Svelte where interactivity makes sense.
 - Avoidant of React patterns and JSX, TSX syntax in clean Astro.
-- Preference from HTML > CSS > Astro > JavaScript > Svelte.  If it can be done with cannonical code, do it with cannonical code.  
+- Preference from HTML > CSS > Astro > JavaScript > Svelte.  If it can be done with cannonical and highly stable Internets code, then do it with cannonical code.  
+ - Reluctant acknowledgement inline styling and market adoption of Tailwind makes initial prototyping easier in Tailwind. 
 - Designed to consume shared packages (tokens, Tailwind presets, component library, brand config, icons) from the `astro-knots` ecosystem.
 - Lives as a Git submodule under `astro-knots/sites/cilantro-site` and as a standalone repo.
 
@@ -31,6 +55,27 @@ To run the site locally, clone the repo and run `pnpm dev`.
 - Environment‑first theme customization: flip site modes and brand via `.env` and config files, which enable rapid theming and multi-branding.
 - Strong theming: design tokens map to Tailwind and CSS variables, enabling consistent branding.
 - Reusable components: Svelte + Astro building blocks that can be themed without duplication.
+- Narrative development through layout sections: each section is a component that can be themed and reused, as well as swapped for new variants.
+
+## Initial Sections & Components
+- BaseHeader
+- BaseFooter
+- BaseLayout
+- Hero Section
+![Cilantro Site Screenshot](https://ik.imagekit.io/xvpgfijuw/parslee/Screenshot%202025-10-06%20at%207.20.12%E2%80%AFPM.png?updatedAt=1759771396800)
+- Problem Section
+![Cilantro Site Screenshot](https://ik.imagekit.io/xvpgfijuw/parslee/Screenshot%202025-10-06%20at%207.20.47%E2%80%AFPM.png?updatedAt=1759771396238)
+- Solution Section
+- Traction Highlights Section
+![Cilantro Site Screenshot](https://ik.imagekit.io/xvpgfijuw/parslee/Screenshot%202025-10-06%20at%207.20.36%E2%80%AFPM.png?updatedAt=1759771395963)
+- Narrative Highlights Section
+![Cilantro Site Screenshot](https://ik.imagekit.io/xvpgfijuw/parslee/Screenshot%202025-10-06%20at%207.20.25%E2%80%AFPM.png?updatedAt=1759771396143)
+- Benefits Section
+![Cilantro Site Screenshot](https://ik.imagekit.io/xvpgfijuw/parslee/Screenshot%202025-10-06%20at%207.20.51%E2%80%AFPM.png?updatedAt=1759771395968)
+- CTA Waitlist Section
+![Cilantro Site Screenshot](https://ik.imagekit.io/xvpgfijuw/parslee/Screenshot%202025-10-06%20at%207.21.00%E2%80%AFPM.png?updatedAt=1759771396016)
+- Initial Trademark, AppIcon, and Favicon assets.
+
 
 ## Repo Layout
 

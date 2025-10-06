@@ -47,7 +47,10 @@ const currentYear = new Date().getFullYear();
           <h4 class="nav-title">Quick Links</h4>
           <nav>
             <div class="hover-slide">
-              <a href="/privacy" class="nav-link">Privacy Policy</a>
+              <a href="/formalities/privacy" class="nav-link">Privacy Policy</a>
+            </div>
+            <div class="hover-slide">
+              <a href="/formalities/terms-of-service" class="nav-link">Terms of Service</a>
             </div>
             <a href="mailto:hello@parslee.ai" class="nav-link hover-slide">Contact Us</a>
             <a href="#" class="nav-link hover-slide">Investor Relations</a>
@@ -137,9 +140,9 @@ const currentYear = new Date().getFullYear();
   .nav-link { display: block; font-family: var(--font-sans); font-size: 0.875rem; color: var(--muted); text-decoration: none; transition: color 0.3s ease; }
   .nav-link:hover { color: var(--accent); }
 
-  .divider { border-top: 1px solid #374151; margin: 0; margin-top: 0.5rem; } /* border-gray-700 */
+  .divider { border-top: 1px solid #374151; margin: 0; margin-top: 1rem; margin-bottom: 1rem; } /* border-gray-700 */
 
-  .bottom-row { display: flex; flex-direction: column; gap: 1rem; justify-content: space-between; align-items: center; }
+  .bottom-row { display: flex; flex-direction: column; gap: 1rem; justify-content: space-between; align-items: center; padding-top: 0.75rem; }
   @media (min-width: 768px) { .bottom-row { flex-direction: row; } }
   .meta { display: flex; align-items: center; gap: 1.5rem; color: #6b7280; font-family: var(--font-sans); font-size: 0.875rem; }
   .dot { display: none; }

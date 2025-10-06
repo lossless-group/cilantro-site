@@ -1,0 +1,34 @@
+---
+import BaseHeader from '../base/BaseHeader.astro';
+import BaseFooter from '../base/BaseFooter.astro';
+
+type MetaTag = {
+  name?: string;
+  content?: string;
+  property?: string;
+  charset?: string;
+  httpEquiv?: string;
+};
+
+interface BaseLayoutProps {
+  title?: string;
+  meta?: MetaTag[];
+}
+
+const { title = 'Parslee', meta = [] } = Astro.props as BaseLayoutProps;
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/appIcon__Parslee.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    {meta.map((m) => <meta {...m} />)}
+    <title>{title}</title>
+  </head>
+  <body>
+    <BaseHeader />
+    <slot />
+    <BaseFooter />
+  </body>
+</html>

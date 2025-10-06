@@ -1,0 +1,174 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const lastUpdated = 'October 6, 2025';
+---
+<BaseLayout title="Terms of Service • Parslee">
+  <main class="policy">
+    <div class="container">
+      <div class="reveal" style="--delay: 0s">
+        <header class="page-header">
+          <h1 class="title">Terms of Service</h1>
+          <p class="subtitle">Last updated: {lastUpdated}</p>
+        </header>
+
+        <div class="content">
+            <section class="section reveal" style="--delay: 0.1s">
+              <h2 class="section-title">Acceptance of Terms</h2>
+              <p class="section-copy">
+                By accessing or using Parslee (the "Service"), you agree to be bound by these Terms of Service (the "Terms"). If you do not agree to these Terms, do not use the Service.
+              </p>
+            </section>
+
+            <section class="section reveal" style="--delay: 0.2s">
+              <h2 class="section-title">Changes to Terms</h2>
+              <p class="section-copy">
+                We may update these Terms from time to time to reflect changes in our practices or for legal, regulatory, or operational reasons. We will post the updated Terms on this page and update the "Last updated" date.
+              </p>
+            </section>
+
+            <section class="section reveal" style="--delay: 0.3s">
+              <h2 class="section-title">Eligibility and Accounts</h2>
+              <p class="section-copy">
+                You must be at least 18 years old to use the Service. If you create an account, you are responsible for maintaining the confidentiality of your login credentials and for all activities under your account.
+              </p>
+            </section>
+
+            <section class="section reveal" style="--delay: 0.4s">
+              <h2 class="section-title">Acceptable Use</h2>
+              <p class="section-copy">
+                You agree not to misuse the Service, including by engaging in illegal activity, infringing intellectual property rights, disrupting service operation, or attempting unauthorized access to systems.
+              </p>
+              <ul class="list">
+                <li>No reverse engineering or unauthorized scraping</li>
+                <li>No interference with security or integrity of the Service</li>
+                <li>No use that violates laws or the rights of others</li>
+              </ul>
+            </section>
+
+            <section class="section reveal" style="--delay: 0.5s">
+              <h2 class="section-title">Intellectual Property</h2>
+              <p class="section-copy">
+                All content, trademarks, logos, and software related to the Service are the property of Parslee or its licensors. You receive a limited, non-exclusive, non-transferable license to use the Service in accordance with these Terms.
+              </p>
+            </section>
+
+            <section class="section reveal" style="--delay: 0.6s">
+              <h2 class="section-title">Fees and Payment</h2>
+              <p class="section-copy">
+                If we offer paid features, fees will be disclosed prior to purchase. By subscribing, you authorize us to charge your chosen payment method. All fees are non-refundable unless required by law.
+              </p>
+            </section>
+
+            <section class="section reveal" style="--delay: 0.7s">
+              <h2 class="section-title">Third-Party Services</h2>
+              <p class="section-copy">
+                The Service may integrate with third-party platforms. We are not responsible for third-party content, policies, or actions. Your use of third-party services is subject to their terms.
+              </p>
+            </section>
+
+            <section class="section reveal" style="--delay: 0.8s">
+              <h2 class="section-title">Disclaimer of Warranties</h2>
+              <p class="section-copy">
+                The Service is provided on an "as is" and "as available" basis without warranties of any kind, express or implied, including merchantability, fitness for a particular purpose, and non-infringement.
+              </p>
+            </section>
+
+            <section class="section reveal" style="--delay: 0.85s">
+              <h2 class="section-title">Limitation of Liability</h2>
+              <p class="section-copy">
+                To the maximum extent permitted by law, Parslee will not be liable for indirect, incidental, special, consequential, or punitive damages, or any loss of profits, data, use, goodwill, or other intangible losses.
+              </p>
+            </section>
+
+            <section class="section reveal" style="--delay: 0.9s">
+              <h2 class="section-title">Indemnification</h2>
+              <p class="section-copy">
+                You agree to indemnify and hold Parslee and its affiliates harmless from any claims, liabilities, damages, losses, and expenses, including reasonable attorney’s fees, arising out of your use of the Service or violation of these Terms.
+              </p>
+            </section>
+
+            <section class="section reveal" style="--delay: 0.95s">
+              <h2 class="section-title">Termination</h2>
+              <p class="section-copy">
+                We may suspend or terminate access to the Service at any time, with or without cause or notice. Upon termination, your right to use the Service will immediately cease.
+              </p>
+            </section>
+
+            <section class="section reveal" style="--delay: 1s">
+              <h2 class="section-title">Governing Law</h2>
+              <p class="section-copy">
+                These Terms are governed by the laws of the State of Georgia, without regard to conflict of law principles. You agree to the exclusive jurisdiction of courts located in Georgia.
+              </p>
+            </section>
+
+            <section class="section reveal" style="--delay: 1.05s">
+              <h2 class="section-title">Contact Us</h2>
+              <p class="section-copy">
+                For questions about these Terms, contact us at:
+              </p>
+              <div class="contact-card">
+                <p><strong>Email:</strong> legal@parslee.ai</p>
+                <p><strong>Company:</strong> Parslee by Volato Group</p>
+                <p><strong>Address:</strong> [Company Address]</p>
+              </div>
+            </section>
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+    <style>
+      :root {
+        --blue: #091B35;
+        --text: #111827;
+        --muted: #6B7280;
+        --bg: #FFFFFF;
+      }
+
+      .policy { background: var(--bg); min-height: 100vh; }
+      .container { max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; padding-top: 6rem; padding-bottom: 6rem; }
+
+      .page-header { text-align: center; margin-bottom: 3rem; }
+      .title { color: var(--blue); font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 700; }
+      .subtitle { color: var(--muted); margin-top: 0.5rem; }
+
+      .content { display: grid; gap: 2rem; }
+      .section { display: grid; gap: 0.75rem; }
+      .section-title { color: var(--blue); font-size: clamp(1.25rem, 2.5vw, 1.5rem); font-weight: 600; }
+      .sub-title { color: var(--blue); font-weight: 600; }
+      .section-copy { color: var(--text); line-height: 1.7; }
+      .list { list-style: disc; padding-left: 1.25rem; color: var(--text); }
+      .list-block { display: grid; gap: 1rem; }
+      .contact-card { background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 0.75rem; padding: 1rem 1.25rem; color: var(--text); }
+
+      /* CSS-only motion; reveal on intersection */
+      .reveal { opacity: 0; transform: translateY(20px); transition: opacity 600ms ease, transform 600ms ease; transition-delay: var(--delay, 0s); }
+      .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+      @media (prefers-reduced-motion: reduce) {
+        .reveal { transition: none; opacity: 1; transform: none; }
+      }
+    </style>
+
+    <script>
+      (function () {
+        const elements = document.querySelectorAll('.reveal');
+        if (!('IntersectionObserver' in window) || elements.length === 0) {
+          elements.forEach((el) => el.classList.add('in-view'));
+          return;
+        }
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        elements.forEach((el) => observer.observe(el));
+      })();
+    </script>
+  </body>
+</html>

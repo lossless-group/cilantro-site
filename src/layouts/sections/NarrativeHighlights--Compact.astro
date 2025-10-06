@@ -1,0 +1,106 @@
+---
+// NarrativeHighlights--Compact.astro
+// Compact variant of Narrative Highlights with tighter spacing and two-column layout.
+---
+<section id="narrative-compact" class="narrative compact" aria-label="Narrative (Compact)">
+  <div class="container">
+    <div class="wrap text-left reveal" style="--delay: 0s">
+      <h2 class="title">
+        Solving the <span class="accent">Hard Part</span> of AI
+      </h2>
+
+      <div class="points points-compact">
+        <div class="point reveal-left" style="--delay: 0s">
+          <span class="line" aria-hidden="true"></span>
+          <p class="copy">AI adoption is accelerating — but most teams still hit a wall with real-world documents.</p>
+        </div>
+        <div class="point reveal-left" style="--delay: 0.1s">
+          <span class="line" aria-hidden="true"></span>
+          <p class="copy">The issue isn’t the model — it’s the messy files: contracts, SOPs, and reports buried across drives.</p>
+        </div>
+        <div class="point reveal-left" style="--delay: 0.2s">
+          <span class="line" aria-hidden="true"></span>
+          <p class="copy">Parslee makes it dramatically easier for AI to read, reason over, and act on business documents.</p>
+        </div>
+        <div class="point reveal-left" style="--delay: 0.3s">
+          <span class="line" aria-hidden="true"></span>
+          <p class="copy">Unlocks practical value across legal, finance, operations — not just another chatbot.</p>
+        </div>
+      </div>
+
+      <div class="emphasis emphasis-compact reveal" style="--delay: 0.4s">
+        <div class="emphasis-row">
+          <span class="dot" aria-hidden="true"></span>
+          <p class="quote">
+            "When AI can finally understand your documents, everything changes."
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --ink: #091B35;
+    --accent-a: #00A991;
+    --accent-b: #3FE0DE;
+    --text: #374151;
+    --text-strong: #111827;
+    --muted: #6B7280;
+    --bg: #ffffff;
+    --border: #E5E7EB;
+  }
+
+  .narrative { background: var(--bg); padding: 72px 0; }
+  @media (min-width: 1024px) { .narrative { padding: 96px 0; } }
+  .container { max-width: 896px; margin: 0 auto; padding: 0 24px; }
+
+  .title {
+    font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .title .accent { background: linear-gradient(90deg, var(--accent-a), var(--accent-b)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  .points-compact { display: grid; gap: 16px; grid-template-columns: 1fr; }
+  @media (min-width: 768px) { .points-compact { grid-template-columns: 1fr 1fr; gap: 18px; } }
+  .point { position: relative; padding-left: 22px; }
+  .line { position: absolute; left: 0; top: 0.6rem; width: 3px; height: 20px; border-radius: 999px; background-image: linear-gradient(180deg, var(--accent-a), var(--accent-b)); opacity: 0.7; }
+  .copy { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-size: clamp(1rem, 2.3vw, 1.125rem); color: var(--text); line-height: 1.6; }
+  .point:hover .copy { color: var(--text-strong); }
+
+  .emphasis-compact { margin-top: 24px; padding: 16px; border: 1px solid color-mix(in oklab, var(--accent-b) 22%, white); border-radius: 16px; background-image: linear-gradient(90deg, #F0F9FF, #ECFDF5); }
+  .emphasis-row { display: flex; align-items: flex-start; gap: 10px; }
+  .dot { width: 7px; height: 7px; border-radius: 999px; background: var(--accent-a); margin-top: 10px; flex-shrink: 0; }
+  .quote { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-size: 1.05rem; color: var(--ink); font-style: italic; }
+
+  /* Reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 500ms ease, transform 500ms ease; transition-delay: var(--delay, 0s); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal-left { opacity: 0; transform: translateX(-20px); transition: opacity 500ms ease, transform 500ms ease; transition-delay: var(--delay, 0s); }
+  .reveal-left.in { opacity: 1; transform: translateX(0); }
+</style>
+
+<script type="module">
+  function onReady(fn) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fn);
+    } else {
+      fn();
+    }
+  }
+
+  onReady(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+        }
+      });
+    }, { rootMargin: '-100px 0px', threshold: 0.1 });
+
+    document.querySelectorAll('.reveal, .reveal-left').forEach((el) => observer.observe(el));
+  });
+</script>
