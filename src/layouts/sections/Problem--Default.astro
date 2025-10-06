@@ -1,0 +1,145 @@
+---
+// Problem--Default.astro
+// Ported from React (motion/react) to Astro with CSS-only motion and minimal JS.
+// No external icon or animation libraries used.
+---
+<section id="problem" class="problem" aria-label="Problem">
+  <div class="container">
+    <div class="grid">
+      <!-- Left content -->
+      <div class="left">
+        <div class="header reveal">
+          <div class="icon-wrap danger">
+            <svg class="icon" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+          </div>
+          <h2 class="title">The Problem</h2>
+        </div>
+
+        <div class="copy reveal" style="--delay: 0.2s">
+          <p>
+            AI has immense promise for business. But it struggles with one of the biggest sources of company knowledge:
+            <strong class="strong">documents</strong>.
+          </p>
+          <p>
+            Most of a company's important information — contracts, policies, reports, SOPs — lives in PDFs, Word files, and SharePoint folders. These are long, complex, and poorly structured.
+            <strong class="danger-strong">Even advanced AI tools get lost in them.</strong>
+          </p>
+        </div>
+
+        <div class="points reveal" style="--delay: 0.4s">
+          <div class="point">
+            <span class="file-icon" aria-hidden="true"></span>
+            <span>AI can't navigate complex document structures</span>
+          </div>
+          <div class="point">
+            <span class="file-icon" aria-hidden="true"></span>
+            <span>Information scattered across different file formats</span>
+          </div>
+          <div class="point">
+            <span class="file-icon" aria-hidden="true"></span>
+            <span>No reliable way to verify AI-generated answers</span>
+          </div>
+          <div class="point">
+            <span class="file-icon" aria-hidden="true"></span>
+            <span>LLMs hallucinate or skip key clauses</span>
+          </div>
+          <div class="point">
+            <span class="file-icon" aria-hidden="true"></span>
+            <span>Generic tools don't understand business context</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right visual -->
+      <div class="right reveal" style="--delay: 0.2s">
+        <div class="visual">
+          <img
+            class="image"
+            src="https://images.unsplash.com/photo-1583521214690-73421a1829a9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjbHV0dGVyZWQlMjBkb2N1bWVudHMlMjBwYXBlcnMlMjBzdGFjayUyMG9mZmljZXxlbnwxfHx8fDE3NTk1NTQ3NzN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+            alt="Cluttered documents and papers representing the problem"
+            loading="lazy"
+          />
+          <div class="overlay" aria-hidden="true"></div>
+
+          <!-- Floating indicators -->
+          <div class="badge badge-danger" aria-live="polite">AI Error</div>
+          <div class="badge badge-warn" aria-live="polite" style="--delay: 1s">Information Lost</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --blue: #091B35;
+    --blue-70: rgba(9, 27, 53, 0.7);
+    --text: #374151;
+    --danger: #EF4444; /* red-500 */
+    --danger-bg: #FEF2F2; /* red-50 */
+    --warn: #F59E0B; /* yellow-500 */
+    --border: #E5E7EB;
+  }
+
+  .problem { background: #fff; padding: 96px 0; }
+  @media (min-width: 1024px) { .problem { padding: 128px 0; } }
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  .grid { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
+  @media (min-width: 1024px) { .grid { grid-template-columns: 1fr 1fr; gap: 64px; } }
+
+  .left { display: grid; gap: 24px; }
+  .header { display: flex; align-items: center; gap: 16px; }
+  .icon-wrap { padding: 12px; border-radius: 16px; background: var(--danger-bg); color: var(--danger); display: inline-flex; }
+  .title { font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-size: clamp(2rem, 4vw, 3rem); color: var(--blue); }
+
+  .copy { display: grid; gap: 16px; }
+  .copy p { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-size: clamp(1.125rem, 2.2vw, 1.25rem); color: var(--text); line-height: 1.6; }
+  .strong { color: var(--blue); font-weight: 600; }
+  .danger-strong { color: var(--danger); font-weight: 600; }
+
+  .points { display: grid; gap: 12px; }
+  .point { display: flex; align-items: flex-start; gap: 12px; color: var(--text); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+  .file-icon { width: 20px; height: 20px; margin-top: 2px; flex-shrink: 0; border-radius: 4px; background: var(--danger); mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>'); mask-size: cover; }
+
+  .right { position: relative; }
+  .visual { position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.08); background: #fff; }
+  .image { width: 100%; height: 400px; object-fit: cover; }
+  @media (min-width: 1024px) { .image { height: 500px; } }
+  .overlay { position: absolute; inset: 0; background-image: linear-gradient(to top, rgba(127,29,29,0.3), transparent); }
+
+  .badge { position: absolute; border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color: #fff; animation: pulse 2s ease-in-out infinite; opacity: 0.9; }
+  .badge-danger { top: 16px; right: 16px; background: var(--danger); }
+  .badge-warn { bottom: 16px; left: 16px; background: var(--warn); animation-delay: var(--delay, 0s); }
+
+  @keyframes pulse { 0% { opacity: 0.7; } 50% { opacity: 1; } 100% { opacity: 0.7; } }
+
+  /* Reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 600ms ease, transform 600ms ease; transition-delay: var(--delay, 0s); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+</style>
+
+<script type="module">
+  function onReady(fn) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fn);
+    } else {
+      fn();
+    }
+  }
+
+  onReady(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+        }
+      });
+    }, { rootMargin: '-100px 0px', threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  });
+</script>

@@ -1,3 +1,256 @@
 ---
-/* Base Header */
+// BaseHeader.astro
+// Ported from React Navigation component to Astro with CSS-based motion only.
+// No external UI or animation libraries used.
+
+const navItems = [
+  { name: 'Product', href: '#hero' },
+  { name: 'Problem', href: '#problem' },
+  { name: 'Solution', href: '#solution' },
+  { name: 'Why Parslee', href: '#narrative' },
+  { name: 'Benefits', href: '#benefits' },
+  { name: 'Beta Access', href: '#waitlist' },
+  { name: 'Contact', href: '#contact' }
+];
+
+
+const isHomePage = Astro.url.pathname === '/';
+const headerHeight = 72; // px
 ---
+<header class="header" id="site-header" aria-label="Primary">
+  <div class="container">
+    <div class="row">
+      <div class="logo">
+        {isHomePage ? (
+          <button class="logo-btn" onclick="smoothScroll('#hero')" aria-label="Go to hero">
+            <img src="/trademark__Parslee--Darkest.svg" alt="Parslee" class="logo-img" />
+          </button>
+        ) : (
+          <a href="/" class="logo-link" aria-label="Back to Home">
+            <img src="/trademark__Parslee--Darkest.svg" alt="Parslee" class="logo-img" />
+          </a>
+        )}
+      </div>
+
+      {isHomePage ? (
+        <nav class="desktop-nav" aria-label="Site">
+          {navItems.map((item) => (
+            <button class="nav-item" data-section={item.href.replace('#','')} onclick={`smoothScroll('${item.href}')`}>
+              <span class="nav-label">{item.name}</span>
+              <span class="indicator" aria-hidden="true"></span>
+            </button>
+          ))}
+        </nav>
+      ) : (
+        <nav class="desktop-nav" aria-label="Site">
+          <a href="/" class="back-home">Back to Home</a>
+        </nav>
+      )}
+
+      <a href="https://www.flyvolato.com" target="_blank" rel="noopener noreferrer" class="investors-btn" aria-label="Investors">
+        <span>Investors</span>
+        <svg class="icon external" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M18 13v6H6V8h6"/>
+          <path d="M15 3h6v6"/>
+          <path d="M10 14L21 3"/>
+        </svg>
+      </a>
+
+      <button id="mobile-toggle" class="mobile-btn" aria-label="Toggle menu" aria-haspopup="true" aria-controls="mobile-menu" aria-expanded="false">
+        <svg class="icon menu" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+        <svg class="icon close" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div id="mobile-menu" class="mobile-overlay" aria-hidden="true">
+  <div class="backdrop"></div>
+  <div class="panel">
+    <div class="panel-inner">
+      {isHomePage ? (
+        <div class="panel-list">
+          {navItems.map((item) => (
+            <button class="panel-item" data-section={item.href.replace('#','')} onclick={`smoothScroll('${item.href}')`}>
+              {item.name}
+            </button>
+          ))}
+        </div>
+      ) : (
+        <a href="/" class="panel-item" onclick="closeMobile()">Back to Home</a>
+      )}
+
+      <a href="https://www.flyvolato.com" target="_blank" rel="noopener noreferrer" class="panel-investors" onclick="closeMobile()">
+        <span>Investors</span>
+        <svg class="icon external" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M18 13v6H6V8h6"/>
+          <path d="M15 3h6v6"/>
+          <path d="M10 14L21 3"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div style={`height: ${headerHeight}px;`}></div>
+
+<style>
+  :root {
+    --blue: #091B35;
+    --blue-70: rgba(9, 27, 53, 0.7);
+    --teal: #00A991;
+    --cyan: #3FE0DE;
+    --border: #E5E7EB;
+  }
+
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: #fff; /* solid background to avoid visual confusion */
+    border-bottom: 1px solid var(--border);
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  }
+  /* solid header always; scrolled state kept for potential future use */
+  .header.scrolled { background: #fff; }
+
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  .row { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-text { color: var(--blue); font-weight: 600; }
+  .logo-img { display: block; height: 28px; }
+  @media (min-width: 768px) { .logo-img { height: 32px; } }
+  .logo-btn, .logo-link { cursor: pointer; background: none; border: none; padding: 0; }
+  .logo-btn:hover, .logo-link:hover { transform: translateY(-1px); }
+  .logo-btn:active, .logo-link:active { transform: translateY(0); }
+
+  .desktop-nav { display: none; align-items: center; gap: 24px; }
+  @media (min-width: 1024px) { .desktop-nav { display: flex; } }
+
+  .nav-item { position: relative; background: none; border: none; padding: 0; cursor: pointer; color: var(--blue-70); font-size: 16px; transition: color 200ms ease; }
+  .nav-item:hover { color: var(--blue); }
+  .nav-item.active { color: var(--blue); }
+  .nav-item .indicator { position: absolute; left: 0; bottom: -4px; height: 2px; width: 0; background: linear-gradient(to right, var(--teal), var(--cyan)); transition: width 200ms ease; }
+  .nav-item:hover .indicator { width: 100%; }
+  .nav-item.active .indicator { width: 100%; }
+  .nav-label { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+
+  .investors-btn { display: none; align-items: center; gap: 8px; padding: 12px 16px; border-radius: 8px; color: #fff; text-decoration: none; background-image: linear-gradient(to right, var(--blue), var(--teal)); box-shadow: 0 10px 20px rgba(9,27,53,0.15); transition: transform 200ms ease, box-shadow 200ms ease; }
+  .investors-btn:hover { transform: translateY(-1px) scale(1.02); box-shadow: 0 12px 24px rgba(9,27,53,0.2); }
+  .investors-btn:active { transform: scale(0.98); }
+  @media (min-width: 1024px) { .investors-btn { display: inline-flex; } }
+
+  .mobile-btn { display: inline-flex; padding: 8px; color: var(--blue); background: none; border: none; }
+  @media (min-width: 1024px) { .mobile-btn { display: none; } }
+  .mobile-btn .icon { transition: opacity 200ms ease, transform 200ms ease; }
+  .mobile-btn .close { opacity: 0; position: absolute; }
+  .mobile-btn[aria-expanded="true"] .menu { opacity: 0; }
+  .mobile-btn[aria-expanded="true"] .close { opacity: 1; position: static; }
+
+  /* Mobile overlay */
+  .mobile-overlay { position: fixed; inset: 0; z-index: 40; pointer-events: none; opacity: 0; visibility: hidden; transition: opacity 300ms ease, visibility 300ms ease; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+  .mobile-overlay.open { pointer-events: auto; opacity: 1; visibility: visible; }
+  .mobile-overlay .backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.2); backdrop-filter: blur(4px); }
+  .mobile-overlay .panel { position: absolute; top: 72px; left: 0; right: 0; background: #fff; border-bottom: 1px solid #e5e7eb; box-shadow: 0 10px 20px rgba(0,0,0,0.05); transform: translateY(-20px); opacity: 0; transition: transform 300ms ease, opacity 300ms ease; }
+  .mobile-overlay.open .panel { transform: translateY(0); opacity: 1; }
+  .panel-inner { padding: 16px 24px; }
+  .panel-list { display: grid; gap: 12px; }
+  .panel-item { display: block; width: 100%; text-align: left; font-size: 18px; padding: 8px 0; color: var(--blue-70); background: none; border: none; cursor: pointer; }
+  .panel-item.active { color: var(--blue); }
+  .panel-investors { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin-top: 16px; padding: 12px 16px; border-radius: 8px; color: #fff; text-decoration: none; background-image: linear-gradient(to right, var(--blue), var(--teal)); }
+
+  /* Utility */
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+</style>
+
+<script>
+  const HEADER_HEIGHT = 72;
+  const sections = ['hero','problem','solution','narrative','benefits','waitlist','contact'];
+
+  function getActiveSection() {
+    let current = 'hero';
+    for (const id of sections) {
+      const el = document.getElementById(id);
+      if (!el) continue;
+      const rect = el.getBoundingClientRect();
+      if (rect.top <= 100 && rect.bottom >= 100) {
+        current = id;
+      }
+    }
+    return current;
+  }
+
+  function updateActiveLinks() {
+    const active = getActiveSection();
+    document.querySelectorAll('.nav-item').forEach((btn) => {
+      const sec = btn.getAttribute('data-section') || '';
+      btn.classList.toggle('active', sec === active);
+    });
+    document.querySelectorAll('#mobile-menu .panel-item').forEach((btn) => {
+      const sec = btn.getAttribute('data-section') || '';
+      if (!sec) return;
+      btn.classList.toggle('active', sec === active);
+    });
+  }
+
+  function onScroll() {
+    updateActiveLinks();
+  }
+
+  // Expose to inline onclick handlers
+  window.smoothScroll = function (href) {
+    const id = href.replace('#','');
+    const el = document.getElementById(id);
+    if (!el) return;
+    const elementTop = el.getBoundingClientRect().top + window.pageYOffset;
+    const offsetTop = elementTop - HEADER_HEIGHT;
+    window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+    window.closeMobile();
+  };
+
+  function getOverlay() { return document.getElementById('mobile-menu'); }
+  function getToggle() { return document.getElementById('mobile-toggle'); }
+
+  window.openMobile = function () {
+    const overlay = getOverlay();
+    const toggle = getToggle();
+    if (!overlay || !toggle) return;
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden','false');
+    toggle.setAttribute('aria-expanded','true');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeMobile = function () {
+    const overlay = getOverlay();
+    const toggle = getToggle();
+    if (!overlay || !toggle) return;
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden','true');
+    toggle.setAttribute('aria-expanded','false');
+    document.body.style.overflow = '';
+  };
+
+  window.toggleMobile = function () {
+    const overlay = getOverlay();
+    if (!overlay) return;
+    if (overlay.classList.contains('open')) window.closeMobile(); else window.openMobile();
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = getToggle();
+    if (toggle) toggle.addEventListener('click', window.toggleMobile, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  });
+</script>

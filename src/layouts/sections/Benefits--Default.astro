@@ -1,0 +1,252 @@
+---
+// Benefits content for the homepage, CSS-only motion (no external libs)
+const benefits = [
+  {
+    key: 'file',
+    title: 'AI built for documents, not chat',
+    description: 'Purpose-built for complex business documents',
+  },
+  {
+    key: 'building',
+    title: 'Works natively in Microsoft 365',
+    description: 'Seamless integration with your existing workflow',
+  },
+  {
+    key: 'check',
+    title: 'Verifiable answers + structured outputs',
+    description: 'Trust your results with line-level citations',
+  },
+  {
+    key: 'trend',
+    title: 'Developed by Volato Group (NYSE: SOAR)',
+    description: 'Enterprise-grade reliability and backing',
+  },
+];
+---
+
+<section id="benefits" class="benefits-section">
+  <div class="container">
+    <div class="tldr reveal-on-scroll">
+      <span class="tldr-pill">TL;DR</span>
+      <h2 class="headline">Why Parslee Changes Everything</h2>
+      <p class="subhead">
+        The key benefits that make Parslee the document AI platform your team actually needs.
+      </p>
+    </div>
+
+    <div class="benefits-grid">
+      {benefits.map((b, index) => (
+        <article class="benefit-card reveal-on-scroll" style={`--stagger: ${index * 0.1}s`}>
+          <div class="icon-wrap">
+            {b.key === 'file' && (
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z"/>
+                <path fill="currentColor" d="M14 2v6h6" opacity="0.3"/>
+                <path fill="currentColor" d="M8 13h8M8 17h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            )}
+            {b.key === 'building' && (
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="4" y="3" width="16" height="18" rx="2" ry="2" fill="currentColor"/>
+                <path d="M8 7h2M8 11h2M8 15h2M14 7h2M14 11h2M14 15h2" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            )}
+            {b.key === 'check' && (
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" fill="currentColor"/>
+                <path d="M8 12l3 3 5-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              </svg>
+            )}
+            {b.key === 'trend' && (
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 17l6-6 4 4 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              </svg>
+            )}
+          </div>
+
+          <div class="content">
+            <h3 class="title">{b.title}</h3>
+            <p class="desc">{b.description}</p>
+          </div>
+
+          <div class="hover-indicator" />
+        </article>
+      ))}
+    </div>
+
+    <div class="bottom-emphasis reveal-on-scroll">
+      <div class="emphasis-row">
+        <span class="dot dot-a" />
+        <span class="emphasis-text">Ready to experience the difference?</span>
+        <span class="dot dot-b" />
+      </div>
+    </div>
+  </div>
+
+  <style>
+    :root {
+      --brand-a: #00A991;
+      --brand-b: #3FE0DE;
+      --ink: #091B35;
+      --ink-muted: #4b5563; /* gray-600 */
+      --surface: #ffffff;
+      --bg: #f9fafb; /* gray-50 */
+      --border: #e5e7eb; /* gray-200 */
+    }
+
+    .benefits-section {
+      background: var(--bg);
+      padding: 96px 0; /* py-24 */
+    }
+    .container {
+      max-width: 1120px; /* ~max-w-7xl */
+      margin: 0 auto;
+      padding: 0 24px; /* px-6 */
+    }
+
+    /* TL;DR header */
+    .tldr {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .tldr-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--ink);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    }
+    .headline {
+      color: var(--ink);
+      font-family: 'DM Sans', Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      font-weight: 600;
+      font-size: 28px;
+      line-height: 1.2;
+      margin: 0 0 12px 0;
+    }
+    @media (min-width: 1024px) {
+      .headline { font-size: 36px; }
+    }
+    .subhead {
+      color: var(--ink-muted);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      font-size: 18px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* Grid */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    @media (min-width: 768px) {
+      .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .benefits-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    /* Card */
+    .benefit-card {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 24px;
+      min-height: 200px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
+      transition: transform 200ms ease, box-shadow 300ms ease, border-color 300ms ease;
+    }
+    .benefit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 24px rgba(9,27,53,0.12);
+      border-color: color-mix(in oklab, var(--brand-b) 30%, var(--border));
+    }
+
+    .icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, color-mix(in oklab, var(--brand-a) 10%, transparent), color-mix(in oklab, var(--brand-b) 10%, transparent));
+      transform: translateZ(0);
+      transition: transform 300ms ease;
+    }
+    .benefit-card:hover .icon-wrap { transform: scale(1.08); }
+    .icon { width: 24px; height: 24px; color: var(--brand-a); }
+
+    .content { display: grid; gap: 8px; }
+    .title {
+      font-family: 'DM Sans', Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      font-size: 18px;
+      color: var(--ink);
+      line-height: 1.3;
+      margin: 0;
+    }
+    .desc {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--ink-muted);
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .hover-indicator {
+      margin-top: 16px;
+      width: 32px;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--brand-a), var(--brand-b));
+      opacity: 0;
+      transition: opacity 300ms ease;
+    }
+    .benefit-card:hover .hover-indicator { opacity: 1; }
+
+    /* Bottom emphasis */
+    .bottom-emphasis { text-align: center; margin-top: 64px; }
+    .emphasis-row { display: inline-flex; align-items: center; gap: 12px; color: var(--ink); }
+    .dot { width: 8px; height: 8px; border-radius: 999px; display: inline-block; }
+    .dot-a { background: var(--brand-a); }
+    .dot-b { background: var(--brand-b); }
+    .emphasis-text { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-size: 18px; }
+
+    /* Reveal-on-scroll CSS-only motion */
+    .reveal-on-scroll { opacity: 0; transform: translateY(20px); }
+    .reveal-on-scroll.in-view {
+      animation: fadeUp 600ms ease forwards;
+      animation-delay: var(--stagger, 0s);
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+
+  <script type="module">
+    // Lightweight IntersectionObserver to toggle the reveal-on-scroll animation
+    document.addEventListener('DOMContentLoaded', () => {
+      const elements = document.querySelectorAll('.reveal-on-scroll');
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
+        }
+      }, { rootMargin: '-80px 0px' });
+
+      elements.forEach((el) => observer.observe(el));
+    });
+  </script>
+</section>

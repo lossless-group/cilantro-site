@@ -1,0 +1,115 @@
+---
+// NarrativeHighlights--Default.astro
+// Ported from React to Astro with CSS-only motion (no external libs).
+// Implements narrative points with staggered reveal and an emphasis block.
+---
+<section id="narrative" class="narrative" aria-label="Narrative">
+  <div class="container">
+    <div class="wrap text-left reveal" style="--delay: 0s">
+      <h2 class="title">
+        Solving the <span class="accent">Hard Part</span> of AI
+      </h2>
+
+      <div class="points">
+        <div class="point reveal-left" style="--delay: 0.0s">
+          <span class="line" aria-hidden="true"></span>
+          <p class="copy">
+            AI adoption is accelerating — but most businesses still hit a wall when it comes to real-world documents.
+          </p>
+        </div>
+        <div class="point reveal-left" style="--delay: 0.15s">
+          <span class="line" aria-hidden="true"></span>
+          <p class="copy">
+            The problem isn't the AI itself. It's the messy, complex files where critical information lives — contracts, SOPs, reports — buried in SharePoint folders and shared drives.
+          </p>
+        </div>
+        <div class="point reveal-left" style="--delay: 0.3s">
+          <span class="line" aria-hidden="true"></span>
+          <p class="copy">
+            Parslee tackles this bottleneck head-on, making it dramatically easier for AI to read, reason over, and act on business documents.
+          </p>
+        </div>
+        <div class="point reveal-left" style="--delay: 0.45s">
+          <span class="line" aria-hidden="true"></span>
+          <p class="copy">
+            This unlocks real value from AI — across legal, finance, ops, and more.
+          </p>
+        </div>
+        <div class="point reveal-left" style="--delay: 0.6s">
+          <span class="line" aria-hidden="true"></span>
+          <p class="copy">
+            It's infrastructure-level AI — not another chatbot.
+          </p>
+        </div>
+      </div>
+
+      <div class="emphasis reveal" style="--delay: 0.8s">
+        <div class="emphasis-row">
+          <span class="dot" aria-hidden="true"></span>
+          <p class="quote">
+            "When AI can finally understand your documents, everything changes. That's what we're building at Parslee."
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --ink: #091B35;
+    --accent-a: #00A991;
+    --accent-b: #3FE0DE;
+    --text: #374151;
+    --text-strong: #111827;
+    --muted: #6B7280;
+    --bg: #ffffff;
+    --border: #E5E7EB;
+  }
+
+  .narrative { background: var(--bg); padding: 96px 0; }
+  @media (min-width: 1024px) { .narrative { padding: 128px 0; } }
+  .container { max-width: 896px; margin: 0 auto; padding: 0 24px; }
+
+  .title { font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-size: clamp(2rem, 4vw, 3rem); color: var(--ink); margin-bottom: 32px; }
+  .accent { background-image: linear-gradient(90deg, var(--accent-a), var(--accent-b)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  .points { display: grid; gap: 24px; }
+  .point { position: relative; }
+  .line { position: absolute; left: 0; top: 0.75rem; width: 4px; height: 24px; border-radius: 999px; background-image: linear-gradient(180deg, var(--accent-a), var(--accent-b)); opacity: 0.6; }
+  .copy { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-size: clamp(1.125rem, 2.4vw, 1.375rem); color: var(--text); line-height: 1.7; padding-left: 24px; transition: color 300ms ease; }
+  .point:hover .copy { color: var(--text-strong); }
+
+  .emphasis { margin-top: 40px; padding: 24px; border: 1px solid color-mix(in oklab, var(--accent-b) 24%, white); border-radius: 24px; background-image: linear-gradient(90deg, #F0F9FF, #ECFDF5); }
+  .emphasis-row { display: flex; align-items: flex-start; gap: 12px; }
+  .dot { width: 8px; height: 8px; border-radius: 999px; background: var(--accent-a); margin-top: 10px; flex-shrink: 0; }
+  .quote { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-size: 1.25rem; color: var(--ink); font-style: italic; }
+
+  /* Reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 600ms ease, transform 600ms ease; transition-delay: var(--delay, 0s); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal-left { opacity: 0; transform: translateX(-16px); transition: opacity 600ms ease, transform 600ms ease; transition-delay: var(--delay, 0s); }
+  .reveal-left.in { opacity: 1; transform: translateX(0); }
+</style>
+
+<script type="module">
+  function onReady(fn) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fn);
+    } else {
+      fn();
+    }
+  }
+
+  onReady(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+        }
+      });
+    }, { rootMargin: '-100px 0px', threshold: 0.1 });
+
+    document.querySelectorAll('.reveal, .reveal-left').forEach((el) => observer.observe(el));
+  });
+</script>

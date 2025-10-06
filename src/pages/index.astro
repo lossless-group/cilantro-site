@@ -1,16 +1,33 @@
 ---
-
+import BaseHeader from '../base/BaseHeader.astro';
+import BaseFooter from '../base/BaseFooter.astro';
+import HeroSection from '../layouts/sections/Hero--Default.astro';
+import ProblemSection from '../layouts/sections/Problem--Default.astro';
+import SolutionSection from '../layouts/sections/Solution--Default.astro';
+import TractionHighlightsSection from '../layouts/sections/TractionHighlights--Default.astro';
+import NarrativeHighlightsSection from '../layouts/sections/NarrativeHighlights--Default.astro'
+import BenefitsSection from '../layouts/sections/Benefits--Default.astro';
+import CTAWaitlistSection from '../layouts/sections/CTA-Waitlist--Default.astro';
 ---
 
+
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Parslee</title>
+  </head>
+  <body>
+    <BaseHeader />
+    <HeroSection />
+    <ProblemSection />
+    <SolutionSection />
+    <TractionHighlightsSection />
+    <NarrativeHighlightsSection />
+    <BenefitsSection />
+    <CTAWaitlistSection />
+    <BaseFooter />
+  </body>
 </html>

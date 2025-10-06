@@ -1,0 +1,167 @@
+---
+// CTA Waitlist section, CSS-only motion (no external libraries)
+const bullets = ['Early beta access', 'Product updates', 'Investor news'];
+---
+
+<section id="waitlist" class="waitlist-section">
+  <!-- Background pattern -->
+  <div class="bg-gradient" aria-hidden="true"></div>
+  <div class="bg-blurs" aria-hidden="true">
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+  </div>
+
+  <div class="container">
+    <div class="stack reveal-on-scroll">
+      <!-- Header -->
+      <div class="header">
+        <div class="icon-shell">
+          <!-- Bell icon -->
+          <svg class="icon icon-bell" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2a6 6 0 0 0-6 6v3.586l-1.707 1.707A1 1 0 0 0 5 15h14a1 1 0 0 0 .707-1.707L18 11.586V8a6 6 0 0 0-6-6Z" fill="currentColor"/>
+            <path d="M9 18a3 3 0 0 0 6 0H9Z" fill="currentColor" opacity="0.8"/>
+          </svg>
+        </div>
+
+        <h2 class="headline">
+          Be Part of the <span class="accent">Future</span> of Document AI
+        </h2>
+        <p class="subhead">
+          Join our early waitlist for priority access, product updates, and investor news.
+        </p>
+      </div>
+
+      <!-- Waitlist form / success -->
+      <div class="form-wrap reveal-on-scroll" id="waitlist-wrap">
+        <form id="waitlist-form" class="form-grid" autocomplete="off" novalidate>
+          <div class="input-wrap">
+            <!-- Mail icon -->
+            <svg class="icon icon-mail" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2" ry="2" fill="currentColor"/>
+              <path d="M3 7l9 6 9-6" stroke="#ffffff" stroke-width="1.6" fill="none"/>
+            </svg>
+            <input type="email" name="email" id="waitlist-email" placeholder="Enter your email address" required />
+          </div>
+          <button type="submit" class="cta-button">
+            <span>Join the Waitlist</span>
+            <!-- ArrowRight icon -->
+            <svg class="icon icon-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          </button>
+        </form>
+
+        <div id="waitlist-success" class="success-card" hidden>
+          <div class="success-row">
+            <div class="success-mark">✓</div>
+            <span>Thank you! You're on the waitlist.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional info -->
+      <div class="extras reveal-on-scroll">
+        <div class="extras-row">
+          {bullets.map((b) => (
+            <div class="extra-item">
+              <span class="dot"></span>
+              <span>{b}</span>
+            </div>
+          ))}
+        </div>
+        <p class="extras-note">No spam, unsubscribe anytime.</p>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    :root {
+      --brand-a: #00A991;
+      --brand-b: #3FE0DE;
+      --ink: #091B35;
+    }
+    .waitlist-section {
+      position: relative;
+      overflow: hidden;
+      padding: 96px 0; /* py-24 */
+      background: var(--brand-a);
+      isolation: isolate;
+    }
+    .bg-gradient { position: absolute; inset: 0; background: linear-gradient(135deg, var(--brand-a), var(--brand-a), var(--brand-b)); }
+    .bg-blurs { position: absolute; inset: 0; opacity: 0.2; }
+    .blob { position: absolute; border-radius: 999px; filter: blur(36px); }
+    .blob-a { top: 33%; left: 25%; width: 18rem; height: 18rem; background: #ffffff; }
+    .blob-b { bottom: 33%; right: 33%; width: 24rem; height: 24rem; background: var(--brand-b); }
+
+    .container { position: relative; max-width: 64rem; margin: 0 auto; padding: 0 24px; text-align: center; }
+    .stack { display: grid; gap: 32px; }
+
+    .icon-shell { display: inline-flex; padding: 16px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(6px); border-radius: 16px; margin: 0 auto; }
+    .icon { width: 32px; height: 32px; color: #ffffff; }
+
+    .headline { font-family: 'DM Sans', Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-weight: 600; font-size: 36px; color: #ffffff; margin: 16px 0 0 0; }
+    @media (min-width: 1024px) { .headline { font-size: 56px; } }
+    .accent { color: var(--brand-b); }
+    .subhead { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-size: 20px; color: rgba(255,255,255,0.9); max-width: 48rem; margin: 12px auto 0; line-height: 1.6; }
+
+    .form-wrap { max-width: 40rem; margin: 0 auto; }
+    .form-grid { display: flex; flex-direction: column; gap: 16px; }
+    @media (min-width: 640px) { .form-grid { flex-direction: row; } }
+
+    .input-wrap { position: relative; flex: 1; }
+    .icon-mail { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: rgba(255,255,255,0.6); }
+    #waitlist-email { width: 100%; padding: 14px 16px 14px 48px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: #ffffff; font-size: 16px; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; outline: none; }
+    #waitlist-email::placeholder { color: rgba(255,255,255,0.6); }
+    #waitlist-email:focus { border-color: rgba(255,255,255,0.4); box-shadow: 0 0 0 2px rgba(255,255,255,0.3) inset; }
+
+    .cta-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 24px; border-radius: 16px; background: #ffffff; color: var(--brand-a); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-weight: 600; box-shadow: 0 8px 24px rgba(0,0,0,0.12); border: none; cursor: pointer; transition: transform 200ms ease, box-shadow 300ms ease; white-space: nowrap; }
+    .cta-button:hover { transform: scale(1.02); box-shadow: 0 12px 32px rgba(0,0,0,0.18); }
+    .cta-button:active { transform: scale(0.98); }
+    .icon-arrow { width: 20px; height: 20px; color: var(--brand-a); transition: transform 300ms ease; }
+    .cta-button:hover .icon-arrow { transform: translateX(4px); }
+
+    .success-card { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(6px); border-radius: 16px; padding: 24px; }
+    .success-row { display: inline-flex; align-items: center; justify-content: center; gap: 12px; color: #ffffff; }
+    .success-mark { width: 32px; height: 32px; border-radius: 999px; background: rgba(255,255,255,0.2); display: inline-flex; align-items: center; justify-content: center; font-size: 18px; }
+
+    .extras { display: grid; gap: 12px; }
+    .extras-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; color: rgba(255,255,255,0.8); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+    .extra-item { display: inline-flex; align-items: center; gap: 8px; }
+    .dot { width: 8px; height: 8px; border-radius: 999px; background: rgba(255,255,255,0.6); }
+    .extras-note { color: rgba(255,255,255,0.6); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-size: 13px; }
+
+    /* Reveal-on-scroll */
+    .reveal-on-scroll { opacity: 0; transform: translateY(20px); }
+    .reveal-on-scroll.in-view { animation: fadeUp 600ms ease forwards; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+
+  <script type="module">
+    // Reveal-on-scroll using IntersectionObserver
+    document.addEventListener('DOMContentLoaded', () => {
+      const revealEls = document.querySelectorAll('.reveal-on-scroll');
+      const io = new IntersectionObserver((entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            e.target.classList.add('in-view');
+            io.unobserve(e.target);
+          }
+        }
+      }, { rootMargin: '-100px 0px' });
+      revealEls.forEach((el) => io.observe(el));
+
+      // Simple waitlist mock submission
+      const form = document.getElementById('waitlist-form');
+      const success = document.getElementById('waitlist-success');
+      form?.addEventListener('submit', (evt) => {
+        evt.preventDefault();
+        form.setAttribute('hidden', '');
+        success?.removeAttribute('hidden');
+        window.setTimeout(() => {
+          success?.setAttribute('hidden', '');
+          form?.removeAttribute('hidden');
+          const input = document.getElementById('waitlist-email');
+          if (input && 'value' in input) { input.value = ''; }
+        }, 3000);
+      });
+    });
+  </script>
+</section>
