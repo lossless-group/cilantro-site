@@ -1,17 +1,109 @@
 /* Site-scoped token variables */
 :root {
-  /* Primary */
+  /* Fonts */
+  --font-sans: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif;
+  /* Base font size */
+  --font-size: 18px;
+
+  /* Typography scale */
+  --text-xs: 14px;
+  --text-sm: 16px;
+  --text-base: 18px;
+  --text-lg: 20px;
+  --text-xl: 26px;
+  --text-2xl: 32px;
+  --text-3xl: 40px;
+  --text-4xl: 48px;
+  --text-5xl: 56px;
+
+  /* Font weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Colors */
+  --background: rgba(255, 255, 255, 1.00);
+  --foreground: rgba(17, 25, 40, 1.00);
+  --card: rgba(255, 255, 255, 1.00);
+  --card-foreground: rgba(17, 25, 40, 1.00);
+  --popover: rgba(255, 255, 255, 1.00);
+  --popover-foreground: rgba(107, 114, 128, 1.00);
+  --primary: rgba(28, 100, 242, 1.00);
+  --primary-foreground: rgba(255, 255, 255, 1.00);
+  --secondary: rgba(243, 244, 246, 1.00);
+  --secondary-foreground: rgba(17, 25, 40, 1.00);
+  --muted: rgba(249, 250, 251, 1.00);
+  --muted-foreground: rgba(107, 114, 128, 1.00);
+  --accent: rgba(28, 100, 242, 1.00);
+  --accent-foreground: rgba(255, 255, 255, 1.00);
+  --destructive: rgba(253, 232, 232, 1.00);
+  --destructive-foreground: rgba(155, 28, 28, 1.00);
+  --border: rgba(229, 231, 235, 1.00);
+  --input: rgba(249, 250, 251, 1.00);
+  --input-background: rgba(249, 250, 251, 1.00);
+  --ring: rgba(28, 100, 242, 1.00);
+
+  /* Charts */
+  --chart-1: rgba(28, 100, 242, 1.00);
+  --chart-2: rgba(14, 159, 110, 1.00);
+  --chart-3: rgba(255, 90, 31, 1.00);
+  --chart-4: rgba(144, 97, 249, 1.00);
+  --chart-5: rgba(240, 82, 82, 1.00);
+
+  /* Radius */
+  --radius: 8px;
+  --radius-button: 80px;
+  --radius-badge: 6px;
+
+  /* Sidebar */
+  --sidebar: rgba(255, 255, 255, 1.00);
+  --sidebar-foreground: rgba(17, 25, 40, 1.00);
+  --sidebar-primary: rgba(243, 244, 246, 1.00);
+  --sidebar-primary-foreground: rgba(17, 25, 40, 1.00);
+  --sidebar-accent: rgba(253, 213, 213, 1.00);
+  --sidebar-accent-foreground: rgba(155, 28, 28, 1.00);
+  --sidebar-border: rgba(229, 231, 235, 1.00);
+  --sidebar-ring: rgba(28, 100, 242, 1.00);
+
+  /* Optional color scale aliases for convenience */
   --color-primary-500: #2563eb;
-
-  /* Secondary */
   --color-secondary-500: #06b6d4;
-
-  /* Accent */
   --color-accent-500: #f59e0b;
 }
 
 /* Optional dark theme overrides */
 [data-theme="dark"], .dark {
+  --background: rgba(17, 25, 40, 1.00);
+  --foreground: rgba(255, 255, 255, 1.00);
+  --card: rgba(31, 41, 55, 1.00);
+  --card-foreground: rgba(255, 255, 255, 1.00);
+  --popover: rgba(31, 41, 55, 1.00);
+  --popover-foreground: rgba(229, 231, 235, 1.00);
+  --primary: rgba(59, 130, 246, 1.00);
+  --primary-foreground: rgba(255, 255, 255, 1.00);
+  --secondary: rgba(55, 65, 81, 1.00);
+  --secondary-foreground: rgba(255, 255, 255, 1.00);
+  --muted: rgba(31, 41, 55, 1.00);
+  --muted-foreground: rgba(156, 163, 175, 1.00);
+  --accent: rgba(59, 130, 246, 1.00);
+  --accent-foreground: rgba(255, 255, 255, 1.00);
+  --destructive: rgba(127, 29, 29, 1.00);
+  --destructive-foreground: rgba(254, 202, 202, 1.00);
+  --border: rgba(55, 65, 81, 1.00);
+  --input: rgba(31, 41, 55, 1.00);
+  --input-background: rgba(31, 41, 55, 1.00);
+  --ring: rgba(59, 130, 246, 1.00);
+  --sidebar: rgba(31, 41, 55, 1.00);
+  --sidebar-foreground: rgba(255, 255, 255, 1.00);
+  --sidebar-primary: rgba(55, 65, 81, 1.00);
+  --sidebar-primary-foreground: rgba(255, 255, 255, 1.00);
+  --sidebar-accent: rgba(127, 29, 29, 1.00);
+  --sidebar-accent-foreground: rgba(254, 202, 202, 1.00);
+  --sidebar-border: rgba(55, 65, 81, 1.00);
+  --sidebar-ring: rgba(59, 130, 246, 1.00);
+  
+  /* Optional scale aliases (dark variants) */
   --color-primary-500: #3b82f6;
   --color-secondary-500: #22d3ee;
   --color-accent-500: #fbbf24;
