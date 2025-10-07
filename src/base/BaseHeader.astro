@@ -3,6 +3,8 @@
 // Ported from React Navigation component to Astro with CSS-based motion only.
 // No external UI or animation libraries used.
 
+import ThemeToggle from "../components/ThemeToggle.astro";
+
 const navItems = [
   { name: 'Product', href: '#hero' },
   { name: 'Problem', href: '#problem' },
@@ -46,6 +48,8 @@ const headerHeight = 72; // px
           <a href="/" class="back-home">Back to Home</a>
         </nav>
       )}
+
+      <ThemeToggle />
 
       <a href="https://www.flyvolato.com" target="_blank" rel="noopener noreferrer" class="investors-btn" aria-label="Investors">
         <span>Investors</span>
@@ -149,6 +153,9 @@ const headerHeight = 72; // px
   .investors-btn:hover { transform: translateY(-1px) scale(1.02); box-shadow: 0 12px 24px rgba(9,27,53,0.2); }
   .investors-btn:active { transform: scale(0.98); }
   @media (min-width: 1024px) { .investors-btn { display: inline-flex; } }
+
+  /* Theme toggle alignment in header row */
+  #theme-toggle { margin-right: 12px; }
 
   .mobile-btn { display: inline-flex; padding: 8px; color: var(--blue); background: none; border: none; }
   @media (min-width: 1024px) { .mobile-btn { display: none; } }
