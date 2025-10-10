@@ -2,6 +2,7 @@
 // TractionHighlights--Default.astro
 // Ported from React to Astro with CSS-only motion (no external libs).
 // Implements two traction cards and a logo strip with reveal-on-scroll.
+import ChipBasic from '../../components/Chip--Basic.astro';
 ---
 <section id="about" class="traction" aria-label="Traction">
   <div class="container">
@@ -55,14 +56,14 @@
           Parslee is developed by a team leveraging years of experience in secure, high-performance software systems.
         </p>
         <div class="foot">
-          <div class="pill">
-            <svg class="pill-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <ChipBasic size="sm" showDot={false}>
+            <svg slot="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect x="3" y="7" width="18" height="14" rx="2" />
               <path d="M7 7V3h10v4" />
               <path d="M7 12h10" />
             </svg>
-            <span>NYSE: SOAR</span>
-          </div>
+            NYSE: SOAR
+          </ChipBasic>
         </div>
       </div>
     </div>
@@ -71,11 +72,11 @@
     <div class="logos reveal" style="--delay: 0.4s">
       <p class="logos-note">Trusted by teams in legal, finance, and operations</p>
       <div class="logos-strip">
-        <div class="logo" style="--d: 0.6s">Legal</div>
-        <div class="logo" style="--d: 0.7s">Finance</div>
-        <div class="logo" style="--d: 0.8s">Operations</div>
-        <div class="logo" style="--d: 0.9s">HR</div>
-        <div class="logo" style="--d: 1.0s">Compliance</div>
+        <ChipBasic label="Legal" style="--d: 0.6s" />
+        <ChipBasic label="Finance" style="--d: 0.7s" />
+        <ChipBasic label="Operations" style="--d: 0.8s" />
+        <ChipBasic label="HR" style="--d: 0.9s" />
+        <ChipBasic label="Compliance" style="--d: 1.0s" />
       </div>
     </div>
   </div>
@@ -112,14 +113,14 @@
   .avatar:first-child { margin-left: 0; }
   .foot-note { font-family: var(--font-sans); font-size: var(--text-sm); color: var(--muted-foreground); }
 
-  .pill { display: inline-flex; align-items: center; gap: 8px; background: var(--foreground); color: var(--accent-foreground); padding: 8px 12px; border-radius: 999px; font-family: var(--font-sans); font-size: var(--text-sm); }
-  .pill-icon { display: block; }
+  /* Pill styles removed; using ChipBasic for better theme contrast */
 
   .logos { text-align: center; }
   .logos-note { font-family: var(--font-sans); font-size: var(--text-sm); color: var(--muted-foreground); margin-bottom: 24px; letter-spacing: 0.08em; text-transform: uppercase; }
-  .logos-strip { display: flex; justify-content: center; align-items: center; gap: 48px; flex-wrap: wrap; opacity: 0.6; }
-  .logo { background: var(--muted); color: var(--muted-foreground); padding: 12px 16px; border-radius: 12px; font-family: var(--font-sans); font-size: var(--text-base); opacity: 0; transform: scale(0.95); transition: opacity 400ms ease, transform 400ms ease; transition-delay: var(--d, 0s); }
-  .logo.in { opacity: 0.4; transform: scale(1); }
+  .logos-strip { display: flex; justify-content: center; align-items: center; gap: 16px; flex-wrap: wrap; opacity: 1; }
+  /* Reveal timing applied to chips via global selector to pierce scoping */
+  :global(.chip) { opacity: 0; transform: scale(0.95); transition: opacity 400ms ease, transform 400ms ease; transition-delay: var(--d, 0s); }
+  :global(.chip.in) { opacity: 1; transform: scale(1); }
 
   /* Reveal on scroll */
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity 600ms ease, transform 600ms ease; transition-delay: var(--delay, 0s); }
@@ -144,6 +145,6 @@
       });
     }, { rootMargin: '-100px 0px', threshold: 0.1 });
 
-    document.querySelectorAll('.reveal, .logo').forEach((el) => observer.observe(el));
+    document.querySelectorAll('.reveal, .chip').forEach((el) => observer.observe(el));
   });
 </script>

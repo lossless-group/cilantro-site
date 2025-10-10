@@ -23,7 +23,7 @@ const bullets = ['Early beta access', 'Product updates', 'Investor news'];
           </svg>
         </div>
 
-        <h2 class="headline text-white font-semibold text-3xl lg:text-5xl mt-4">
+        <h2 class="headline font-semibold text-3xl lg:text-5xl mt-4">
           Be Part of the <span class="accent">Future</span> of Document AI
         </h2>
         <p class="subhead text-white/90 text-lg max-w-3xl mx-auto mt-3 leading-relaxed">
@@ -59,11 +59,11 @@ const bullets = ['Early beta access', 'Product updates', 'Investor news'];
 
       <!-- Additional info -->
       <div class="extras reveal-on-scroll grid gap-3">
-        <div class="extras-row flex flex-wrap justify-center gap-6 text-white/80">
+        <div class="extras-row flex flex-wrap justify-center gap-3">
           {bullets.map((b) => (
-            <div class="extra-item inline-flex items-center gap-2">
-              <span class="dot w-2 h-2 rounded-full bg-white/60"></span>
-              <span>{b}</span>
+            <div class="chip">
+              <span class="dot" aria-hidden="true"></span>
+              <span class="label">{b}</span>
             </div>
           ))}
         </div>
@@ -92,13 +92,10 @@ const bullets = ['Early beta access', 'Product updates', 'Investor news'];
     .icon-shell { display: inline-flex; padding: 16px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(6px); border-radius: 16px; margin: 0 auto; }
     .icon { width: 32px; height: 32px; color: var(--accent-foreground); }
 
-    .headline { font-family: var(--font-sans); font-weight: 600; font-size: 36px; color: var(--accent-foreground); margin: 16px 0 0 0; }
+    .headline { font-family: var(--font-sans); font-weight: 600; font-size: 36px; color: var(--foreground); margin: 16px 0 0 0; }
     @media (min-width: 1024px) { .headline { font-size: 56px; } }
-    .accent { color: var(--secondary); }
-    /* Vibrant mode: force the accent word to use foreground for strong contrast.
-       Use :global to ensure the data-theme attribute selector is not blocked by scoping. */
-    :global([data-theme="vibrant"]) .waitlist-section .accent { color: var(--foreground) !important; }
-    .subhead { font-family: var(--font-sans); font-size: 20px; color: color-mix(in oklab, var(--accent-foreground) 90%, transparent); max-width: 48rem; margin: 12px auto 0; line-height: 1.6; }
+    .accent { color: var(--foreground) !important; text-decoration: underline; text-decoration-color: color-mix(in oklab, var(--accent) 70%, var(--foreground) 30%); text-underline-offset: 6px; text-decoration-thickness: 2px; }
+    .subhead { font-family: var(--font-sans); font-size: 20px; color: color-mix(in oklab, var(--foreground) 82%, transparent) !important; max-width: 48rem; margin: 12px auto 0; line-height: 1.6; }
 
     .form-wrap { max-width: 40rem; margin: 0 auto; }
     .form-grid { display: flex; flex-direction: column; gap: 16px; }
@@ -122,9 +119,13 @@ const bullets = ['Early beta access', 'Product updates', 'Investor news'];
     .success-mark { width: 32px; height: 32px; border-radius: 999px; background: color-mix(in oklab, var(--accent-foreground) 20%, transparent); display: inline-flex; align-items: center; justify-content: center; font-size: 18px; }
 
     .extras { display: grid; gap: 12px; }
-    .extras-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; color: color-mix(in oklab, var(--accent-foreground) 80%, transparent); font-family: var(--font-sans); }
-    .extra-item { display: inline-flex; align-items: center; gap: 8px; }
-    .dot { width: 8px; height: 8px; border-radius: 999px; background: color-mix(in oklab, var(--accent-foreground) 60%, transparent); }
+    .extras-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; font-family: var(--font-sans); }
+
+    /* Chip -- Basic: mode-sensitive using site tokens */
+    .chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; background: color-mix(in oklab, var(--card) 92%, transparent); border: 1px solid color-mix(in oklab, var(--foreground) 14%, transparent); color: var(--foreground); font-size: var(--text-sm); box-shadow: 0 6px 18px color-mix(in oklab, var(--foreground) 12%, transparent); transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease; }
+    .chip:hover { transform: translateY(-1px); background: color-mix(in oklab, var(--card) 96%, transparent); box-shadow: 0 10px 22px color-mix(in oklab, var(--foreground) 16%, transparent); }
+    .chip .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--secondary); }
+    .chip .label { line-height: 1; }
     .extras-note { color: color-mix(in oklab, var(--accent-foreground) 60%, transparent); font-family: var(--font-sans); font-size: 13px; }
 
     /* Reveal-on-scroll */

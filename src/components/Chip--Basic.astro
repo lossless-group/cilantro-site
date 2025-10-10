@@ -1,0 +1,29 @@
+---
+interface Props {
+  label?: string;
+  dotColor?: string;
+  size?: 'sm' | 'md';
+  style?: string;
+  class?: string;
+  showDot?: boolean;
+}
+const { label, dotColor, size = 'md', style, class: className, showDot = true } = Astro.props as Props;
+---
+<div class={`chip ${className ?? ''}`} data-size={size} style={style}>
+  {showDot ? <span class="dot" style={dotColor ? `background:${dotColor}` : undefined} aria-hidden="true"></span> : null}
+  <span class="icon-wrap"><slot name="icon" /></span>
+  {label ? <span class="label">{label}</span> : <span class="label"><slot /></span>}
+</div>
+
+<style>
+  .chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; background: color-mix(in oklab, var(--card) 92%, transparent); border: 1px solid color-mix(in oklab, var(--foreground) 14%, transparent); color: var(--foreground); font-family: var(--font-sans); font-size: var(--text-sm); box-shadow: 0 6px 18px color-mix(in oklab, var(--foreground) 12%, transparent); transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease; }
+  .chip:hover { transform: translateY(-1px); background: color-mix(in oklab, var(--card) 96%, transparent); box-shadow: 0 10px 22px color-mix(in oklab, var(--foreground) 16%, transparent); }
+
+  .chip[data-size="sm"] { padding: 6px 10px; font-size: var(--text-xs); }
+  .chip[data-size="md"] { padding: 8px 12px; }
+
+  .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--secondary); }
+  .icon-wrap { display: inline-flex; align-items: center; }
+  .icon-wrap :where(svg) { width: 14px; height: 14px; display: block; color: var(--foreground); }
+  .label { line-height: 1; }
+</style>
