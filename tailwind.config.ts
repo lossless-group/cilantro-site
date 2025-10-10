@@ -1,11 +1,10 @@
 import type { Config } from "tailwindcss";
-import preset from "@knots/tailwind/preset.mjs";
-import plugin from "@knots/tailwind/plugin.mjs";
 
-// Tailwind v4 config for cilantro-site, consuming shared preset/plugin
+// Tailwind v4 standalone config for cilantro-site
+// Avoids depending on workspace-only @knots/tailwind preset/plugin
 export default {
   content: ["src/**/*.{astro,md,mdx,svelte,ts,tsx}"],
-  presets: [preset],
-  plugins: [plugin],
-  theme: { extend: {} }
+  theme: { extend: {} },
+  presets: [],
+  plugins: []
 } satisfies Config;

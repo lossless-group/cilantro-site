@@ -1,4 +1,4 @@
-import type { BrandConfig } from "@knots/brand-config";
+import type { BrandConfig } from "../types/brand";
 
 const brand: BrandConfig = {
   name: "cilantro",
