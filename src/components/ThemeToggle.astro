@@ -1,29 +1,65 @@
 ---
 ---
-<button id="theme-toggle" class="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1 text-sm text-foreground bg-card hover:bg-muted transition-colors" aria-label="Toggle theme">
-  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<button id="theme-toggle" class="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1 text-sm text-foreground bg-card hover:bg-muted transition-colors" aria-label="Toggle theme" title="Theme">
+  <span class="sr-only">Toggle theme</span>
+  <!-- Sun (Light) -->
+  <svg id="icon-sun" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <circle cx="12" cy="12" r="5" />
     <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
   </svg>
-  <span>Theme</span>
+  <!-- Moon (Dark) -->
+  <svg id="icon-moon" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79Z" />
+  </svg>
+  <!-- Lightning (Vibrant) -->
+  <svg id="icon-bolt" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none">
+    <path d="M13 2L3 14h7l-1 8 11-13h-7l1-7z" />
+  </svg>
+  <span id="theme-label" class="sr-only">Theme</span>
 </button>
 
 <script>
   const root = document.documentElement;
   const STORAGE_KEY = 'theme';
-  const initial = localStorage.getItem(STORAGE_KEY);
-  if (initial === 'dark') {
-    root.classList.add('dark');
-  } else if (initial === 'light') {
-    root.classList.remove('dark');
+  const MODES = ['light', 'dark', 'vibrant'];
+
+  function applyTheme(mode) {
+    root.setAttribute('data-theme', mode);
+    if (mode === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+    const label = document.getElementById('theme-label');
+    const btn = document.getElementById('theme-toggle');
+    const pretty = mode.charAt(0).toUpperCase() + mode.slice(1);
+    if (label) label.textContent = `Theme: ${pretty}`;
+    if (btn) btn.title = `Theme: ${pretty}`;
+
+    // update icon visibility
+    const icons = {
+      light: document.getElementById('icon-sun'),
+      dark: document.getElementById('icon-moon'),
+      vibrant: document.getElementById('icon-bolt'),
+    };
+    Object.values(icons).forEach((el) => { if (el) el.style.display = 'none'; });
+    const active = icons[mode];
+    if (active) active.style.display = '';
   }
+
+  const saved = localStorage.getItem(STORAGE_KEY);
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const initialAttr = root.getAttribute('data-theme');
+  const initial = saved || initialAttr || (prefersDark ? 'dark' : 'light');
+  applyTheme(initial);
+
+  let index = MODES.indexOf(initial);
+  if (index < 0) index = 0;
+
   document.getElementById('theme-toggle')?.addEventListener('click', () => {
-    const isDark = root.classList.toggle('dark');
-    localStorage.setItem(STORAGE_KEY, isDark ? 'dark' : 'light');
+    index = (index + 1) % MODES.length;
+    const next = MODES[index];
+    applyTheme(next);
+    localStorage.setItem(STORAGE_KEY, next);
   });
-  // Respect OS preference on first load if no saved choice
-  if (!initial) {
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (prefersDark) root.classList.add('dark');
-  }
 </script>

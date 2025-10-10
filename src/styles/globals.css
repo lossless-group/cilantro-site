@@ -3,7 +3,8 @@
 @import "@knots/tokens/css/modes.css";
 @import "./tokens.css";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:is(.dark *, [data-theme='dark'] *));
+@custom-variant vibrant (&:is([data-theme='vibrant'] *));
 
 @theme inline {
   --color-background: var(--background);
@@ -127,4 +128,15 @@ input {
 html {
   font-size: var(--font-size);
   font-family: var(--font-sans);
+}
+
+/* Dark mode alternating green text utility */
+.dark .alternate-green > *:nth-child(odd),
+[data-theme='dark'] .alternate-green > *:nth-child(odd) {
+  color: var(--secondary);
+}
+
+.dark .alternate-green > *:nth-child(even),
+[data-theme='dark'] .alternate-green > *:nth-child(even) {
+  color: var(--accent);
 }

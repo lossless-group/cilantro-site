@@ -124,3 +124,39 @@
   --danger-bg: color-mix(in oklab, var(--danger) 18%, transparent);
   --warning: #F59E0B;
 }
+
+/* Vibrant theme overrides: punchier accents and rings while staying on light base */
+[data-theme="vibrant"] {
+  --background: rgba(255, 255, 255, 1.00);
+  --foreground: rgba(17, 25, 40, 1.00);
+  --card: rgba(255, 255, 255, 1.00);
+  --card-foreground: rgba(17, 25, 40, 1.00);
+  --popover: rgba(255, 255, 255, 1.00);
+  --popover-foreground: rgba(55, 65, 81, 1.00);
+  --primary: var(--color-primary-500);
+  --primary-foreground: rgba(255, 255, 255, 1.00);
+  --secondary: var(--color-secondary-500);
+  --secondary-foreground: rgba(17, 25, 40, 1.00);
+  --muted: rgba(243, 244, 246, 1.00);
+  --muted-foreground: rgba(55, 65, 81, 1.00);
+  --accent: var(--color-accent-500);
+  --accent-foreground: rgba(255, 255, 255, 1.00);
+  --destructive: rgba(253, 232, 232, 1.00);
+  --destructive-foreground: rgba(155, 28, 28, 1.00);
+  --border: rgba(229, 231, 235, 1.00);
+  --input: rgba(249, 250, 251, 1.00);
+  --input-background: rgba(249, 250, 251, 1.00);
+  /* Emphasize focus ring using accent */
+  --ring: color-mix(in oklab, var(--accent) 50%, white);
+
+  /* Keep brand-driven gradient helpers; vibrant favors visible glow on light */
+  --accent-a: var(--accent);
+  --accent-b: var(--secondary);
+  
+  /* Charts keep base hues but appear brighter on light */
+  --chart-1: rgba(28, 100, 242, 1.00);
+  --chart-2: rgba(14, 159, 110, 1.00);
+  --chart-3: rgba(255, 90, 31, 1.00);
+  --chart-4: rgba(144, 97, 249, 1.00);
+  --chart-5: rgba(240, 82, 82, 1.00);
+}
