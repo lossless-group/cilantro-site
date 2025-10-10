@@ -124,31 +124,25 @@
 
 <style>
   .solution {
-    /* Localize vars to this section to avoid global collisions */
-    --bg: #0e1b33;
-    --accent-a: #00A991;
-    --accent-b: #3FE0DE;
-    --text: rgba(255,255,255,0.9);
-    --muted: rgba(255,255,255,0.8);
-    --border: rgba(255,255,255,0.12);
+    /* Use site tokens and brand vars */
     position: relative;
-    background: var(--bg);
+    background: color-mix(in oklab, var(--foreground) 92%, transparent);
     overflow: hidden;
     padding: 96px 0;
   }
   @media (min-width: 1024px) { .solution { padding: 128px 0; } }
-  .bg-base { position: absolute; inset: 0; background-color: var(--bg); }
+  .bg-base { position: absolute; inset: 0; background-color: color-mix(in oklab, var(--foreground) 92%, transparent); }
   /* Disable glows to avoid washing out the background */
   .bg-glow { display: none; }
   .glow { position: absolute; width: 24rem; height: 24rem; border-radius: 999px; filter: blur(48px); }
-  .glow-a { top: 25%; left: 20%; background: var(--accent-a); }
-  .glow-b { bottom: 20%; right: 20%; background: var(--accent-b); }
+  .glow-a { top: 25%; left: 20%; background: color-mix(in oklab, var(--accent) 12%, transparent); }
+  .glow-b { bottom: 20%; right: 20%; background: color-mix(in oklab, var(--secondary) 12%, transparent); }
 
   .container { position: relative; max-width: 1120px; margin: 0 auto; padding: 0 24px; }
   .header { text-align: center; margin-bottom: 80px; }
-  .title { font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-size: clamp(2rem, 4vw, 3.5rem); color: white; margin: 0 0 16px; }
-  .accent { color: var(--accent-b); }
-  .subtitle { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-size: clamp(1.125rem, 2.2vw, 1.25rem); color: var(--muted); max-width: 56ch; margin: 0 auto; }
+  .title { font-family: var(--font-sans); font-size: clamp(2rem, 4vw, 3.5rem); color: var(--accent-foreground); margin: 0 0 16px; }
+  .accent { color: var(--secondary); }
+  .subtitle { font-family: var(--font-sans); font-size: clamp(1.125rem, 2.2vw, 1.25rem); color: color-mix(in oklab, var(--accent-foreground) 80%, transparent); max-width: 56ch; margin: 0 auto; }
 
   .grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
   @media (min-width: 768px) { .grid { grid-template-columns: 1fr 1fr; } }
@@ -158,19 +152,19 @@
   .card:hover { background: rgba(255,255,255,0.07); transform: translateY(-2px); }
 
   .icon-wrap { margin-bottom: 20px; }
-  .icon-grad { width: 64px; height: 64px; border-radius: 16px; display: flex; align-items: center; justify-content: center; background-image: linear-gradient(135deg, rgba(0,169,145,0.12), rgba(63,224,222,0.12)); transition: transform 300ms ease; }
+  .icon-grad { width: 64px; height: 64px; border-radius: 16px; display: flex; align-items: center; justify-content: center; background-image: linear-gradient(135deg, color-mix(in oklab, var(--accent) 12%, transparent), color-mix(in oklab, var(--secondary) 12%, transparent)); transition: transform 300ms ease; }
   .card:hover .icon-grad { transform: scale(1.08); }
   .icon { display: block; }
 
   .content { display: grid; gap: 12px; }
-  .card-title { font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-size: var(--text-xl); color: white; }
-  .card-copy { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color: var(--muted); line-height: 1.6; }
+  .card-title { font-family: var(--font-sans); font-size: var(--text-xl); color: var(--accent-foreground); }
+  .card-copy { font-family: var(--font-sans); color: color-mix(in oklab, var(--accent-foreground) 80%, transparent); line-height: 1.6; }
 
-  .hover-glow { position: absolute; inset: 0; border-radius: 20px; background-image: linear-gradient(90deg, rgba(0,169,145,0.14), rgba(63,224,222,0.14)); opacity: 0; transition: opacity 300ms ease; filter: blur(12px); z-index: -1; }
+  .hover-glow { position: absolute; inset: 0; border-radius: 20px; background-image: linear-gradient(90deg, color-mix(in oklab, var(--accent) 14%, transparent), color-mix(in oklab, var(--secondary) 14%, transparent)); opacity: 0; transition: opacity 300ms ease; filter: blur(12px); z-index: -1; }
   .card:hover .hover-glow { opacity: 1; }
 
   .cta { text-align: center; margin-top: 48px; }
-  .cta-copy { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color: rgba(255,255,255,0.6); font-style: italic; }
+  .cta-copy { font-family: var(--font-sans); color: color-mix(in oklab, var(--accent-foreground) 60%, transparent); font-style: italic; }
 
   /* Reveal on scroll */
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity 600ms ease, transform 600ms ease; transition-delay: var(--delay, 0s); }

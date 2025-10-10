@@ -2,7 +2,7 @@
 import BaseHeader from '../base/BaseHeader.astro';
 import BaseFooter from '../base/BaseFooter.astro';
 import '../styles/globals.css';
-import { getBrandConfig } from '@knots/brand-config';
+import brand from '@brand';
 
 type MetaTag = {
   name?: string;
@@ -19,11 +19,9 @@ interface BaseLayoutProps {
 
 const { title = 'Parslee', meta = [] } = Astro.props as BaseLayoutProps;
 
-const SITE_BRAND = import.meta.env.SITE_BRAND ?? 'cilantro';
 const SITE_MODE = import.meta.env.SITE_MODE ?? 'light';
-const brand = getBrandConfig(SITE_BRAND);
 ---
-<html lang="en" data-theme={SITE_MODE} data-brand={SITE_BRAND}>
+<html lang="en" data-theme={SITE_MODE} data-brand={brand.name} style={`--primary:${brand.colors.primary};--secondary:${brand.colors.secondary};--accent:${brand.colors.accent};--color-primary-500:${brand.colors.primary};--color-secondary-500:${brand.colors.secondary};--color-accent-500:${brand.colors.accent};`}>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href={brand.assets?.favicon ?? '/appIcon__Parslee.svg'} />
@@ -34,14 +32,7 @@ const brand = getBrandConfig(SITE_BRAND);
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     {meta.map((m) => <meta {...m} />)}
     <title>{title}</title>
-    <style is:global>{`:root[data-brand="${SITE_BRAND}"] { 
-      --primary: ${brand.colors.primary};
-      --secondary: ${brand.colors.secondary};
-      --accent: ${brand.colors.accent};
-      --color-primary-500: ${brand.colors.primary};
-      --color-secondary-500: ${brand.colors.secondary};
-      --color-accent-500: ${brand.colors.accent};
-    }`}</style>
+    
   </head>
   <body>
     <BaseHeader />

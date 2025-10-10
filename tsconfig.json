@@ -1,5 +1,12 @@
 {
   "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@brand": ["src/config/brand.ts"],
+      "@knots/brand-config": ["../../packages/brand-config/src/index.ts"]
+    }
+  },
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"]
 }

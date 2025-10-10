@@ -41,25 +41,14 @@
 </section>
 
 <style>
-  :root {
-    --ink: #091B35;
-    --accent-a: #00A991;
-    --accent-b: #3FE0DE;
-    --text: #374151;
-    --text-strong: #111827;
-    --muted: #6B7280;
-    --bg: #ffffff;
-    --border: #E5E7EB;
-  }
-
-  .narrative { background: var(--bg); padding: 72px 0; }
+  .narrative { background: var(--background); padding: 72px 0; }
   @media (min-width: 1024px) { .narrative { padding: 96px 0; } }
   .container { max-width: 896px; margin: 0 auto; padding: 0 24px; }
 
   .title {
-    font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-family: var(--font-sans);
     font-size: clamp(1.75rem, 3.5vw, 2.25rem);
-    color: var(--ink);
+    color: var(--foreground);
     margin-bottom: 20px;
   }
   .title .accent { background: linear-gradient(90deg, var(--accent-a), var(--accent-b)); -webkit-background-clip: text; background-clip: text; color: transparent; }
@@ -68,13 +57,13 @@
   @media (min-width: 768px) { .points-compact { grid-template-columns: 1fr 1fr; gap: 18px; } }
   .point { position: relative; padding-left: 22px; }
   .line { position: absolute; left: 0; top: 0.6rem; width: 3px; height: 20px; border-radius: 999px; background-image: linear-gradient(180deg, var(--accent-a), var(--accent-b)); opacity: 0.7; }
-  .copy { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-size: clamp(1rem, 2.3vw, 1.125rem); color: var(--text); line-height: 1.6; }
-  .point:hover .copy { color: var(--text-strong); }
+  .copy { font-family: var(--font-sans); font-size: clamp(1rem, 2.3vw, 1.125rem); color: var(--muted-foreground); line-height: 1.6; }
+  .point:hover .copy { color: var(--foreground); }
 
-  .emphasis-compact { margin-top: 24px; padding: 16px; border: 1px solid color-mix(in oklab, var(--accent-b) 22%, white); border-radius: 16px; background-image: linear-gradient(90deg, #F0F9FF, #ECFDF5); }
+  .emphasis-compact { margin-top: 24px; padding: 16px; border: 1px solid color-mix(in oklab, var(--accent-b) 22%, var(--card)); border-radius: 16px; background-image: linear-gradient(90deg, color-mix(in oklab, var(--accent-a) 8%, var(--card)), color-mix(in oklab, var(--accent-b) 8%, var(--card))); }
   .emphasis-row { display: flex; align-items: flex-start; gap: 10px; }
   .dot { width: 7px; height: 7px; border-radius: 999px; background: var(--accent-a); margin-top: 10px; flex-shrink: 0; }
-  .quote { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-size: var(--text-base); color: var(--ink); font-style: italic; }
+  .quote { font-family: var(--font-sans); font-size: var(--text-base); color: var(--foreground); font-style: italic; }
 
   /* Reveal on scroll */
   .reveal { opacity: 0; transform: translateY(20px); transition: opacity 500ms ease, transform 500ms ease; transition-delay: var(--delay, 0s); }

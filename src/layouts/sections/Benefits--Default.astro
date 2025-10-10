@@ -156,8 +156,8 @@ const benefits = [
     }
 
     /* Card */
-    .benefit-card {
-      background: var(--surface);
+  .benefit-card {
+      background: var(--card);
       border-radius: 16px;
       padding: 24px;
       min-height: 200px;
@@ -168,7 +168,7 @@ const benefits = [
     .benefit-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 24px rgba(9,27,53,0.12);
-      border-color: color-mix(in oklab, var(--brand-b) 30%, var(--border));
+      border-color: color-mix(in oklab, var(--accent-b) 30%, var(--border));
     }
 
     .icon-wrap {
@@ -179,24 +179,24 @@ const benefits = [
       align-items: center;
       justify-content: center;
       margin-bottom: 16px;
-      background: linear-gradient(135deg, color-mix(in oklab, var(--brand-a) 10%, transparent), color-mix(in oklab, var(--brand-b) 10%, transparent));
+      background: linear-gradient(135deg, color-mix(in oklab, var(--accent-a) 10%, transparent), color-mix(in oklab, var(--accent-b) 10%, transparent));
       transform: translateZ(0);
       transition: transform 300ms ease;
     }
     .benefit-card:hover .icon-wrap { transform: scale(1.08); }
-    .icon { width: 24px; height: 24px; color: var(--brand-a); }
+    .icon { width: 24px; height: 24px; color: var(--accent); }
 
     .content { display: grid; gap: 8px; }
     .title {
-      font-family: 'DM Sans', Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      font-family: var(--font-sans);
       font-size: 18px;
-      color: var(--ink);
+      color: var(--foreground);
       line-height: 1.3;
       margin: 0;
     }
     .desc {
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      color: var(--ink-muted);
+      font-family: var(--font-sans);
+      color: var(--muted-foreground);
       font-size: 14px;
       line-height: 1.6;
       margin: 0;
@@ -207,7 +207,7 @@ const benefits = [
       width: 32px;
       height: 3px;
       border-radius: 999px;
-      background: linear-gradient(90deg, var(--brand-a), var(--brand-b));
+      background: linear-gradient(90deg, var(--accent-a), var(--accent-b));
       opacity: 0;
       transition: opacity 300ms ease;
     }
@@ -215,11 +215,11 @@ const benefits = [
 
     /* Bottom emphasis */
     .bottom-emphasis { text-align: center; margin-top: 64px; }
-    .emphasis-row { display: inline-flex; align-items: center; gap: 12px; color: var(--ink); }
+    .emphasis-row { display: inline-flex; align-items: center; gap: 12px; color: var(--foreground); }
     .dot { width: 8px; height: 8px; border-radius: 999px; display: inline-block; }
-    .dot-a { background: var(--brand-a); }
-    .dot-b { background: var(--brand-b); }
-    .emphasis-text { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-size: 18px; }
+    .dot-a { background: var(--accent-a); }
+    .dot-b { background: var(--accent-b); }
+    .emphasis-text { font-family: var(--font-sans); font-size: 18px; }
 
     /* Reveal-on-scroll CSS-only motion */
     .reveal-on-scroll { opacity: 0; transform: translateY(20px); }

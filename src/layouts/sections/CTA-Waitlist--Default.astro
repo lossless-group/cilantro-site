@@ -73,60 +73,55 @@ const bullets = ['Early beta access', 'Product updates', 'Investor news'];
   </div>
 
   <style>
-    :root {
-      --brand-a: #00A991;
-      --brand-b: #3FE0DE;
-      --ink: #091B35;
-    }
     .waitlist-section {
       position: relative;
       overflow: hidden;
       padding: 96px 0; /* py-24 */
-      background: var(--brand-a);
+      background: var(--primary);
       isolation: isolate;
     }
-    .bg-gradient { position: absolute; inset: 0; background: linear-gradient(135deg, var(--brand-a), var(--brand-a), var(--brand-b)); }
+    .bg-gradient { position: absolute; inset: 0; background: linear-gradient(135deg, var(--primary), var(--primary), var(--secondary)); }
     .bg-blurs { position: absolute; inset: 0; opacity: 0.2; }
     .blob { position: absolute; border-radius: 999px; filter: blur(36px); }
-    .blob-a { top: 33%; left: 25%; width: 18rem; height: 18rem; background: #ffffff; }
-    .blob-b { bottom: 33%; right: 33%; width: 24rem; height: 24rem; background: var(--brand-b); }
+    .blob-a { top: 33%; left: 25%; width: 18rem; height: 18rem; background: var(--card); }
+    .blob-b { bottom: 33%; right: 33%; width: 24rem; height: 24rem; background: var(--secondary); }
 
     .container { position: relative; max-width: 64rem; margin: 0 auto; padding: 0 24px; text-align: center; }
     .stack { display: grid; gap: 32px; }
 
     .icon-shell { display: inline-flex; padding: 16px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(6px); border-radius: 16px; margin: 0 auto; }
-    .icon { width: 32px; height: 32px; color: #ffffff; }
+    .icon { width: 32px; height: 32px; color: var(--accent-foreground); }
 
-    .headline { font-family: 'DM Sans', Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-weight: 600; font-size: 36px; color: #ffffff; margin: 16px 0 0 0; }
+    .headline { font-family: var(--font-sans); font-weight: 600; font-size: 36px; color: var(--accent-foreground); margin: 16px 0 0 0; }
     @media (min-width: 1024px) { .headline { font-size: 56px; } }
-    .accent { color: var(--brand-b); }
-    .subhead { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-size: 20px; color: rgba(255,255,255,0.9); max-width: 48rem; margin: 12px auto 0; line-height: 1.6; }
+    .accent { color: var(--secondary); }
+    .subhead { font-family: var(--font-sans); font-size: 20px; color: color-mix(in oklab, var(--accent-foreground) 90%, transparent); max-width: 48rem; margin: 12px auto 0; line-height: 1.6; }
 
     .form-wrap { max-width: 40rem; margin: 0 auto; }
     .form-grid { display: flex; flex-direction: column; gap: 16px; }
     @media (min-width: 640px) { .form-grid { flex-direction: row; } }
 
     .input-wrap { position: relative; flex: 1; }
-    .icon-mail { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: rgba(255,255,255,0.6); }
-    #waitlist-email { width: 100%; padding: 14px 16px 14px 48px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: #ffffff; font-size: 16px; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; outline: none; }
-    #waitlist-email::placeholder { color: rgba(255,255,255,0.6); }
-    #waitlist-email:focus { border-color: rgba(255,255,255,0.4); box-shadow: 0 0 0 2px rgba(255,255,255,0.3) inset; }
+    .icon-mail { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: color-mix(in oklab, var(--accent-foreground) 60%, transparent); }
+    #waitlist-email { width: 100%; padding: 14px 16px 14px 48px; border-radius: 16px; border: 1px solid color-mix(in oklab, var(--accent-foreground) 20%, transparent); background: color-mix(in oklab, var(--card) 10%, transparent); color: var(--accent-foreground); font-size: 16px; font-family: var(--font-sans); outline: none; }
+    #waitlist-email::placeholder { color: color-mix(in oklab, var(--accent-foreground) 60%, transparent); }
+    #waitlist-email:focus { border-color: color-mix(in oklab, var(--accent-foreground) 40%, transparent); box-shadow: 0 0 0 2px color-mix(in oklab, var(--accent-foreground) 30%, transparent) inset; }
 
-    .cta-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 24px; border-radius: 16px; background: #ffffff; color: var(--brand-a); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-weight: 600; box-shadow: 0 8px 24px rgba(0,0,0,0.12); border: none; cursor: pointer; transition: transform 200ms ease, box-shadow 300ms ease; white-space: nowrap; }
-    .cta-button:hover { transform: scale(1.02); box-shadow: 0 12px 32px rgba(0,0,0,0.18); }
+    .cta-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 24px; border-radius: 16px; background: var(--card); color: var(--primary); font-family: var(--font-sans); font-weight: 600; box-shadow: 0 8px 24px color-mix(in oklab, var(--foreground) 12%, transparent); border: none; cursor: pointer; transition: transform 200ms ease, box-shadow 300ms ease; white-space: nowrap; }
+    .cta-button:hover { transform: scale(1.02); box-shadow: 0 12px 32px color-mix(in oklab, var(--foreground) 18%, transparent); }
     .cta-button:active { transform: scale(0.98); }
-    .icon-arrow { width: 20px; height: 20px; color: var(--brand-a); transition: transform 300ms ease; }
+    .icon-arrow { width: 20px; height: 20px; color: var(--primary); transition: transform 300ms ease; }
     .cta-button:hover .icon-arrow { transform: translateX(4px); }
 
     .success-card { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(6px); border-radius: 16px; padding: 24px; }
-    .success-row { display: inline-flex; align-items: center; justify-content: center; gap: 12px; color: #ffffff; }
-    .success-mark { width: 32px; height: 32px; border-radius: 999px; background: rgba(255,255,255,0.2); display: inline-flex; align-items: center; justify-content: center; font-size: 18px; }
+    .success-row { display: inline-flex; align-items: center; justify-content: center; gap: 12px; color: var(--accent-foreground); }
+    .success-mark { width: 32px; height: 32px; border-radius: 999px; background: color-mix(in oklab, var(--accent-foreground) 20%, transparent); display: inline-flex; align-items: center; justify-content: center; font-size: 18px; }
 
     .extras { display: grid; gap: 12px; }
-    .extras-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; color: rgba(255,255,255,0.8); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+    .extras-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; color: color-mix(in oklab, var(--accent-foreground) 80%, transparent); font-family: var(--font-sans); }
     .extra-item { display: inline-flex; align-items: center; gap: 8px; }
-    .dot { width: 8px; height: 8px; border-radius: 999px; background: rgba(255,255,255,0.6); }
-    .extras-note { color: rgba(255,255,255,0.6); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-size: 13px; }
+    .dot { width: 8px; height: 8px; border-radius: 999px; background: color-mix(in oklab, var(--accent-foreground) 60%, transparent); }
+    .extras-note { color: color-mix(in oklab, var(--accent-foreground) 60%, transparent); font-family: var(--font-sans); font-size: 13px; }
 
     /* Reveal-on-scroll */
     .reveal-on-scroll { opacity: 0; transform: translateY(20px); }
