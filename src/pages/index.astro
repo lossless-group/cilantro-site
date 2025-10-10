@@ -7,8 +7,16 @@ import TractionHighlightsSection from '../layouts/sections/TractionHighlights--D
 import NarrativeHighlightsSection from '../layouts/sections/NarrativeHighlights--Compact.astro'
 import BenefitsSection from '../layouts/sections/Benefits--Default.astro';
 import CTAWaitlistSection from '../layouts/sections/CTA-Waitlist--Default.astro';
+import { buildOgMeta } from '../utils/og';
+import { SITE_SEO } from '../config/seo';
+
+const pageTitle = 'Parslee: Enabling better use of AI through contextual understanding of documents.';
+const pageDescription = SITE_SEO.defaultDescription;
+const pageImage = SITE_SEO.defaultImage; // /public path
+const pageUrl = Astro.url?.pathname ?? '/';
+
 ---
-<BaseLayout title="Parslee: Enabling better use of AI through contextual understanding of documents.">
+<BaseLayout title={pageTitle} meta={buildOgMeta({ title: pageTitle, description: pageDescription, image: pageImage, url: pageUrl })}>
   <HeroSection />
   <ProblemSection />
   <SolutionSection />

@@ -129,6 +129,62 @@ Example usage
 - In `src/styles/base.css`, import token CSS variables: `@import '@knots/tokens/css/variables.css';`
 - Use brand config at runtime to select palette/assets based on `SITE_BRAND`.
 
+## SEO & Open Graph
+
+This site uses a centralized, flexible SEO/Open Graph system so every page can share the right content consistently.
+
+- Defaults and types live in `src/config/seo.ts` (e.g., `SITE_SEO` with `defaultTitle`, `defaultDescription`, `defaultImage`, `siteName`, `twitterHandle`).
+- A small helper in `src/utils/og.ts` (`buildOgMeta(input)`) composes OG/Twitter meta tags using page overrides atop site defaults.
+- `BaseLayout.astro` renders the provided `meta` array and the `<title>`, keeping meta tag rendering consistent across pages.
+
+Basic usage:
+
+```astro
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { buildOgMeta } from '../utils/og';
+import { SITE_SEO } from '../config/seo';
+
+const pageTitle = 'Parslee: Enabling better use of AI through contextual understanding of documents.';
+const pageDescription = SITE_SEO.defaultDescription;
+const pageImage = SITE_SEO.defaultImage;
+const pageUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : Astro.url.pathname;
+---
+<BaseLayout
+  title={pageTitle}
+  meta={buildOgMeta({ title: pageTitle, description: pageDescription, image: pageImage, url: pageUrl })}
+>
+  <!-- page content -->
+</BaseLayout>
+```
+
+Dynamic route example (`type: 'article'`):
+
+```astro
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { buildOgMeta } from '../../utils/og';
+
+const { slug } = Astro.params;
+const post = await getEntry('posts', slug);
+
+const title = post.data.title;
+const description = post.data.description;
+const image = post.data.shareImage ?? '/default-share.webp';
+const url = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : Astro.url.pathname;
+---
+<BaseLayout title={title} meta={buildOgMeta({ title, description, image, url, type: 'article' })}>
+  <!-- post content -->
+</BaseLayout>
+```
+
+Notes:
+- Set `site` in `astro.config.mjs` (e.g., `site: 'https://parslee.ai'`) to generate absolute canonical/OG URLs.
+- If using TS `verbatimModuleSyntax`, import types with `import type { ... }` (e.g., `ShareMetaInput`).
+- Consider adding `og:image:width/height/type` and `twitter:image:alt` for stricter parsers.
+- For dynamic OG images, implement `/api/og` and cache aggressively; fall back to a static default image on failure.
+
 ## Component Architecture
 
 - Astro layouts compose site shells; Svelte components handle interactivity.
