@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ThemeToggle from '../../components/ThemeToggle.astro';
+import Chip from '../../components/Chip--Basic.astro';
+import CTAButton from '../../components/Button--CTA.astro';
+
+// Existing landing sections (using current layout-based sections)
+import HeroSection from '../../layouts/sections/Hero--Default.astro';
+import ProblemSection from '../../layouts/sections/Problem--Default.astro';
+import SolutionSection from '../../layouts/sections/Solution--Default.astro';
+import CTAWaitlistSection from '../../layouts/sections/CTA-Waitlist--Default.astro';
+
+const pageTitle = 'Design System';
+---
+<BaseLayout title={pageTitle}>
+  <main class="ds">
+    <div class="container">
+      <header class="ds-header">
+        <h1 class="title">Design System</h1>
+        <p class="subtitle">Reference components and section templates</p>
+      </header>
+
+      <section class="block" aria-label="Components">
+        <h2 class="block-title">Components</h2>
+        <div class="cta-row">
+          <!-- Special CTA placed first, label wrapped in span -->
+          <CTAButton label="Get Started" variant="accent" size="lg" href="/" />
+          <CTAButton label="Contact Sales" variant="secondary" size="md" href="/formalities/terms-of-service" />
+          <CTAButton label="Ghost CTA" variant="ghost" size="md" />
+        </div>
+        <div class="grid">
+          <div class="card">
+            <h3 class="card-title">ThemeToggle</h3>
+            <p class="card-copy">Cycles through light, dark, and vibrant modes.</p>
+            <div class="demo">
+              <ThemeToggle />
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Chip</h3>
+            <p class="card-copy">Inline status/label indicator with optional icon and dot.</p>
+            <div class="demo chips">
+              <Chip label="Default Chip" />
+              <Chip label="Accent Dot" dotColor="var(--accent)" />
+              <Chip label="Small" size="sm" showDot={false} />
+              <Chip>
+                <svg slot="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79Z"/></svg>
+                With Icon via Slot
+              </Chip>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block" aria-label="Sections">
+        <h2 class="block-title">Sections</h2>
+        <p class="muted">These are page-level building blocks currently implemented under <code>src/layouts/sections</code>.</p>
+        <div class="stack">
+          <HeroSection />
+          <ProblemSection />
+          <SolutionSection />
+          <CTAWaitlistSection />
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <style>
+    .ds { background: var(--background); padding: 48px 0 64px; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+    .ds-header { display: grid; gap: 8px; margin-bottom: 24px; }
+    .title { font-family: var(--font-sans); font-weight: 700; font-size: clamp(2rem, 4vw, 2.5rem); color: var(--foreground); }
+    .subtitle { color: var(--muted-foreground); }
+
+    .block { display: grid; gap: 16px; margin-top: 40px; }
+    .block-title { font-family: var(--font-sans); font-weight: 600; font-size: clamp(1.25rem, 3vw, 1.5rem); color: var(--foreground); }
+    .muted { color: var(--muted-foreground); }
+
+    .grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 768px) { .grid { grid-template-columns: 1fr 1fr; } }
+
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; display: grid; gap: 8px; }
+    .card-title { font-family: var(--font-sans); font-weight: 600; color: var(--foreground); }
+    .card-copy { color: var(--muted-foreground); }
+    .demo { display: grid; gap: 12px; align-items: center; }
+    .chips { display: flex; flex-wrap: wrap; gap: 12px; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+    .stack { display: grid; gap: 48px; }
+  </style>
+</BaseLayout>
