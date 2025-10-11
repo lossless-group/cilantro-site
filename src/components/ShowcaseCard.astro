@@ -1,0 +1,23 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  class?: string;
+  style?: string;
+}
+const { title, description, class: className, style } = Astro.props as Props;
+---
+<div class={`card ${className ?? ''}`} style={style}>
+  {title ? <h3 class="card-title">{title}</h3> : null}
+  {description ? <p class="card-copy">{description}</p> : null}
+  <div class="card-content">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; display: grid; gap: 8px; }
+  .card-title { font-family: var(--font-sans); font-weight: 600; color: var(--foreground); }
+  .card-copy { color: var(--muted-foreground); }
+  .card-content { display: grid; gap: 12px; align-items: center; }
+</style>

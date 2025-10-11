@@ -3,6 +3,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ThemeToggle from '../../components/ThemeToggle.astro';
 import Chip from '../../components/Chip--Basic.astro';
 import CTAButton from '../../components/Button--CTA.astro';
+import ShowcaseCard from '../../components/ShowcaseCard.astro';
+import CardWithIcon from '../../components/Card-w-Icon.astro';
 
 // Existing landing sections (using current layout-based sections)
 import HeroSection from '../../layouts/sections/Hero--Default.astro';
@@ -29,17 +31,13 @@ const pageTitle = 'Design System';
           <CTAButton label="Ghost CTA" variant="ghost" size="md" />
         </div>
         <div class="grid">
-          <div class="card">
-            <h3 class="card-title">ThemeToggle</h3>
-            <p class="card-copy">Cycles through light, dark, and vibrant modes.</p>
+          <ShowcaseCard title="ThemeToggle" description="Cycles through light, dark, and vibrant modes.">
             <div class="demo">
               <ThemeToggle />
             </div>
-          </div>
+          </ShowcaseCard>
 
-          <div class="card">
-            <h3 class="card-title">Chip</h3>
-            <p class="card-copy">Inline status/label indicator with optional icon and dot.</p>
+          <ShowcaseCard title="Chip" description="Inline status/label indicator with optional icon and dot.">
             <div class="demo chips">
               <Chip label="Default Chip" />
               <Chip label="Accent Dot" dotColor="var(--accent)" />
@@ -49,8 +47,14 @@ const pageTitle = 'Design System';
                 With Icon via Slot
               </Chip>
             </div>
-          </div>
+          </ShowcaseCard>
+
         </div>
+         <CardWithIcon
+            title="Built for Microsoft 365"
+            description="Cilantro is designed to work seamlessly with Microsoft 365, enhancing productivity and collaboration."
+            icon="microsoft-365"
+          />   
       </section>
 
       <section class="block" aria-label="Sections">
@@ -81,9 +85,6 @@ const pageTitle = 'Design System';
     .grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
     @media (min-width: 768px) { .grid { grid-template-columns: 1fr 1fr; } }
 
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; display: grid; gap: 8px; }
-    .card-title { font-family: var(--font-sans); font-weight: 600; color: var(--foreground); }
-    .card-copy { color: var(--muted-foreground); }
     .demo { display: grid; gap: 12px; align-items: center; }
     .chips { display: flex; flex-wrap: wrap; gap: 12px; }
     .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
