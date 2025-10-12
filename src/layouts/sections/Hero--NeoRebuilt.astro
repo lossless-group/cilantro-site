@@ -1,0 +1,122 @@
+---
+---
+<section class="hero-v2" aria-label="Neo Hero (Rebuilt)">
+  <div class="hero-v2__container">
+    <!-- Header row: Neo app icon + text -->
+    <div class="hero-v2__header">
+      <img class="app-icon-v2" src="/public/appIcon__Neo.webp" alt="Neo App Icon" width="96" height="96" />
+      <div class="hero-v2__text">
+        <h2 class="header-title-v2">The missing context layer for real Code Assistant workloads.</h2>
+        <p class="header-copy-v2">
+          Neo is a self-improving code reasoning engine with persistent semantic memory, using multi-agent reasoning to analyze code, generate solutions, and continuously improve through feedback loops.
+        </p>
+      </div>
+    </div>
+    <!-- Full-width tabs row -->
+    <div class="hero-v2__tabs-row">
+      <div class="feature-tabs">
+        <nav class="tab-list" aria-label="Neo features">
+          <button class="tab-btn" data-key="persistent-memory">Persistent Memory</button>
+          <button class="tab-btn" data-key="semantic-retrieval">Semantic Retrieval</button>
+          <button class="tab-btn" data-key="code-first-generation">Code-First Generation</button>
+          <button class="tab-btn" data-key="local-storage">Local Storage</button>
+          <button class="tab-btn" data-key="model-agnostic">Model-Agnostic</button>
+          <button class="tab-btn" data-key="claude-code-plugin">Claude Code Plugin</button>
+        </nav>
+        <div class="feature-panel" role="region" aria-live="polite">
+          <p class="panel-text"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Two-column row: left stack (GitHub icon + CTA), right Claude logo -->
+    <div class="hero-v2__cta-grid">
+      <div class="hero-v2__left">
+        <div class="stack-v2">
+          <a href="https://github.com/Parslee-ai/neo" target="_blank" rel="noopener noreferrer">
+            <svg class="icon-github-v2" viewBox="0 0 24 24" width="96" height="96" aria-hidden="true">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12a10 10 0 0 0 6.838 9.49c.5.091.682-.217.682-.483 0-.237-.009-.866-.013-1.701-2.782.604-3.37-1.34-3.37-1.34-.455-1.157-1.11-1.466-1.11-1.466-.907-.62.069-.607.069-.607 1.003.071 1.53 1.03 1.53 1.03.892 1.528 2.341 1.087 2.91.831.091-.647.35-1.087.636-1.338-2.221-.253-4.555-1.111-4.555-4.944 0-1.091.39-1.984 1.029-2.682-.103-.253-.446-1.272.098-2.65 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0 1 12 7.07c.851.004 1.707.115 2.507.337 1.909-1.294 2.748-1.025 2.748-1.025.546 1.378.203 2.397.1 2.65.64.698 1.028 1.592 1.028 2.682 0 3.842-2.338 4.687-4.566 4.936.359.31.679.922.679 1.858 0 1.34-.012 2.42-.012 2.75 0 .268.18.579.688.481A10 10 0 0 0 22 12c0-5.523-4.477-10-10-10Z" fill="currentColor"/>
+            </svg>
+          </a>
+          <div class="cta-v2">
+            <a class="cta-link-v2" href="https://github.com/Parslee-ai/neo" target="_blank" rel="noopener noreferrer">Available as a Claude Code Plugin</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-v2__right">
+        <img class="claude-logo-v2" src="https://ik.imagekit.io/xvpgfijuw/parslee/bannerFor__Claude-Code.webp" alt="Claude Code Plugin" width="320" height="160" />
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .hero-v2 { position: relative; background: radial-gradient(1000px 480px at 20% 0%, rgba(0,255,156,0.12), transparent 60%), linear-gradient(180deg, #0b0f0a, #070a08); color: #d6ffe8; padding: 56px 20px; overflow: hidden; --matrix-green: #00ff9c; }
+    /* Matrix-style subtle grid overlay */
+    .hero-v2::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,255,156,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,156,0.06) 1px, transparent 1px);
+      background-size: 24px 24px, 24px 24px;
+      mask-image: radial-gradient(1000px 500px at 50% 0%, rgba(0,0,0,0.65), transparent 70%);
+      pointer-events: none;
+    }
+    .hero-v2__container { max-width: 1120px; margin: 0 auto; }
+    .hero-v2__header { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: center; margin-bottom: 20px; }
+    .app-icon-v2 { width: 96px; height: 96px; border-radius: 16px; filter: drop-shadow(0 0 14px rgba(0,255,156,0.35)); }
+    .header-title-v2 { font-weight: 600; color: #c0ffe0; line-height: 1.5; font-size: clamp(1rem, 2.4vw, 1.25rem); }
+    .header-copy-v2 { color: #b3ffdb; max-width: 64ch; font-size: var(--text-xs); line-height: 1.6; }
+
+    /* Tabs row full width */
+    .hero-v2__tabs-row { display: grid; grid-template-columns: 1fr; }
+    .feature-tabs { display: grid; gap: 10px; margin-top: 12px; }
+    .tab-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tab-btn { padding: 8px 12px; border-radius: 10px; font-weight: 700; font-size: var(--text-xs); color: #c0ffe0; background: transparent; border: 1px solid rgba(0,255,156,0.18); box-shadow: none; cursor: pointer; }
+    .tab-btn::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 8px; border-radius: 50%; background: var(--matrix-green); box-shadow: 0 0 6px rgba(0,255,156,0.35); border: 1px solid rgba(11,15,10,0.45); }
+    .tab-btn:hover { background: rgba(0,255,156,0.14); box-shadow: 0 8px 24px rgba(0,255,156,0.18); }
+    .tab-btn.active { background: var(--matrix-green); color: #0b0f0a; box-shadow: 0 10px 28px rgba(0,255,156,0.22); }
+    .feature-panel { background: rgba(0,255,156,0.06); border: 1px solid rgba(0,255,156,0.18); border-radius: 12px; padding: 12px 14px; }
+    .panel-text { color: #c0ffe0; font-size: var(--text-xs); }
+
+    /* Two-column layout below */
+    .hero-v2__cta-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 20px; }
+    @media (min-width: 900px) { .hero-v2__cta-grid { grid-template-columns: 1fr 1fr; align-items: center; } }
+    .hero-v2__left, .hero-v2__right { display: grid; place-items: center; }
+    .stack-v2 { display: grid; gap: 2rem; place-items: center; }
+
+    .icon-github-v2 { color: #00ff9c; filter: drop-shadow(0 0 12px rgba(0,255,156,0.35)); }
+    .cta-link-v2 { display: inline-flex; align-items: center; gap: 8px; color: #0b0f0a; background: #00ff9c; padding: 10px 14px; border-radius: 12px; font-weight: 700; font-size: var(--text-xs); text-decoration: none; box-shadow: 0 10px 26px rgba(0,255,156,0.26), inset 0 0 0 1px rgba(0,0,0,0.15); }
+    .cta-link-v2:hover { box-shadow: 0 14px 34px rgba(0,255,156,0.32), inset 0 0 0 1px rgba(0,0,0,0.2); transform: translateY(-1px); transition: transform 200ms ease, box-shadow 200ms ease; }
+
+    .claude-logo-v2 { width: 320px; height: auto; border-radius: 12px; filter: drop-shadow(0 0 18px rgba(0,255,156,0.4)); }
+  </style>
+
+  <script type="module">
+    document.addEventListener('DOMContentLoaded', () => {
+      const featureMap = {
+        'persistent-memory': 'Learns from every solution attempt',
+        'semantic-retrieval': 'Vector search finds relevant patterns',
+        'code-first-generation': 'No diff parsing failures',
+        'local-storage': 'Privacy-first JSON storage in ~/.neo directory',
+        'model-agnostic': 'Works with any LM provider',
+        'claude-code-plugin': "Integrates seamlessly with Anthropic's Claude models and CLI."
+      };
+      const wrap = document.querySelector('.feature-tabs');
+      if (wrap) {
+        const buttons = wrap.querySelectorAll('.tab-btn');
+        const panel = wrap.querySelector('.panel-text');
+        const setActive = (key) => {
+          buttons.forEach((btn) => btn.classList.toggle('active', btn.dataset.key === key));
+          if (panel) panel.textContent = featureMap[key] || '';
+        };
+        buttons.forEach((btn, i) => {
+          btn.addEventListener('click', () => setActive(btn.dataset.key));
+          if (i === 0) btn.classList.add('active');
+        });
+        if (buttons[0]) setActive(buttons[0].dataset.key);
+      }
+    });
+  </script>
+</section>
