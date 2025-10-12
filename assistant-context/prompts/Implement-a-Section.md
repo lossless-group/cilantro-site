@@ -6,7 +6,7 @@ original_authors:
   - Michael Staton
 date_first_authored: 2025-10-12
 date_last_updated: 2025-10-12
-usage_index: 0
+usage_index: 1
 ---
 
 # Implement a Section in Astro

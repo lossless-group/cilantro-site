@@ -1,0 +1,492 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { buildOgMeta } from '../../utils/og';
+import { SITE_SEO } from '../../config/seo';
+
+const pageTitle = 'Neo - The Missing Context Layer for AI Code Assistants';
+const pageDescription = SITE_SEO.defaultDescription;
+const pageImage = '/shareBanner__Neo.webp';
+const pageUrl = Astro.url?.pathname ?? '/jam-with/neo';
+---
+<BaseLayout title={pageTitle} meta={buildOgMeta({ title: pageTitle, description: pageDescription, image: pageImage, url: pageUrl })}>
+  <div class="neo-landing">
+    <!-- Hero Section -->
+    <section class="hero-section" aria-label="Neo Hero">
+      <div class="hero-gradient"></div>
+      <div class="hero-grid"></div>
+      <div class="hero-container">
+        <div class="hero-content">
+          <h1 class="hero-headline">
+            Progress Comes with Struggles.
+          </h1>
+          <p class="hero-subheadline">
+            Vibe Coding or Context Engineering is powerful... but with significant limitations.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Neo Solution Section -->
+    <section class="solution-section">
+      <div class="solution-container">
+        <div class="solution-header">
+          <img class="neo-icon" src="/appIcon__Neo.webp" alt="Neo App Icon" width="128" height="128" />
+          <div class="solution-text">
+            <h2 class="solution-title">Neo can get you out of The Matrix</h2>
+            <p class="solution-description">
+              Neo is the missing context layer for real Code Assistant workloads. It provides the missing context, team, and company knowledge to AI models, enabling them to generate more accurate, consistent, production-grade code.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pain Points Section -->
+    <section class="pain-section">
+      <div class="pain-container">
+        <h2 class="pain-header">Do these frustrations ring any bells?</h2>
+        <p class="pain-subheader">Why Vibe Coding can be frustrating and counterproductive</p>
+
+        <div class="pain-grid">
+          <article class="pain-card">
+            <h3 class="pain-title">Poor Contextual Awareness</h3>
+            <p class="pain-description">
+              AI models excel at pattern recognition and syntax, but miss deeper project, team or company rules and patterns, leading to code that "looks right" but misses the real requirements. <sup class="citation">[<a href="#ref-ucph8r">1</a>] [<a href="#ref-9f363s">2</a>] [<a href="#ref-17262x">3</a>] [<a href="#ref-8hy165">4</a>]</sup>
+            </p>
+          </article>
+
+          <article class="pain-card">
+            <h3 class="pain-title">Limited Creativity and Design Thinking</h3>
+            <p class="pain-description">
+              AI can't innovate or strategize; for open-ended tasks or complex algorithm design, its suggestions lack originality and critical insight. <sup class="citation">[<a href="#ref-ucph8r">1</a>] [<a href="#ref-9f363s">2</a>] [<a href="#ref-8hy165">4</a>]</sup>
+            </p>
+          </article>
+
+          <article class="pain-card">
+            <h3 class="pain-title">Handling Edge Cases</h3>
+            <p class="pain-description">
+              Rare scenarios, multi-step error handling, and intricate algorithms often stump AI, resulting in incorrect or suboptimal code that requires manual correction. <sup class="citation">[<a href="#ref-9f363s">2</a>]</sup>
+            </p>
+          </article>
+
+          <article class="pain-card">
+            <h3 class="pain-title">Review Overload</h3>
+            <p class="pain-description">
+              Apiiro's 2024 research found pull requests with AI code required 60% more review comments — especially on security issues — creating review fatigue and slowing delivery. <sup class="citation">[<a href="#ref-vk4uhi">5</a>]</sup>
+            </p>
+          </article>
+
+          <article class="pain-card">
+            <h3 class="pain-title">Productivity Paradox</h3>
+            <p class="pain-description">
+              Contrary to claims, recent studies show experienced developers took about 19% longer to finish issues when using AI tools — the time lost to fixing, checking, or refactoring AI-generated code often outweighs purported efficiency gains. <sup class="citation">[<a href="#ref-7rrgpy">6</a>]</sup>
+            </p>
+          </article>
+
+          <article class="pain-card">
+            <h3 class="pain-title">Decreased Trust and Frustration</h3>
+            <p class="pain-description">
+              Engineers reported frustration with superficial tests, hallucinated logic (code that "compiles but collapses in production"), and AI failing to respect proprietary conventions or nuanced requirements. <sup class="citation">[<a href="#ref-17262x">3</a>] [<a href="#ref-8hy165">4</a>] [<a href="#ref-7rrgpy">6</a>]</sup>
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="cta-container">
+        <div class="cta-grid">
+          <div class="cta-card">
+            <svg class="cta-icon" viewBox="0 0 24 24" width="64" height="64" aria-hidden="true">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12a10 10 0 0 0 6.838 9.49c.5.091.682-.217.682-.483 0-.237-.009-.866-.013-1.701-2.782.604-3.37-1.34-3.37-1.34-.455-1.157-1.11-1.466-1.11-1.466-.907-.62.069-.607.069-.607 1.003.071 1.53 1.03 1.53 1.03.892 1.528 2.341 1.087 2.91.831.091-.647.35-1.087.636-1.338-2.221-.253-4.555-1.111-4.555-4.944 0-1.091.39-1.984 1.029-2.682-.103-.253-.446-1.272.098-2.65 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0 1 12 7.07c.851.004 1.707.115 2.507.337 1.909-1.294 2.748-1.025 2.748-1.025.546 1.378.203 2.397.1 2.65.64.698 1.028 1.592 1.028 2.682 0 3.842-2.338 4.687-4.566 4.936.359.31.679.922.679 1.858 0 1.34-.012 2.42-.012 2.75 0 .268.18.579.688.481A10 10 0 0 0 22 12c0-5.523-4.477-10-10-10Z" fill="currentColor"/>
+            </svg>
+            <h3 class="cta-title">Join us on Github</h3>
+            <a class="cta-button" href="https://github.com/Parslee-ai/neo" target="_blank" rel="noopener noreferrer">
+              View Repository
+            </a>
+          </div>
+
+          <div class="cta-card">
+            <img class="cta-logo" src="https://ik.imagekit.io/xvpgfijuw/parslee/bannerFor__Claude-Code--Smaller.webp?updatedAt=1760294516640" alt="Claude Code Plugin" width="256" height="128" />
+            <h3 class="cta-title">Add to Claude Code</h3>
+            <a class="cta-button" href="https://github.com/Parslee-ai/claude-code-plugins" target="_blank" rel="noopener noreferrer">
+              Install Plugin
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- References Section -->
+    <section class="references-section">
+      <div class="references-container">
+        <h4 class="references-heading">References</h4>
+        <ol class="references-list">
+          <li id="ref-ucph8r">2025, Oct 12. <a href="https://allthingsopen.org/articles/ai-code-assistants-limitations" target="_blank" rel="noopener noreferrer">6 limitations of AI code assistants and why developers should be ...</a> Published: 2025-02-19 | Updated: 2025-10-12</li>
+          <li id="ref-9f363s">2025, Oct 09. <a href="https://zencoder.ai/blog/limitations-of-ai-coding-assistants" target="_blank" rel="noopener noreferrer">Limitations of AI Coding Assistants: What You Need to Know</a> Published: 2025-09-22 | Updated: 2025-10-09</li>
+          <li id="ref-17262x">2025, Oct 12. <a href="https://news.mit.edu/2025/can-ai-really-code-study-maps-roadblocks-to-autonomous-software-engineering-0716" target="_blank" rel="noopener noreferrer">Can AI really code? Study maps the roadblocks to ... - MIT News</a> Published: 2025-07-16 | Updated: 2025-10-12</li>
+          <li id="ref-8hy165">2025, Oct 12. <a href="https://blog.thepete.net/blog/2025/05/22/why-your-ai-coding-assistant-keeps-doing-it-wrong-and-how-to-fix-it/" target="_blank" rel="noopener noreferrer">Why Your AI Coding Assistant Keeps Doing It Wrong, and How To ...</a> Published: 2025-05-22 | Updated: 2025-10-12</li>
+          <li id="ref-vk4uhi">2025, Oct 12. <a href="https://www.cerbos.dev/blog/productivity-paradox-of-ai-coding-assistants" target="_blank" rel="noopener noreferrer">The Productivity Paradox of AI Coding Assistants | Cerbos</a> Published: 2025-09-12 | Updated: 2025-10-12</li>
+          <li id="ref-7rrgpy">2025, Oct 12. <a href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/" target="_blank" rel="noopener noreferrer">Measuring the Impact of Early-2025 AI on Experienced ... - METR</a> Published: 2025-07-10 | Updated: 2025-10-12</li>
+        </ol>
+      </div>
+    </section>
+  </div>
+
+</BaseLayout>
+
+  <style>
+    /* Reset and Base */
+    .neo-landing {
+      --neo-green: #00ff9c;
+      --neo-green-dim: #00cc7d;
+      --neo-bg-dark: #070a08;
+      --neo-bg-darker: #0b0f0a;
+      --neo-text-bright: #d6ffe8;
+      --neo-text-medium: #c0ffe0;
+      --neo-text-dim: #b3ffdb;
+      font-family: system-ui, -apple-system, sans-serif;
+      color: var(--neo-text-bright);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      position: relative;
+      min-height: 70vh;
+      display: grid;
+      place-items: center;
+      padding: 4rem 1.5rem;
+      background: linear-gradient(180deg, var(--neo-bg-darker), var(--neo-bg-dark));
+      overflow: hidden;
+    }
+
+    .hero-gradient {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(1400px 800px at 50% 20%, rgba(0,255,156,0.15), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,255,156,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,156,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(1200px 700px at 50% 30%, rgba(0,0,0,0.5), transparent 80%);
+      pointer-events: none;
+    }
+
+    .hero-container {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .hero-headline {
+      font-size: clamp(2.5rem, 8vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, var(--neo-green) 0%, var(--neo-text-bright) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 60px rgba(0,255,156,0.3);
+      letter-spacing: -0.02em;
+    }
+
+    .hero-subheadline {
+      font-size: clamp(1.25rem, 3vw, 2rem);
+      font-weight: 400;
+      color: var(--neo-text-medium);
+      max-width: 42ch;
+      margin: 0 auto;
+      line-height: 1.4;
+    }
+
+    /* Solution Section */
+    .solution-section {
+      padding: 6rem 1.5rem;
+      background: linear-gradient(180deg, var(--neo-bg-dark), var(--neo-bg-darker));
+    }
+
+    .solution-container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .solution-header {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .solution-header {
+        grid-template-columns: 1fr;
+        text-align: center;
+        justify-items: center;
+      }
+    }
+
+    .neo-icon {
+      width: 128px;
+      height: 128px;
+      border-radius: 24px;
+      filter: drop-shadow(0 0 30px rgba(0,255,156,0.5));
+    }
+
+    .solution-title {
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      color: var(--neo-green);
+      text-shadow: 0 0 40px rgba(0,255,156,0.3);
+    }
+
+    .solution-description {
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      line-height: 1.6;
+      color: var(--neo-text-dim);
+      max-width: 65ch;
+    }
+
+    /* Pain Points Section */
+    .pain-section {
+      padding: 6rem 1.5rem;
+      background: var(--neo-bg-darker);
+      position: relative;
+    }
+
+    .pain-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,255,156,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,156,0.02) 1px, transparent 1px);
+      background-size: 30px 30px;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .pain-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .pain-header {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 0.75rem;
+      color: var(--neo-text-bright);
+    }
+
+    .pain-subheader {
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      text-align: center;
+      color: var(--neo-text-dim);
+      margin-bottom: 4rem;
+    }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .pain-card {
+      background: rgba(0,255,156,0.04);
+      border: 1px solid rgba(0,255,156,0.15);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pain-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--neo-green), transparent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .pain-card:hover {
+      background: rgba(0,255,156,0.08);
+      border-color: rgba(0,255,156,0.3);
+      box-shadow: 0 10px 40px rgba(0,255,156,0.15);
+      transform: translateY(-4px);
+    }
+
+    .pain-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .pain-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--neo-green);
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .pain-description {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--neo-text-dim);
+    }
+
+    .citation {
+      font-size: 0.75rem;
+      color: var(--neo-text-medium);
+    }
+
+    .citation a {
+      color: var(--neo-green);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .citation a:hover {
+      color: var(--neo-text-bright);
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 6rem 1.5rem;
+      background: linear-gradient(180deg, var(--neo-bg-darker), var(--neo-bg-dark));
+    }
+
+    .cta-container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .cta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+    }
+
+    .cta-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 3rem 2rem;
+      background: rgba(0,255,156,0.06);
+      border: 2px solid rgba(0,255,156,0.2);
+      border-radius: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .cta-card:hover {
+      background: rgba(0,255,156,0.1);
+      border-color: var(--neo-green);
+      box-shadow: 0 20px 60px rgba(0,255,156,0.2);
+      transform: scale(1.02);
+    }
+
+    .cta-icon {
+      color: var(--neo-green);
+      margin-bottom: 1.5rem;
+      filter: drop-shadow(0 0 20px rgba(0,255,156,0.4));
+    }
+
+    .cta-logo {
+      width: 100%;
+      max-width: 256px;
+      height: auto;
+      margin-bottom: 1.5rem;
+      border-radius: 12px;
+      filter: drop-shadow(0 0 20px rgba(0,255,156,0.3));
+    }
+
+    .cta-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--neo-text-bright);
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: var(--neo-green);
+      color: var(--neo-bg-darker);
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      box-shadow: 0 10px 30px rgba(0,255,156,0.3);
+    }
+
+    .cta-button:hover {
+      background: var(--neo-text-bright);
+      box-shadow: 0 15px 40px rgba(0,255,156,0.4);
+      transform: translateY(-2px);
+    }
+
+    /* References Section */
+    .references-section {
+      padding: 3rem 1.5rem;
+      background: var(--neo-bg-darker);
+      border-top: 1px solid rgba(0,255,156,0.1);
+    }
+
+    .references-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .references-heading {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--neo-text-medium);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .references-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 0.65rem;
+      line-height: 1.6;
+      color: rgba(192, 255, 224, 0.5);
+    }
+
+    .references-list li {
+      margin-bottom: 0.5rem;
+      padding-left: 1.5em;
+      text-indent: -1.5em;
+    }
+
+    .references-list a {
+      color: rgba(0, 255, 156, 0.6);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .references-list a:hover {
+      color: var(--neo-green);
+    }
+  </style>

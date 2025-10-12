@@ -2,6 +2,10 @@
 ---
 <section class="hero-v2" aria-label="Neo Hero (Rebuilt)">
   <div class="hero-v2__container">
+    <!-- Top centered headline box -->
+    <div class="hero-v2__top">
+      <p class="top-title">We're Open Sourcing our favorite Internal Tool.<br />Join us.</p>
+    </div>
     <!-- Header row: Neo app icon + text -->
     <div class="hero-v2__header">
       <img class="app-icon-v2" src="/appIcon__Neo.webp" alt="Neo App Icon" width="112" height="112" />
@@ -21,7 +25,6 @@
           <button class="tab-btn" data-key="code-first-generation">Code-First Generation</button>
           <button class="tab-btn" data-key="local-storage">Local Storage</button>
           <button class="tab-btn" data-key="model-agnostic">Model-Agnostic</button>
-          <button class="tab-btn" data-key="claude-code-plugin">Claude Code Plugin</button>
         </nav>
         <div class="feature-panel" role="region" aria-live="polite">
           <p class="panel-text"></p>
@@ -44,7 +47,7 @@
         </div>
       </div>
       <div class="hero-v2__right">
-        <img class="claude-logo-v2" src="https://ik.imagekit.io/xvpgfijuw/parslee/bannerFor__Claude-Code.webp" alt="Claude Code Plugin" width="320" height="160" />
+        <img class="claude-logo-v2" src="https://ik.imagekit.io/xvpgfijuw/parslee/bannerFor__Claude-Code--Smaller.webp?updatedAt=1760294516640" alt="Claude Code Plugin" width="320" height="160" />
       </div>
     </div>
   </div>
@@ -64,6 +67,8 @@
       pointer-events: none;
     }
     .hero-v2__container { max-width: 1120px; margin: 0 auto; }
+    .hero-v2__top { display: grid; place-items: center; margin-bottom: 32px; }
+    .top-title { text-align: center; background: rgba(0,255,156,0.08); border-radius: 12px; padding: 10px 16px; color: #c0ffe0; font-weight: 700; font-size: clamp(1.25rem, 4vw, 1.75rem); line-height: 1.4; box-shadow: 0 10px 26px rgba(0,255,156,0.18); }
     .hero-v2__header { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: center; margin-bottom: 20px; }
     .app-icon-v2 { width: 96px; height: 96px; border-radius: 16px; filter: drop-shadow(0 0 14px rgba(0,255,156,0.35)); }
     .header-title-v2 { font-weight: 600; color: #c0ffe0; line-height: 1.5; font-size: clamp(1rem, 2.4vw, 1.25rem); }
@@ -71,13 +76,14 @@
 
     /* Tabs row full width */
     .hero-v2__tabs-row { display: grid; grid-template-columns: 1fr; }
-    .feature-tabs { display: grid; gap: 10px; margin-top: 12px; }
-    .tab-list { display: flex; flex-wrap: wrap; gap: 8px; }
-    .tab-btn { padding: 8px 12px; border-radius: 10px; font-weight: 700; font-size: var(--text-xs); color: #c0ffe0; background: transparent; border: 1px solid rgba(0,255,156,0.18); box-shadow: none; cursor: pointer; }
+    .feature-tabs { display: grid; gap: 10px; margin-top: 12px; position: relative; }
+    /* Make tabs appear like folder tabs sitting on the panel */
+    .tab-list { display: flex; flex-wrap: wrap; gap: 6px; align-items: flex-end; margin-bottom: -1px; padding: 0 8px; }
+    .tab-btn { position: relative; padding: 8px 12px; font-weight: 700; font-size: var(--text-xs); color: #c0ffe0; background: rgba(0,255,156,0.08); border: 1px solid rgba(0,255,156,0.18); border-bottom-color: transparent; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-left-radius: 0; border-bottom-right-radius: 0; box-shadow: none; cursor: pointer; }
     .tab-btn::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 8px; border-radius: 50%; background: var(--matrix-green); box-shadow: 0 0 6px rgba(0,255,156,0.35); border: 1px solid rgba(11,15,10,0.45); }
     .tab-btn:hover { background: rgba(0,255,156,0.14); box-shadow: 0 8px 24px rgba(0,255,156,0.18); }
-    .tab-btn.active { background: var(--matrix-green); color: #0b0f0a; box-shadow: 0 10px 28px rgba(0,255,156,0.22); }
-    .feature-panel { background: rgba(0,255,156,0.06); border: 1px solid rgba(0,255,156,0.18); border-radius: 12px; padding: 12px 14px; }
+    .tab-btn.active { background: var(--matrix-green); color: #0b0f0a; border-color: rgba(0,255,156,0.6); border-bottom-color: transparent; box-shadow: 0 10px 28px rgba(0,255,156,0.22); z-index: 1; }
+    .feature-panel { --panel-bg: rgba(0,255,156,0.06); background: var(--panel-bg); border: 1px solid rgba(0,255,156,0.18); border-radius: 12px; padding: 12px 14px; }
     .panel-text { color: #c0ffe0; font-size: var(--text-xs); }
 
     /* Two-column layout below */
@@ -100,8 +106,7 @@
         'semantic-retrieval': 'Vector search finds relevant patterns',
         'code-first-generation': 'No diff parsing failures',
         'local-storage': 'Privacy-first JSON storage in ~/.neo directory',
-        'model-agnostic': 'Works with any LM provider',
-        'claude-code-plugin': "Integrates seamlessly with Anthropic's Claude models and CLI."
+        'model-agnostic': 'Works with any LM provider'
       };
       const wrap = document.querySelector('.feature-tabs');
       if (wrap) {
