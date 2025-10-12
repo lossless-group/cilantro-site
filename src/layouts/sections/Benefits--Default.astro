@@ -234,19 +234,14 @@ const benefits = [
   </style>
 
   <script type="module">
-    // Lightweight IntersectionObserver to toggle the reveal-on-scroll animation
+    import { setupRevealObserver } from '/src/utils/revealObserver.ts';
     document.addEventListener('DOMContentLoaded', () => {
-      const elements = document.querySelectorAll('.reveal-on-scroll');
-      const observer = new IntersectionObserver((entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in-view');
-            observer.unobserve(entry.target);
-          }
-        }
-      }, { rootMargin: '-80px 0px' });
-
-      elements.forEach((el) => observer.observe(el));
+      setupRevealObserver({
+        selector: '.reveal-on-scroll',
+        inViewClass: 'in-view',
+        rootMargin: '-80px 0px',
+        unobserveOnReveal: 'always'
+      });
     });
   </script>
 </section>

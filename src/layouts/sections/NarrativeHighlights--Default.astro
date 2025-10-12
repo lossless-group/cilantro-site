@@ -90,15 +90,14 @@
     }
   }
 
+  import { setupRevealObserver } from '/src/utils/revealObserver.ts';
   onReady(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-        }
-      });
-    }, { rootMargin: '-100px 0px', threshold: 0.1 });
-
-    document.querySelectorAll('.reveal, .reveal-left').forEach((el) => observer.observe(el));
+    setupRevealObserver({
+      selector: ['.reveal', '.reveal-left'],
+      inViewClass: 'in',
+      rootMargin: '-100px 0px',
+      threshold: 0.1,
+      unobserveOnReveal: 'always'
+    });
   });
 </script>

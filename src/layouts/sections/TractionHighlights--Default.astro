@@ -128,6 +128,7 @@ import ChipBasic from '../../components/Chip--Basic.astro';
 </style>
 
 <script type="module">
+  import { setupRevealObserver } from '/src/utils/revealObserver.ts';
   function onReady(fn) {
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', fn);
@@ -137,14 +138,12 @@ import ChipBasic from '../../components/Chip--Basic.astro';
   }
 
   onReady(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-        }
-      });
-    }, { rootMargin: '-100px 0px', threshold: 0.1 });
-
-    document.querySelectorAll('.reveal, .chip').forEach((el) => observer.observe(el));
+    setupRevealObserver({
+      selector: ['.reveal', '.chip'],
+      inViewClass: 'in',
+      rootMargin: '-100px 0px',
+      threshold: 0.1,
+      unobserveOnReveal: 'always'
+    });
   });
 </script>

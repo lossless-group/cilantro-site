@@ -203,23 +203,16 @@ const lastUpdated = 'October 6, 2025';
       }
     </style>
 
-    <script>
-      (function () {
-        const elements = document.querySelectorAll('.reveal');
-        if (!('IntersectionObserver' in window) || elements.length === 0) {
-          elements.forEach((el) => el.classList.add('in-view'));
-          return;
-        }
-        const observer = new IntersectionObserver((entries, obs) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('in-view');
-              obs.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.1 });
-        elements.forEach((el) => observer.observe(el));
-      })();
+    <script type="module">
+      import { setupRevealObserver } from '/src/utils/revealObserver.ts';
+      document.addEventListener('DOMContentLoaded', () => {
+        setupRevealObserver({
+          selector: '.reveal',
+          inViewClass: 'in-view',
+          threshold: 0.1,
+          unobserveOnReveal: 'always'
+        });
+      });
     </script>
   </body>
 </html>

@@ -175,6 +175,7 @@
 </style>
 
 <script type="module">
+  import { setupRevealObserver } from '/src/utils/revealObserver.ts';
   function onReady(fn) {
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', fn);
@@ -184,14 +185,12 @@
   }
 
   onReady(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-        }
-      });
-    }, { rootMargin: '-100px 0px', threshold: 0.1 });
-
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    setupRevealObserver({
+      selector: '.reveal',
+      inViewClass: 'in',
+      rootMargin: '-100px 0px',
+      threshold: 0.1,
+      unobserveOnReveal: 'always'
+    });
   });
 </script>

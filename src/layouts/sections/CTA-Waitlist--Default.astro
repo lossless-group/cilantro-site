@@ -135,18 +135,15 @@ const bullets = ['Early beta access', 'Product updates', 'Investor news'];
   </style>
 
   <script type="module">
-    // Reveal-on-scroll using IntersectionObserver
+    import { setupRevealObserver } from '/src/utils/revealObserver.ts';
+    // Reveal-on-scroll using shared utility
     document.addEventListener('DOMContentLoaded', () => {
-      const revealEls = document.querySelectorAll('.reveal-on-scroll');
-      const io = new IntersectionObserver((entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) {
-            e.target.classList.add('in-view');
-            io.unobserve(e.target);
-          }
-        }
-      }, { rootMargin: '-100px 0px' });
-      revealEls.forEach((el) => io.observe(el));
+      setupRevealObserver({
+        selector: '.reveal-on-scroll',
+        inViewClass: 'in-view',
+        rootMargin: '-100px 0px',
+        unobserveOnReveal: 'always'
+      });
 
       // Simple waitlist mock submission
       const form = document.getElementById('waitlist-form');
