@@ -128,7 +128,7 @@ import ChipBasic from '../../components/Chip--Basic.astro';
 </style>
 
 <script type="module">
-  import { setupRevealObserver } from '/src/utils/revealObserver.ts';
+  import { setupRevealObserver } from '@utils/revealObserver';
   function onReady(fn) {
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', fn);
