@@ -1,3 +1,24 @@
+---
+title: "Dynamic OpenGraph Images"
+lede: "As website content grows more numerous, across different audiences and different contexts, dynamically generated OpenGraph images can amplify shares and referral marketing while not bogging down the team with the need to create and maintain a separate image for each piece of content."
+date_authored_initial_draft: 2025-10-13
+date_authored_current_draft: 2025-10-13
+date_authored_final_draft: 2025-10-13
+date_first_published: null
+date_last_updated: 2025-10-13
+at_semantic_version: 0.0.1.1
+publish: false
+status: Attempted
+augmented_with: "Claude Sonnet 4 on Claude Code"
+category: Marketing-Site
+date_created: 2025-10-13
+date_modified: 2025-10-13
+authors:
+  - Michael Staton
+image_prompt: "A view of inside a bus, where riders are looking down at their phones. Each rider is sharing websites and content on social media, and OpenGraph images are popping up above their head as if they are thought bubbles"
+slug: dynamic-opengraph-images
+tags: [Marketing-Site, Digital-Marketing]
+---
 # A System for Generating Dynamic OpenGraph Images based on Content and Variables
 
 **Status:** Work in Progress - Core functionality implemented, Vercel deployment pending resolution
