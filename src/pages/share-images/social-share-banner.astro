@@ -2,6 +2,10 @@
 // Astro component for social share banner template
 // This is rendered as a standalone HTML page for Playwright to screenshot
 
+// CRITICAL: Disable pre-rendering so this page is server-rendered on each request
+// This allows URL parameters to be read dynamically from Astro.url
+export const prerender = false;
+
 // Get URL parameters from the request
 const { url } = Astro;
 const title = url.searchParams.get('title') || null;

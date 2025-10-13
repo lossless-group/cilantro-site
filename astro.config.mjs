@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config'
 import tailwind from '@tailwindcss/vite'
 import { fileURLToPath } from 'node:url'
 import { existsSync } from 'node:fs'
+import vercel from '@astrojs/vercel'
 
 // https://docs.astro.build/en/guides/integrations-guide/tailwind/#tailwind-v4
 // Detect if we're in the monorepo with local workspace packages available.
@@ -24,6 +25,8 @@ const aliases = {
 }
 
 export default defineConfig({
+  // Adapter enables SSR for pages with `export const prerender = false`
+  adapter: vercel(),
   vite: {
     plugins: [tailwind()],
     // In monorepo dev, allow reading shared packages; omit in standalone.

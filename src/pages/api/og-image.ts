@@ -18,6 +18,10 @@ import os from 'os';
  * Note: On serverless platforms (like Vercel), filesystem caching is ephemeral.
  * Set cache-control headers to leverage CDN caching instead.
  */
+
+// CRITICAL: Disable pre-rendering so this endpoint is server-rendered on each request
+export const prerender = false;
+
 export const GET: APIRoute = async ({ url, request }) => {
   try {
     const params = url.searchParams;
