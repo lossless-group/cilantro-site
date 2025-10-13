@@ -4,9 +4,9 @@
   "version": "0.0.0.3",
   "packageManager": "pnpm@10.15.0",
   "scripts": {
-    "dev": "pnpm dev",
-    "build": "pnpm build",
-    "preview": "pnpm preview"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
   },
   "dependencies": {
     "@astrojs/vercel": "^8.2.9",
