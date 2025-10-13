@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "pnpm dev",
     "build": "pnpm build",
-    "preview": "pnpm preview",
-    "postinstall": "pnpm run approve-builds"
+    "preview": "pnpm preview"
   },
   "dependencies": {
     "@astrojs/vercel": "^8.2.9",
