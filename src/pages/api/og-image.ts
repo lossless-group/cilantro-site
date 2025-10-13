@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
-import { chromium } from 'playwright';
+import { chromium as playwrightChromium } from 'playwright-core';
+import chromium from '@sparticuz/chromium';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 import crypto from 'crypto';
@@ -107,16 +108,11 @@ export const GET: APIRoute = async ({ url, request }) => {
       });
     }
 
-    // Launch headless browser
-    const browser = await chromium.launch({
+    // Launch headless browser using @sparticuz/chromium for Vercel compatibility
+    const browser = await playwrightChromium.launch({
+      args: chromium.args,
+      executablePath: await chromium.executablePath(),
       headless: true,
-      args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--disable-accelerated-2d-canvas',
-        '--disable-gpu',
-      ],
     });
 
     const page = await browser.newPage({
