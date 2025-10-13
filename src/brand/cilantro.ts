@@ -10,7 +10,7 @@ const brand: BrandConfig = {
   assets: {
     logoLight: "/brands/cilantro/logos/logo-light.svg",
     logoDark: "/brands/cilantro/logos/logo-dark.svg",
-    favicon: "/brands/cilantro/icons/favicon.svg",
+    favicon: "favicon__Parslee.png",
   },
 };
 
