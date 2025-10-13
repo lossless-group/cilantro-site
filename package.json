@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "postinstall": "pnpm run approve-builds && pnpm run setup-playwright",
+    "postinstall": "pnpm run approve-builds",
     "approve-builds": "pnpm approve-builds || true",
     "setup-playwright": "playwright install chromium --with-deps || playwright install chromium || true"
   },
