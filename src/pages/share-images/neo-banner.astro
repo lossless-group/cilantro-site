@@ -1,0 +1,269 @@
+---
+// Neo social share banner template - 1200×630px for Open Graph images
+// Static template for Neo landing page with Matrix green theme
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neo Social Share Banner - 1200x630</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #0b0f0a;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    .banner {
+      position: relative;
+      width: 1200px;
+      height: 630px;
+      background: linear-gradient(135deg, #070a08 0%, #0b0f0a 50%, #070a08 100%);
+      overflow: hidden;
+    }
+
+    /* Matrix Grid Pattern */
+    .grid-pattern {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,255,156,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,156,0.06) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.8;
+      mask-image: radial-gradient(ellipse 900px 500px at 50% 50%, rgba(0,0,0,0.6), transparent 80%);
+    }
+
+    /* Glowing Gradient Orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.4;
+    }
+
+    .orb-1 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(0,255,156,0.3) 0%, transparent 70%);
+      top: -200px;
+      right: -150px;
+    }
+
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(0,204,125,0.25) 0%, transparent 70%);
+      bottom: -150px;
+      left: -100px;
+    }
+
+    /* Content Container */
+    .content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 50px 70px;
+    }
+
+    /* Top Section - Neo Icon and Title */
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .neo-icon {
+      width: 96px;
+      height: 96px;
+      border-radius: 20px;
+      filter: drop-shadow(0 0 40px rgba(0,255,156,0.6));
+    }
+
+    .header-text h1 {
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1.2;
+      background: linear-gradient(135deg, #00ff9c 0%, #d6ffe8 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 60px rgba(0,255,156,0.3);
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+
+    .header-text p {
+      font-size: 18px;
+      font-weight: 500;
+      color: #b3ffdb;
+      opacity: 0.9;
+    }
+
+    /* Main Content - Tagline */
+    .tagline-section {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 40px 0;
+    }
+
+    .tagline {
+      font-size: 64px;
+      font-weight: 800;
+      line-height: 1.15;
+      color: #d6ffe8;
+      text-align: left;
+      max-width: 1000px;
+      letter-spacing: -0.02em;
+      text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+    }
+
+    .tagline .highlight {
+      color: #00ff9c;
+      text-shadow: 0 0 40px rgba(0,255,156,0.5);
+    }
+
+    /* Bottom Section - Glassmorphic Badge */
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .glass-badge {
+      background: rgba(0,255,156,0.08);
+      backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(0,255,156,0.25);
+      border-radius: 16px;
+      padding: 16px 32px;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    }
+
+    .badge-dot {
+      width: 10px;
+      height: 10px;
+      background: #00ff9c;
+      border-radius: 50%;
+      box-shadow: 0 0 16px rgba(0,255,156,0.8);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.15); }
+    }
+
+    .badge-text {
+      font-size: 20px;
+      font-weight: 700;
+      color: #d6ffe8;
+      letter-spacing: 0.01em;
+    }
+
+    /* Corner Accent Lines */
+    .corner-accent {
+      position: absolute;
+      border: 2.5px solid rgba(0,255,156,0.25);
+    }
+
+    .corner-accent.top-left {
+      width: 100px;
+      height: 100px;
+      top: 35px;
+      left: 35px;
+      border-right: none;
+      border-bottom: none;
+      border-radius: 16px 0 0 0;
+    }
+
+    .corner-accent.bottom-right {
+      width: 100px;
+      height: 100px;
+      bottom: 35px;
+      right: 35px;
+      border-left: none;
+      border-top: none;
+      border-radius: 0 0 16px 0;
+    }
+
+    /* Matrix Code Effect Overlay */
+    .matrix-overlay {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(0deg, transparent 90%, rgba(0,255,156,0.03) 100%);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="banner">
+    <!-- Grid Pattern -->
+    <div class="grid-pattern"></div>
+
+    <!-- Matrix Overlay -->
+    <div class="matrix-overlay"></div>
+
+    <!-- Glowing Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <!-- Corner Accents -->
+    <div class="corner-accent top-left"></div>
+    <div class="corner-accent bottom-right"></div>
+
+    <!-- Content -->
+    <div class="content">
+      <!-- Header with Neo Icon -->
+      <div class="header">
+        <img
+          src="/appIcon__Neo.webp"
+          alt="Neo App Icon"
+          class="neo-icon"
+        />
+        <div class="header-text">
+          <h1>Neo</h1>
+          <p>The Missing Context Layer</p>
+        </div>
+      </div>
+
+      <!-- Main Tagline -->
+      <div class="tagline-section">
+        <h2 class="tagline">
+          Neo can get you out of <span class="highlight">The Matrix</span>
+        </h2>
+      </div>
+
+      <!-- Footer Badge -->
+      <div class="footer">
+        <div class="glass-badge">
+          <div class="badge-dot"></div>
+          <span class="badge-text">AI Code Assistant Context Layer</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    // Static Neo social share banner template
+    console.log('%c🤖 Neo Social Share Banner', 'font-size: 16px; font-weight: bold; color: #00ff9c;');
+  </script>
+</body>
+</html>
