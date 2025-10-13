@@ -1,0 +1,303 @@
+---
+// Astro component for social share banner template
+// This is rendered as a standalone HTML page for Playwright to screenshot
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parslee Social Share Banner - 1200x630</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #1a1a1a;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    .banner {
+      position: relative;
+      width: 1200px;
+      height: 630px;
+      background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #0f1419 100%);
+      overflow: hidden;
+    }
+
+    /* Geometric Pattern Overlay */
+    .pattern {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(30deg, rgba(63, 224, 222, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(63, 224, 222, 0.03) 87.5%, rgba(63, 224, 222, 0.03)),
+        linear-gradient(150deg, rgba(63, 224, 222, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(63, 224, 222, 0.03) 87.5%, rgba(63, 224, 222, 0.03)),
+        linear-gradient(30deg, rgba(63, 224, 222, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(63, 224, 222, 0.03) 87.5%, rgba(63, 224, 222, 0.03)),
+        linear-gradient(150deg, rgba(63, 224, 222, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(63, 224, 222, 0.03) 87.5%, rgba(63, 224, 222, 0.03)),
+        linear-gradient(60deg, rgba(0, 169, 145, 0.04) 25%, transparent 25.5%, transparent 75%, rgba(0, 169, 145, 0.04) 75%, rgba(0, 169, 145, 0.04)),
+        linear-gradient(60deg, rgba(0, 169, 145, 0.04) 25%, transparent 25.5%, transparent 75%, rgba(0, 169, 145, 0.04) 75%, rgba(0, 169, 145, 0.04));
+      background-size: 80px 140px;
+      background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+      opacity: 0.4;
+    }
+
+    /* Glassmorphic Gradient Orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.5;
+    }
+
+    .orb-1 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(63, 224, 222, 0.25) 0%, transparent 70%);
+      top: -150px;
+      right: -100px;
+    }
+
+    .orb-2 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(0, 169, 145, 0.2) 0%, transparent 70%);
+      bottom: -100px;
+      left: -50px;
+    }
+
+    .orb-3 {
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, rgba(63, 224, 222, 0.15) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Content Container */
+    .content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 60px 80px;
+    }
+
+    /* Top Section - Logo and Wordmark */
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .app-icon {
+      width: 80px;
+      height: 80px;
+      filter: drop-shadow(0 10px 30px rgba(63, 224, 222, 0.3));
+    }
+
+    .wordmark {
+      height: 42px;
+      width: auto;
+      filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.1));
+    }
+
+    /* Main Content - Tagline */
+    .tagline-section {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 0;
+    }
+
+    .tagline {
+      font-size: 56px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #ffffff;
+      text-align: left;
+      max-width: 900px;
+      letter-spacing: -0.02em;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .tagline .highlight {
+      color: #3FE0DE;
+      background: linear-gradient(135deg, #3FE0DE 0%, #00A991 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: none;
+      filter: drop-shadow(0 0 20px rgba(63, 224, 222, 0.3));
+    }
+
+    /* Bottom Section - Glassmorphic Card */
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 20px 32px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .glass-card-dot {
+      width: 8px;
+      height: 8px;
+      background: #3FE0DE;
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(63, 224, 222, 0.6);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.1); }
+    }
+
+    .glass-card-text {
+      font-size: 18px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.9);
+      letter-spacing: 0.02em;
+    }
+
+    /* Decorative Corner Elements */
+    .corner-accent {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border: 2px solid rgba(63, 224, 222, 0.2);
+    }
+
+    .corner-accent.top-left {
+      top: 40px;
+      left: 40px;
+      border-right: none;
+      border-bottom: none;
+      border-radius: 12px 0 0 0;
+    }
+
+    .corner-accent.bottom-right {
+      bottom: 40px;
+      right: 40px;
+      border-left: none;
+      border-top: none;
+      border-radius: 0 0 12px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="banner">
+    <!-- Geometric Pattern -->
+    <div class="pattern"></div>
+
+    <!-- Glassmorphic Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Corner Accents -->
+    <div class="corner-accent top-left"></div>
+    <div class="corner-accent bottom-right"></div>
+
+    <!-- Content -->
+    <div class="content">
+      <!-- Header with Logo -->
+      <div class="header">
+        <img
+          src="/appIcon__Parslee.svg"
+          alt="Parslee App Icon"
+          class="app-icon"
+        />
+        <img
+          src="/trademark__Parslee--Lightest.svg"
+          alt="Parslee"
+          class="wordmark"
+        />
+      </div>
+
+      <!-- Main Tagline -->
+      <div class="tagline-section">
+        <h1 class="tagline" id="tagline">
+          The <span class="highlight">missing Context Layer</span> for effective AI workloads and agentic workforces.
+        </h1>
+      </div>
+
+      <!-- Footer Card -->
+      <div class="footer">
+        <div class="glass-card">
+          <div class="glass-card-dot"></div>
+          <span class="glass-card-text" id="subtitle">Document AI Platform</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    // Dynamic content from URL parameters
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+
+      // Update tagline if provided
+      const title = params.get('title');
+      const highlightText = params.get('highlight');
+
+      if (title) {
+        const taglineEl = document.getElementById('tagline');
+        if (highlightText) {
+          // Split title and wrap highlight in span
+          const titleHTML = title.replace(
+            highlightText,
+            `<span class="highlight">${highlightText}</span>`
+          );
+          taglineEl.innerHTML = titleHTML;
+        } else {
+          taglineEl.textContent = title;
+        }
+      }
+
+      // Update subtitle if provided
+      const subtitle = params.get('subtitle');
+      if (subtitle) {
+        document.getElementById('subtitle').textContent = subtitle;
+      }
+
+      // Signal that dynamic content is ready for Playwright
+      document.body.setAttribute('data-og-ready', 'true');
+
+      // Log available parameters for debugging
+      console.log('%c📸 Social Share Banner Ready!', 'font-size: 20px; font-weight: bold; color: #3FE0DE;');
+      console.log('Available URL parameters:');
+      console.log('  - title: Main tagline text');
+      console.log('  - highlight: Text to highlight in the title');
+      console.log('  - subtitle: Footer card text');
+      console.log('\nExample:');
+      console.log('  ?title=The missing Context Layer&highlight=missing Context Layer&subtitle=Document AI Platform');
+      console.log('\nCurrent values:');
+      params.forEach((value, key) => {
+        console.log(`  ${key}: ${value}`);
+      });
+    })();
+  </script>
+</body>
+</html>

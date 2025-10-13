@@ -6,13 +6,19 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "postinstall": "pnpm run approve-builds && pnpm run setup-playwright",
+    "approve-builds": "pnpm approve-builds || true",
+    "setup-playwright": "playwright install chromium --with-deps || playwright install chromium || true"
   },
   "dependencies": {
-    "astro": "^5.14.1"
+    "astro": "^5.14.1",
+    "sharp": "^0.34.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.56.0",
     "@tailwindcss/vite": "^4.1.14",
+    "playwright": "^1.56.0",
     "tailwindcss": "^4.1.14"
   }
 }

@@ -12,7 +12,7 @@ export const SITE_SEO: SiteSEO = {
   defaultTitle: 'The missing Context Layer for AI Workloads and Document Intelligence',
   defaultDescription:
     'Enabling better use of AI through contextual understanding of documents.',
-  defaultImage: '/shareBanner__Parslee-Zinger.webp',
+  defaultImage: '/shareBanner__Parslee.webp',
   twitterHandle: '@parslee_ai',
 };
 

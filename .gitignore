@@ -6,6 +6,9 @@ dist/
 # dependencies
 node_modules/
 
+# generated OG images (regenerated on-demand)
+public/generated-og/
+
 # logs
 npm-debug.log*
 yarn-debug.log*

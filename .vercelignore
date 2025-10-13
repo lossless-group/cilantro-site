@@ -1,0 +1,35 @@
+# Vercel build cache
+.vercel
+
+# Node modules (managed by pnpm)
+node_modules
+
+# Development files
+.astro
+.env.local
+.env.*.local
+
+# Generated OG images (regenerated on demand)
+public/generated-og
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor directories
+.vscode
+.idea
+
+# Test coverage
+coverage
+
+# Temporary files
+*.tmp
+*.temp
