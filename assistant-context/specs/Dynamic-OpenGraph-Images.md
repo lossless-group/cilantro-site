@@ -766,6 +766,8 @@ This is expected behavior - the package is compiled for Linux serverless runtime
 
 ### What's Pending ⏳
 
+Review and implement from Vercel's og package: https://vercel.com/docs/og-image-generation
+
 1. **Vercel Deployment:** Code is committed but not yet deployed to Vercel with @sparticuz/chromium
 2. **Production Testing:** Need to verify serverless function works end-to-end on Vercel
 3. **Performance Optimization:** Haven't measured cold start times or memory usage
