@@ -3,6 +3,5 @@
   "buildCommand": "pnpm exec playwright install --with-deps chromium && pnpm run build",
   "installCommand": "pnpm install --no-frozen-lockfile",
   "framework": "astro",
-  "packageManager": "pnpm",
   "regions": ["iad1"]
 }
