@@ -7,9 +7,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "postinstall": "pnpm run approve-builds",
-    "approve-builds": "pnpm approve-builds || true"
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/vercel": "^8.2.9",
