@@ -4,8 +4,5 @@
   "installCommand": "pnpm install",
   "framework": "astro",
   "packageManager": "pnpm",
-  "regions": ["iad1"],
-  "env": {
-    "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD": "0"
-  }
+  "regions": ["iad1"]
 }
