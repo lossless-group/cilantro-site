@@ -26,7 +26,10 @@ const aliases = {
 
 export default defineConfig({
   // Adapter enables SSR for pages with `export const prerender = false`
-  adapter: vercel(),
+  adapter: vercel({
+    maxDuration: 30,  // OG image generation needs extra time for Playwright
+    imageService: true,
+  }),
   vite: {
     plugins: [tailwind()],
     // In monorepo dev, allow reading shared packages; omit in standalone.
