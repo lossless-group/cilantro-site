@@ -4,7 +4,12 @@
     "baseUrl": ".",
     "paths": {
       "@brand": ["src/config/brand.ts"],
-      
+      "@utils/*": ["src/utils/*"],
+      "@components/*": ["src/components/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@config/*": ["src/config/*"],
+      "@base/*": ["src/base/*"],
+      "@styles/*": ["src/styles/*"]
     }
   },
   "include": [".astro/types.d.ts", "**/*"],
