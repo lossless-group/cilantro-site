@@ -25,10 +25,12 @@ const headerHeight = 72; // px
       <div class="logo">
         {isHomePage ? (
           <button class="logo-btn" onclick="smoothScroll('#hero')" aria-label="Go to hero">
-            <img src="/trademark__Parslee--Darkest.svg" alt="Parslee" class="logo-img" />
+            <img src="/appIcon__Parslee.svg" alt="Parslee App Icon" class="logo-icon" />
+            <img src="/trademark__Parslee--Darkest.svg" alt="Parslee Wordmark" class="logo-img" />
           </button>
         ) : (
           <a href="/" class="logo-link" aria-label="Back to Home">
+            <img src="/appIcon__Parslee.svg" alt="Parslee App Icon" class="logo-icon" />
             <img src="/trademark__Parslee--Darkest.svg" alt="Parslee" class="logo-img" />
           </a>
         )}
@@ -114,9 +116,11 @@ const headerHeight = 72; // px
 
   .logo { display: flex; align-items: center; gap: 12px; }
   .logo-text { color: var(--blue); font-weight: 600; }
+  .logo-icon { display: block; height: 22px; width: 22px; border-radius: 4px; }
+  @media (min-width: 768px) { .logo-icon { height: 32px; width: 32px; border-radius: 8px; } }
   .logo-img { display: block; height: 28px; }
   @media (min-width: 768px) { .logo-img { height: 32px; } }
-  .logo-btn, .logo-link { cursor: pointer; background: none; border: none; padding: 0; }
+  .logo-btn, .logo-link { cursor: pointer; background: none; border: none; padding: 0; display: flex; align-items: center; gap: 12px; }
   .logo-btn:hover, .logo-link:hover { transform: translateY(-1px); }
   .logo-btn:active, .logo-link:active { transform: translateY(0); }
 
