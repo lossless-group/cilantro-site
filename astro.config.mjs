@@ -17,6 +17,12 @@ const hasWorkspaceBrandConfig = existsSync(fileURLToPath(brandConfigSrcUrl))
 // Build aliases conditionally so standalone deployments don't depend on monorepo paths.
 const aliases = {
   '@brand': fileURLToPath(new URL('./src/config/brand.ts', import.meta.url)),
+  '@utils': fileURLToPath(new URL('./src/utils', import.meta.url)),
+  '@components': fileURLToPath(new URL('./src/components', import.meta.url)),
+  '@layouts': fileURLToPath(new URL('./src/layouts', import.meta.url)),
+  '@config': fileURLToPath(new URL('./src/config', import.meta.url)),
+  '@base': fileURLToPath(new URL('./src/base', import.meta.url)),
+  '@styles': fileURLToPath(new URL('./src/styles', import.meta.url)),
   ...(hasWorkspaceTokensCss
     ? { '@knots/tokens/css': fileURLToPath(tokensCssUrl) }
     : {}),
