@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config'
 import tailwind from '@tailwindcss/vite'
 import { fileURLToPath } from 'node:url'
 import { existsSync } from 'node:fs'
+// Vercel adapter - not currently in use, but keeping dependency for future SSR needs
 import vercel from '@astrojs/vercel'
 
 // https://docs.astro.build/en/guides/integrations-guide/tailwind/#tailwind-v4
@@ -25,11 +26,11 @@ const aliases = {
 }
 
 export default defineConfig({
-  // Adapter enables SSR for pages with `export const prerender = false`
-  adapter: vercel({
-    maxDuration: 30,  // OG image generation needs extra time for Playwright
-    imageService: true,
-  }),
+  // SSR adapter commented out - not currently needed
+  // adapter: vercel({
+  //   maxDuration: 30,
+  //   imageService: true,
+  // }),
   vite: {
     plugins: [tailwind()],
     // In monorepo dev, allow reading shared packages; omit in standalone.

@@ -1,34 +1,7 @@
 ---
 // Astro component for social share banner template
-// This is rendered as a standalone HTML page for Playwright to screenshot
-
-// CRITICAL: Disable pre-rendering so this page is server-rendered on each request
-// This allows URL parameters to be read dynamically from Astro.url
-export const prerender = false;
-
-// Get URL parameters from the request
-const { url } = Astro;
-const title = url.searchParams.get('title') || null;
-const highlightText = url.searchParams.get('highlight') || null;
-const subtitle = url.searchParams.get('subtitle') || 'Document AI Platform';
-
-// Default tagline
-const defaultTagline = 'The <span class="highlight">missing Context Layer</span> for effective AI workloads and agentic workforces.';
-
-// Build the tagline HTML
-let taglineHTML = defaultTagline;
-if (title) {
-  if (highlightText && title.includes(highlightText)) {
-    // Wrap the highlight text in a span
-    taglineHTML = title.replace(
-      highlightText,
-      `<span class="highlight">${highlightText}</span>`
-    );
-  } else {
-    // No highlight, just use the title as-is
-    taglineHTML = title;
-  }
-}
+// Static template preserved for potential future use with OG image generation
+// Currently renders with default content only
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -266,7 +239,8 @@ if (title) {
 
       <!-- Main Tagline -->
       <div class="tagline-section">
-        <h1 class="tagline" id="tagline" set:html={taglineHTML}>
+        <h1 class="tagline" id="tagline">
+          The <span class="highlight">missing Context Layer</span> for effective AI workloads and agentic workforces.
         </h1>
       </div>
 
@@ -274,19 +248,15 @@ if (title) {
       <div class="footer">
         <div class="glass-card">
           <div class="glass-card-dot"></div>
-          <span class="glass-card-text" id="subtitle">{subtitle}</span>
+          <span class="glass-card-text" id="subtitle">Document AI Platform</span>
         </div>
       </div>
     </div>
   </div>
 
   <script is:inline>
-    // Signal that content is ready for Playwright (content is server-rendered, no client-side JS needed)
-    document.body.setAttribute('data-og-ready', 'true');
-
-    // Debug logging
-    console.log('%c📸 Social Share Banner (Server-Rendered)', 'font-size: 16px; font-weight: bold; color: #3FE0DE;');
-    console.log('Content rendered server-side via Astro frontmatter');
+    // Static social share banner template
+    console.log('%c📸 Social Share Banner Template', 'font-size: 16px; font-weight: bold; color: #3FE0DE;');
   </script>
 </body>
 </html>

@@ -9,15 +9,11 @@
     "preview": "astro preview",
     "astro": "astro",
     "postinstall": "pnpm run approve-builds",
-    "approve-builds": "pnpm approve-builds || true",
-    "setup-playwright": "playwright install chromium --with-deps || playwright install chromium || true"
+    "approve-builds": "pnpm approve-builds || true"
   },
   "dependencies": {
     "@astrojs/vercel": "^8.2.9",
-    "@sparticuz/chromium": "^141.0.0",
-    "astro": "^5.14.1",
-    "playwright-core": "^1.56.0",
-    "sharp": "^0.34.4"
+    "astro": "^5.14.1"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.14",

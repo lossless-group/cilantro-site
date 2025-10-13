@@ -778,6 +778,22 @@ This is expected behavior - the package is compiled for Linux serverless runtime
 2. **Build Time Increased:** Playwright-core still adds ~30s to build time
 3. **No Fallback Images:** If generation fails, no graceful degradation to static fallback
 
+#### Current Error in Vercel build:
+it just continuously loops through this command
+
+```bash
+> cilantro-site@0.0.0.3 approve-builds /vercel/path0
+> pnpm approve-builds || true
+> cilantro-site@0.0.0.3 approve-builds /vercel/path0
+> pnpm approve-builds || true
+> cilantro-site@0.0.0.3 approve-builds /vercel/path0
+> pnpm approve-builds || true
+> cilantro-site@0.0.0.3 approve-builds /vercel/path0
+> pnpm approve-builds || true
+> cilantro-site@0.0.0.3 approve-builds /vercel/path0
+> pnpm approve-builds || true
+```
+
 ---
 
 ## Next Steps
