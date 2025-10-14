@@ -1,0 +1,12 @@
+[submodule "src/content/changelogs/changelog-parslee"]
+    path = src/content/changelogs/changelog-parslee
+    url = https://github.com/lossless-group/changelog-parslee.git
+    branch = main
+[submodule "src/content/changelogs/changelog-neo"]
+    path = src/content/changelogs/changelog-neo
+    url = https://github.com/lossless-group/changelog-neo.git
+    branch = main
+[submodule "src/content/changelogs/changelog-cilantro-site"]
+	path = src/content/changelogs/changelog-cilantro-site
+	url = https://github.com/lossless-group/changelog-cilantro-site.git
+	branch = main
