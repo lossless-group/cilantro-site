@@ -105,23 +105,26 @@ src/content/
 ### Collection Configuration (`content.config.ts`)
 
 ```typescript
-const changelogNeo = defineCollection({
-  loader: glob({
-    pattern: '**/*.md',
-    base: './src/content/changelogs/neo'
-  }),
-  schema: z.object({
-    version: z.string(),              // e.g., "1.2.0"
-    title: z.string(),                // e.g., "Semantic Reasoning Improvements"
-    date: z.date(),                   // Release date
-    product: z.literal('neo'),        // Product identifier
-    type: z.enum(['major', 'minor', 'patch']),  // Semver type
-    published: z.boolean().default(true),       // Draft control
-    summary: z.string().optional(),   // SEO description
-    author: z.string().optional(),    // Release author/team
-    tags: z.array(z.string()).optional(),       // Custom tags
-  }),
-});
+  const changelogSchema = z.object({
+    version: z.string().optional(),
+    title: z.string(),
+    lede: z.string().optional(),
+    slug: z.string(),
+    date_created: z.date().optional(),
+    date_modified: z.date().optional(),
+    date_started: z.date().optional(),
+    date_shipped: z.date().optional(),
+    product: z.enum(['Neo', 'Parslee', 'Cilantro-Site']),
+    type: z.enum(['Major', 'Minor', 'Patch', 'Documentation', 'Refactor',
+  'Infrastructure']),
+    is_release: z.boolean().optional().default(false),
+    publish: z.boolean().default(true),
+    summary: z.string().optional(),
+    why_care: z.string().optional(),
+    authors: z.array(z.string()).optional(),
+    contributors: z.array(z.string()).optional(),
+    tags: z.array(z.string()).optional(),
+  }); 
 
 const changelogParslee = defineCollection({
   loader: glob({
@@ -1012,3 +1015,66 @@ in the unified changelog folder?
 
   But Option 2 (config in each submodule) gives maximum autonomy if teams want different
   schemas or have different needs.
+
+  Neo's Architectural Analysis Complete
+
+  I've completed a comprehensive evaluation of your multi-product changelog architecture. Here
+  are the key findings:
+
+  Overall Assessment: 8.3/10 - Strong foundation with clear optimization opportunities
+
+  Critical Issues to Address
+
+  1. Parslee Submodule Problem (High Priority)
+
+  Your git submodule shows uncommitted changes:
+  -39ec2accd4386ee83f8c299553f7eaf5008f7a02 src/content/changelogs/changelog-parslee
+
+  The minus sign indicates a detached HEAD or uncommitted state. This needs immediate attention.
+
+  2. Date Field Confusion (High Priority)
+
+  You have 4 date fields (date_created, date_modified, date_started, date_shipped) but your
+  routing code only uses date_shipped. This creates issues for non-release entries that may not
+  have a ship date.
+
+  Recommendation: Establish a clear date hierarchy with fallbacks in your sorting logic.
+
+  3. Scalability Concerns (Medium Priority)
+
+  - No pagination implemented yet (becomes critical around 100+ entries)
+  - Fetching all collections on every page load
+  - No query-level filtering
+
+  What's Working Well
+
+  ✅ Modular config approach - Your changelog.config.ts separation is exactly right✅ Clean
+  routing structure - SEO-friendly URLs with good hierarchy✅ Product-specific type literals -
+  Prevents misconfiguration✅ Rich metadata schema - Good balance of required vs optional fields
+
+
+  Key Recommendations
+
+  1. Fix the submodule issue - See detailed commands in Neo's analysis
+  2. Simplify date strategy - Use primary date field with fallbacks
+  3. Add pagination proactively - Before you hit 50+ entries
+  4. Create authoring tools - CLI generator for new changelog entries
+  5. Add validation hooks - Catch schema errors before build time
+
+  Architecture Decision Validation
+
+  Your git submodules approach is appropriate for your context since:
+  - You're in a monorepo with multiple products
+  - Teams may want independent content ownership
+  - The modular config file approach you chose is ideal
+
+  Next Steps
+
+  Would you like me to:
+  1. Fix the Parslee submodule issue (5 mins)
+  2. Create a changelog entry generator script (15 mins)
+  3. Update schema with simplified date handling (10 mins)
+  4. Add pagination to unified view (20 mins)
+
+  The full analysis from Neo includes detailed code examples, risk scores, and implementation
+  roadmap. Which priority would you like to tackle first?

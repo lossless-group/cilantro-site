@@ -1,0 +1,245 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { buildOgMeta } from '../../utils/og';
+
+// Fetch all changelog entries from all products
+const neoEntries = await getCollection('changelog-neo', ({ data }) => data.publish === true);
+const parsleeEntries = await getCollection('changelog-parslee', ({ data }) => data.publish === true);
+const siteEntries = await getCollection('changelog-cilantro-site', ({ data }) => data.publish === true);
+
+// Combine and sort by date (most recent first)
+const allEntries = [...neoEntries, ...parsleeEntries, ...siteEntries]
+  .filter(entry => entry.data.date_shipped)
+  .sort((a, b) => {
+    const dateA = a.data.date_shipped?.getTime() || 0;
+    const dateB = b.data.date_shipped?.getTime() || 0;
+    return dateB - dateA;
+  });
+
+// SEO metadata
+const pageTitle = 'Changelog - Lossless Group Product Updates';
+const pageDescription = 'Track all updates, features, and improvements across Neo, Parslee, and Cilantro Site. Stay informed about the latest releases and changes.';
+const pageUrl = '/changelog';
+
+// Product identifiers for filtering
+const productMap: Record<string, string> = {
+  'Neo': 'neo',
+  'Parslee': 'parslee',
+  'Cilantro-Site': 'cilantro-site'
+};
+
+// Format date for display
+function formatDate(date: Date | undefined): string {
+  if (!date) return 'Unknown date';
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  }).format(date);
+}
+---
+
+<BaseLayout title={pageTitle} meta={buildOgMeta({ title: pageTitle, description: pageDescription, url: pageUrl })}>
+  <!-- Header -->
+  <header class="border-b border-border bg-gradient-to-b from-muted/30 to-transparent">
+    <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+        <h1 class="bg-gradient-to-r from-accent via-secondary to-primary bg-clip-text text-5xl font-bold tracking-tight text-transparent lg:text-6xl">
+          Product Changelog
+        </h1>
+        <p class="mt-6 text-xl leading-8 text-muted-foreground">
+          Track updates across all Lossless Group products. See what's new, what's fixed, and what's coming next.
+        </p>
+
+        <!-- Filter tabs -->
+        <div class="mt-8 flex flex-wrap justify-center gap-2">
+          <button class="changelog-filter-tab active rounded-full border border-border bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90" data-filter="all">
+            All Products
+          </button>
+          <button class="changelog-filter-tab rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition-all hover:bg-muted" data-filter="neo">
+            Neo
+          </button>
+          <button class="changelog-filter-tab rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition-all hover:bg-muted" data-filter="parslee">
+            Parslee
+          </button>
+          <button class="changelog-filter-tab rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition-all hover:bg-muted" data-filter="cilantro-site">
+            Cilantro Site
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Timeline -->
+  <main class="py-16">
+    <div class="mx-auto max-w-5xl px-6 lg:px-8">
+      {allEntries.length === 0 ? (
+        <div class="rounded-lg border border-border bg-card p-12 text-center">
+          <p class="text-muted-foreground">No changelog entries yet. Check back soon for updates!</p>
+        </div>
+      ) : (
+        <div class="space-y-8">
+          {allEntries.map((entry) => {
+            const { data } = entry;
+            const productSlug = productMap[data.product];
+            const detailUrl = `/changelog/${productSlug}/${data.slug}`;
+
+            return (
+              <article class="changelog-entry group relative" data-product={productSlug}>
+                <!-- Timeline connector -->
+                <div class="absolute left-0 top-10 hidden h-full w-px bg-border lg:block"></div>
+
+                <!-- Date marker (desktop) -->
+                <div class="absolute -left-24 top-8 hidden w-20 text-right lg:block">
+                  <time datetime={data.date_shipped?.toISOString()} class="text-sm font-medium text-muted-foreground">
+                    {formatDate(data.date_shipped)}
+                  </time>
+                </div>
+
+                <!-- Content card -->
+                <div class="rounded-xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:border-primary/50 hover:shadow-md lg:ml-8">
+                  <!-- Date (mobile) -->
+                  <time datetime={data.date_shipped?.toISOString()} class="mb-3 block text-sm font-medium text-muted-foreground lg:hidden">
+                    {formatDate(data.date_shipped)}
+                  </time>
+
+                  <!-- Badges -->
+                  <div class="mb-4 flex flex-wrap items-center gap-2">
+                    <span class={`
+                      inline-flex items-center rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide
+                      ${data.product === 'Neo' ? 'bg-purple-500/10 text-purple-600 dark:bg-purple-500/20 dark:text-purple-400' : ''}
+                      ${data.product === 'Parslee' ? 'bg-cyan-500/10 text-cyan-600 dark:bg-cyan-500/20 dark:text-cyan-400' : ''}
+                      ${data.product === 'Cilantro-Site' ? 'bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400' : ''}
+                    `}>
+                      {data.product}
+                    </span>
+
+                    {data.version && (
+                      <span class="inline-flex items-center rounded-md bg-muted px-3 py-1 font-mono text-xs font-semibold text-foreground">
+                        {data.version}
+                      </span>
+                    )}
+
+                    <span class={`
+                      inline-flex items-center rounded-md px-2.5 py-1 text-xs font-medium
+                      ${data.type === 'Major' ? 'bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-400' : ''}
+                      ${data.type === 'Minor' ? 'bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-400' : ''}
+                      ${data.type === 'Patch' ? 'bg-gray-50 text-gray-700 dark:bg-gray-900 dark:text-gray-400' : ''}
+                      ${data.type === 'Documentation' ? 'bg-purple-50 text-purple-700 dark:bg-purple-950 dark:text-purple-400' : ''}
+                      ${data.type === 'Refactor' || data.type === 'Infrastructure' ? 'bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-400' : ''}
+                    `}>
+                      {data.type}
+                    </span>
+
+                    {data.is_release && (
+                      <span class="inline-flex items-center rounded-md bg-green-600 px-2.5 py-1 text-xs font-bold text-white">
+                        Release
+                      </span>
+                    )}
+                  </div>
+
+                  <!-- Title -->
+                  <h2 class="mb-3 text-2xl font-bold tracking-tight">
+                    <a href={detailUrl} class="text-foreground transition-colors hover:text-primary">
+                      {data.title}
+                    </a>
+                  </h2>
+
+                  <!-- Description -->
+                  {(data.lede || data.summary) && (
+                    <p class="mb-4 leading-relaxed text-muted-foreground">
+                      {data.lede || data.summary}
+                    </p>
+                  )}
+
+                  <!-- Meta -->
+                  <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+                    {data.authors && data.authors.length > 0 && (
+                      <span>By {data.authors.join(', ')}</span>
+                    )}
+                    {data.tags && data.tags.length > 0 && (
+                      <div class="flex flex-wrap gap-1.5">
+                        {data.tags.slice(0, 3).map(tag => (
+                          <span class="rounded-md bg-muted px-2 py-0.5 text-xs">{tag}</span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  <!-- Read more -->
+                  <div class="mt-4">
+                    <a href={detailUrl} class="inline-flex items-center text-sm font-semibold text-primary hover:underline">
+                      View Full Changelog
+                      <svg class="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  </main>
+
+  <!-- RSS Subscribe -->
+  <aside class="border-t border-border bg-muted/30">
+    <div class="mx-auto max-w-5xl px-6 py-12 lg:px-8">
+      <h3 class="mb-2 text-xl font-bold">Stay Updated</h3>
+      <p class="mb-4 text-muted-foreground">Subscribe to our changelog feeds:</p>
+      <div class="flex flex-wrap gap-3">
+        <a href="/changelog/rss.xml" class="inline-flex items-center rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition-all hover:border-orange-500 hover:text-orange-500">
+          <svg class="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+          </svg>
+          All Products RSS
+        </a>
+        <a href="/changelog/neo/rss.xml" class="inline-flex items-center rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition-all hover:border-purple-500 hover:text-purple-500">
+          Neo RSS
+        </a>
+        <a href="/changelog/parslee/rss.xml" class="inline-flex items-center rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition-all hover:border-cyan-500 hover:text-cyan-500">
+          Parslee RSS
+        </a>
+        <a href="/changelog/cilantro-site/rss.xml" class="inline-flex items-center rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition-all hover:border-emerald-500 hover:text-emerald-500">
+          Site RSS
+        </a>
+      </div>
+    </div>
+  </aside>
+</BaseLayout>
+
+<script>
+  // Filter functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('.changelog-filter-tab');
+    const entries = document.querySelectorAll('.changelog-entry');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const filter = tab.getAttribute('data-filter');
+
+        // Update active tab
+        tabs.forEach(t => {
+          t.classList.remove('active', 'bg-primary', 'text-primary-foreground');
+          t.classList.add('bg-background', 'text-foreground');
+        });
+        tab.classList.add('active', 'bg-primary', 'text-primary-foreground');
+        tab.classList.remove('bg-background', 'text-foreground');
+
+        // Filter entries
+        entries.forEach(entry => {
+          const product = entry.getAttribute('data-product');
+          if (filter === 'all' || product === filter) {
+            entry.style.display = 'block';
+          } else {
+            entry.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
+</BaseLayout>

@@ -1,0 +1,292 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { buildOgMeta } from '../../../utils/og';
+import type { GetStaticPaths } from 'astro';
+
+// Define valid product routes
+export const getStaticPaths = (async () => {
+  return [
+    { params: { product: 'neo' } },
+    { params: { product: 'parslee' } },
+    { params: { product: 'cilantro-site' } },
+  ];
+}) satisfies GetStaticPaths;
+
+const { product } = Astro.params;
+
+// Map URL params to collection names and display info
+const productMap: Record<string, { collection: string; display: string; colorClass: string }> = {
+  'neo': {
+    collection: 'changelog-neo',
+    display: 'Neo',
+    colorClass: 'purple'
+  },
+  'parslee': {
+    collection: 'changelog-parslee',
+    display: 'Parslee',
+    colorClass: 'cyan'
+  },
+  'cilantro-site': {
+    collection: 'changelog-cilantro-site',
+    display: 'Cilantro Site',
+    colorClass: 'emerald'
+  }
+};
+
+const productInfo = productMap[product!];
+if (!productInfo) {
+  return Astro.redirect('/changelog');
+}
+
+// Fetch entries for this product only
+const entries = await getCollection(productInfo.collection as any, ({ data }) => data.publish === true);
+
+// Sort by date (most recent first)
+const sortedEntries = entries
+  .filter(entry => entry.data.date_shipped)
+  .sort((a, b) => {
+    const dateA = a.data.date_shipped?.getTime() || 0;
+    const dateB = b.data.date_shipped?.getTime() || 0;
+    return dateB - dateA;
+  });
+
+// SEO metadata
+const pageTitle = `${productInfo.display} Changelog - Product Updates`;
+const pageDescription = `Track all updates, features, and improvements for ${productInfo.display}. Stay informed about the latest releases and changes.`;
+const pageUrl = `/changelog/${product}`;
+
+// Format date
+function formatDate(date: Date | undefined): string {
+  if (!date) return 'Unknown date';
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  }).format(date);
+}
+---
+
+<BaseLayout title={pageTitle} meta={buildOgMeta({ title: pageTitle, description: pageDescription, url: pageUrl })}>
+  <!-- Header -->
+  <header class="border-b border-border bg-gradient-to-b from-muted/30 to-transparent">
+    <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+      <div class="mx-auto max-w-3xl">
+        <!-- Breadcrumb -->
+        <nav class="mb-6 flex items-center gap-2 text-sm text-muted-foreground">
+          <a href="/changelog" class="transition-colors hover:text-foreground">All Changelogs</a>
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width={2} d="M9 5l7 7-7 7" />
+          </svg>
+          <span class="font-semibold text-foreground">{productInfo.display}</span>
+        </nav>
+
+        <!-- Title -->
+        <h1 class={`
+          mb-4 text-5xl font-bold tracking-tight lg:text-6xl
+          ${productInfo.colorClass === 'purple' ? 'text-purple-600 dark:text-purple-400' : ''}
+          ${productInfo.colorClass === 'cyan' ? 'text-cyan-600 dark:text-cyan-400' : ''}
+          ${productInfo.colorClass === 'emerald' ? 'text-emerald-600 dark:text-emerald-400' : ''}
+        `}>
+          {productInfo.display} Changelog
+        </h1>
+
+        <p class="text-xl leading-8 text-muted-foreground">
+          Track updates, features, and improvements for {productInfo.display}.
+        </p>
+
+        <!-- Filter by type -->
+        <div class="mt-8 flex flex-wrap gap-2">
+          <button class="changelog-type-filter active rounded-full border border-border bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90" data-filter="all">
+            All Updates
+          </button>
+          <button class="changelog-type-filter rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition-all hover:bg-muted" data-filter="major">
+            Major
+          </button>
+          <button class="changelog-type-filter rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition-all hover:bg-muted" data-filter="minor">
+            Minor
+          </button>
+          <button class="changelog-type-filter rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition-all hover:bg-muted" data-filter="patch">
+            Patch
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Timeline -->
+  <main class="py-16">
+    <div class="mx-auto max-w-5xl px-6 lg:px-8">
+      {sortedEntries.length === 0 ? (
+        <div class="rounded-lg border border-border bg-card p-12 text-center">
+          <p class="text-muted-foreground">No changelog entries yet for {productInfo.display}. Check back soon for updates!</p>
+        </div>
+      ) : (
+        <div class="space-y-8">
+          {sortedEntries.map((entry) => {
+            const { data } = entry;
+            const detailUrl = `/changelog/${product}/${data.slug}`;
+
+            return (
+              <article class="changelog-entry-item group relative" data-type={data.type.toLowerCase()}>
+                <!-- Timeline connector -->
+                <div class="absolute left-0 top-10 hidden h-full w-px bg-border lg:block"></div>
+
+                <!-- Date marker (desktop) -->
+                <div class="absolute -left-24 top-8 hidden w-20 text-right lg:block">
+                  <time datetime={data.date_shipped?.toISOString()} class="text-sm font-medium text-muted-foreground">
+                    {formatDate(data.date_shipped)}
+                  </time>
+                </div>
+
+                <!-- Content card -->
+                <div class={`
+                  rounded-xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:shadow-md lg:ml-8
+                  ${productInfo.colorClass === 'purple' ? 'hover:border-purple-500/50' : ''}
+                  ${productInfo.colorClass === 'cyan' ? 'hover:border-cyan-500/50' : ''}
+                  ${productInfo.colorClass === 'emerald' ? 'hover:border-emerald-500/50' : ''}
+                `}>
+                  <!-- Date (mobile) -->
+                  <time datetime={data.date_shipped?.toISOString()} class="mb-3 block text-sm font-medium text-muted-foreground lg:hidden">
+                    {formatDate(data.date_shipped)}
+                  </time>
+
+                  <!-- Badges -->
+                  <div class="mb-4 flex flex-wrap items-center gap-2">
+                    {data.version && (
+                      <span class="inline-flex items-center rounded-md bg-muted px-3 py-1 font-mono text-xs font-semibold text-foreground">
+                        {data.version}
+                      </span>
+                    )}
+
+                    <span class={`
+                      inline-flex items-center rounded-md px-2.5 py-1 text-xs font-medium
+                      ${data.type === 'Major' ? 'bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-400' : ''}
+                      ${data.type === 'Minor' ? 'bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-400' : ''}
+                      ${data.type === 'Patch' ? 'bg-gray-50 text-gray-700 dark:bg-gray-900 dark:text-gray-400' : ''}
+                      ${data.type === 'Documentation' ? 'bg-purple-50 text-purple-700 dark:bg-purple-950 dark:text-purple-400' : ''}
+                      ${data.type === 'Refactor' || data.type === 'Infrastructure' ? 'bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-400' : ''}
+                    `}>
+                      {data.type}
+                    </span>
+
+                    {data.is_release && (
+                      <span class="inline-flex items-center rounded-md bg-green-600 px-2.5 py-1 text-xs font-bold text-white">
+                        Release
+                      </span>
+                    )}
+                  </div>
+
+                  <!-- Title -->
+                  <h2 class="mb-3 text-2xl font-bold tracking-tight">
+                    <a href={detailUrl} class={`
+                      transition-colors
+                      ${productInfo.colorClass === 'purple' ? 'text-foreground hover:text-purple-600 dark:hover:text-purple-400' : ''}
+                      ${productInfo.colorClass === 'cyan' ? 'text-foreground hover:text-cyan-600 dark:hover:text-cyan-400' : ''}
+                      ${productInfo.colorClass === 'emerald' ? 'text-foreground hover:text-emerald-600 dark:hover:text-emerald-400' : ''}
+                    `}>
+                      {data.title}
+                    </a>
+                  </h2>
+
+                  <!-- Description -->
+                  {(data.lede || data.summary) && (
+                    <p class="mb-4 leading-relaxed text-muted-foreground">
+                      {data.lede || data.summary}
+                    </p>
+                  )}
+
+                  <!-- Meta -->
+                  <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+                    {data.authors && data.authors.length > 0 && (
+                      <span>By {data.authors.join(', ')}</span>
+                    )}
+                    {data.tags && data.tags.length > 0 && (
+                      <div class="flex flex-wrap gap-1.5">
+                        {data.tags.slice(0, 3).map(tag => (
+                          <span class="rounded-md bg-muted px-2 py-0.5 text-xs">{tag}</span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  <!-- Read more -->
+                  <div class="mt-4">
+                    <a href={detailUrl} class={`
+                      inline-flex items-center text-sm font-semibold hover:underline
+                      ${productInfo.colorClass === 'purple' ? 'text-purple-600 dark:text-purple-400' : ''}
+                      ${productInfo.colorClass === 'cyan' ? 'text-cyan-600 dark:text-cyan-400' : ''}
+                      ${productInfo.colorClass === 'emerald' ? 'text-emerald-600 dark:text-emerald-400' : ''}
+                    `}>
+                      View Full Changelog
+                      <svg class="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  </main>
+
+  <!-- RSS Subscribe -->
+  <aside class="border-t border-border bg-muted/30">
+    <div class="mx-auto max-w-5xl px-6 py-12 lg:px-8">
+      <h3 class="mb-2 text-xl font-bold">Stay Updated</h3>
+      <p class="mb-4 text-muted-foreground">Subscribe to the {productInfo.display} changelog feed:</p>
+      <div class="flex flex-wrap gap-3">
+        <a href={`/changelog/${product}/rss.xml`} class={`
+          inline-flex items-center rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium transition-all
+          ${productInfo.colorClass === 'purple' ? 'text-foreground hover:border-purple-500 hover:text-purple-600 dark:hover:text-purple-400' : ''}
+          ${productInfo.colorClass === 'cyan' ? 'text-foreground hover:border-cyan-500 hover:text-cyan-600 dark:hover:text-cyan-400' : ''}
+          ${productInfo.colorClass === 'emerald' ? 'text-foreground hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400' : ''}
+        `}>
+          <svg class="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+          </svg>
+          {productInfo.display} RSS Feed
+        </a>
+        <a href="/changelog" class="inline-flex items-center rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition-all hover:bg-muted">
+          View All Products
+        </a>
+      </div>
+    </div>
+  </aside>
+</BaseLayout>
+
+<script>
+  // Filter functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('.changelog-type-filter');
+    const entries = document.querySelectorAll('.changelog-entry-item');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const filter = tab.getAttribute('data-filter');
+
+        // Update active tab
+        tabs.forEach(t => {
+          t.classList.remove('active', 'bg-primary', 'text-primary-foreground');
+          t.classList.add('bg-background', 'text-foreground');
+        });
+        tab.classList.add('active', 'bg-primary', 'text-primary-foreground');
+        tab.classList.remove('bg-background', 'text-foreground');
+
+        // Filter entries
+        entries.forEach(entry => {
+          const type = entry.getAttribute('data-type');
+          if (filter === 'all' || type === filter) {
+            entry.style.display = 'block';
+          } else {
+            entry.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
+</BaseLayout>
