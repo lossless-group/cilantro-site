@@ -1,0 +1,441 @@
+---
+// ChangelogPreview--Default.astro
+// Displays recent changelog entries with reveal-on-scroll animation
+import { getCollection } from 'astro:content';
+
+// Fetch latest 3 changelog entries across all products
+const neoEntries = await getCollection('changelog-neo', ({ data }) => data.publish === true);
+const parsleeEntries = await getCollection('changelog-parslee', ({ data }) => data.publish === true);
+const siteEntries = await getCollection('changelog-cilantro-site', ({ data }) => data.publish === true);
+
+const allEntries = [...neoEntries, ...parsleeEntries, ...siteEntries]
+  .filter(entry => entry.data.date_shipped)
+  .sort((a, b) => {
+    const dateA = a.data.date_shipped?.getTime() || 0;
+    const dateB = b.data.date_shipped?.getTime() || 0;
+    return dateB - dateA;
+  })
+  .slice(0, 3);
+
+// Product metadata
+const productMap: Record<string, { slug: string; color: string; display: string }> = {
+  'Neo': { slug: 'neo', color: 'purple', display: 'Neo' },
+  'Parslee': { slug: 'parslee', color: 'cyan', display: 'Parslee' },
+  'Cilantro-Site': { slug: 'cilantro-site', color: 'emerald', display: 'Cilantro Site' }
+};
+
+// Format date
+function formatDate(date: Date | undefined): string {
+  if (!date) return 'Recently';
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  }).format(date);
+}
+---
+
+<section id="changelog-preview" class="changelog-preview" aria-label="Recent Updates">
+  <div class="container">
+    <!-- Section header -->
+    <div class="header reveal" style="--delay: 0s">
+      <div class="header-content">
+        <h2 class="title">What's New</h2>
+        <div class="title-bar"></div>
+      </div>
+      <p class="subtitle">
+        Track our latest updates, features, and improvements across all products.
+      </p>
+    </div>
+
+    <!-- Changelog cards -->
+    <div class="cards">
+      {allEntries.map((entry, idx) => {
+        const { data } = entry;
+        const product = productMap[data.product];
+        const detailUrl = `/changelog/${product.slug}/${data.slug}`;
+
+        return (
+          <article class="card reveal" style={`--delay: ${0.1 * (idx + 1)}s`} data-product={product.color}>
+            <!-- Product badge -->
+            <div class="card-header">
+              <span class={`product-badge badge-${product.color}`}>
+                {product.display}
+              </span>
+              {data.version && (
+                <span class="version-badge">{data.version}</span>
+              )}
+            </div>
+
+            <!-- Title -->
+            <h3 class="card-title">
+              <a href={detailUrl} class="card-link">
+                {data.title}
+              </a>
+            </h3>
+
+            <!-- Lede -->
+            {data.lede && (
+              <p class="card-lede">
+                {data.lede}
+              </p>
+            )}
+
+            <!-- Meta -->
+            <div class="card-meta">
+              <time datetime={data.date_shipped?.toISOString()}>
+                {formatDate(data.date_shipped)}
+              </time>
+              <span class="dot">•</span>
+              <span class={`type-label type-${data.type.toLowerCase()}`}>
+                {data.type}
+              </span>
+            </div>
+
+            <!-- Read more -->
+            <div class="card-footer">
+              <a href={detailUrl} class={`read-more link-${product.color}`}>
+                View Details
+                <svg class="arrow" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+
+    <!-- View all link -->
+    <div class="footer reveal" style="--delay: 0.5s">
+      <a href="/changelog" class="view-all">
+        View Full Changelog
+        <svg class="arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .changelog-preview {
+    --blue: #091B35;
+    --blue-70: rgba(9, 27, 53, 0.7);
+    --teal: #00A991;
+    --cyan: #3FE0DE;
+    --purple: #8b5cf6;
+    --emerald: #10b981;
+    --border: #E5E7EB;
+    --bg-light: #F9FAFB;
+
+    padding: 80px 0;
+    background: linear-gradient(to bottom, #ffffff 0%, var(--bg-light) 100%);
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  }
+
+  .container {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .title {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--blue);
+    letter-spacing: -0.02em;
+  }
+
+  @media (min-width: 768px) {
+    .title {
+      font-size: 48px;
+    }
+  }
+
+  .title-bar {
+    height: 3px;
+    width: 60px;
+    background: linear-gradient(to right, var(--teal), var(--cyan));
+    border-radius: 2px;
+  }
+
+  .subtitle {
+    font-size: 18px;
+    color: var(--blue-70);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Cards grid */
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  @media (min-width: 768px) {
+    .cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .cards {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Card */
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
+
+  /* Product badge styling */
+  .card[data-product="purple"]:hover {
+    border-color: rgba(139, 92, 246, 0.3);
+  }
+
+  .card[data-product="cyan"]:hover {
+    border-color: rgba(6, 182, 212, 0.3);
+  }
+
+  .card[data-product="emerald"]:hover {
+    border-color: rgba(16, 185, 129, 0.3);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .product-badge {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 12px;
+    border-radius: 12px;
+  }
+
+  .badge-purple {
+    background: rgba(139, 92, 246, 0.1);
+    color: #7c3aed;
+  }
+
+  .badge-cyan {
+    background: rgba(6, 182, 212, 0.1);
+    color: #0891b2;
+  }
+
+  .badge-emerald {
+    background: rgba(16, 185, 129, 0.1);
+    color: #059669;
+  }
+
+  .version-badge {
+    font-size: 11px;
+    font-weight: 600;
+    font-family: ui-monospace, monospace;
+    color: var(--blue-70);
+    background: var(--bg-light);
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+
+  .card-title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  .card-link {
+    color: var(--blue);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .card-link:hover {
+    color: var(--teal);
+  }
+
+  .card-lede {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--blue-70);
+    margin: 0;
+    flex: 1;
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--blue-70);
+  }
+
+  .dot {
+    opacity: 0.5;
+  }
+
+  .type-label {
+    font-weight: 500;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+
+  .type-major {
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+  }
+
+  .type-minor {
+    background: rgba(59, 130, 246, 0.1);
+    color: #2563eb;
+  }
+
+  .type-patch {
+    background: rgba(107, 114, 128, 0.1);
+    color: #4b5563;
+  }
+
+  .card-footer {
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+
+  .read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .link-purple {
+    color: #7c3aed;
+  }
+
+  .link-purple:hover {
+    color: #6d28d9;
+  }
+
+  .link-cyan {
+    color: #0891b2;
+  }
+
+  .link-cyan:hover {
+    color: #0e7490;
+  }
+
+  .link-emerald {
+    color: #059669;
+  }
+
+  .link-emerald:hover {
+    color: #047857;
+  }
+
+  .arrow {
+    transition: transform 0.2s ease;
+  }
+
+  .read-more:hover .arrow {
+    transform: translateX(3px);
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+  }
+
+  .view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--blue);
+    text-decoration: none;
+    padding: 12px 24px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .view-all:hover {
+    border-color: var(--teal);
+    color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 169, 145, 0.2);
+  }
+
+  .view-all:hover .arrow {
+    transform: translateX(4px);
+  }
+
+  /* Reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: reveal 0.8s ease forwards;
+    animation-delay: var(--delay, 0s);
+  }
+
+  @keyframes reveal {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+
+    .card,
+    .view-all,
+    .read-more .arrow {
+      transition: none;
+    }
+  }
+</style>

@@ -7,6 +7,7 @@ import SolutionSection from '../layouts/sections/Solution--Default.astro';
 import TractionHighlightsSection from '../layouts/sections/TractionHighlights--Default.astro';
 import NarrativeHighlightsSection from '../layouts/sections/NarrativeHighlights--Compact.astro'
 import BenefitsSection from '../layouts/sections/Benefits--Default.astro';
+import ChangelogPreviewSection from '../layouts/sections/ChangelogPreview--Default.astro';
 import CTAWaitlistSection from '../layouts/sections/CTA-Waitlist--Default.astro';
 import { buildOgMeta } from '../utils/og';
 import { SITE_SEO } from '../config/seo';
@@ -26,4 +27,5 @@ const pageUrl = Astro.url?.pathname ?? '/';
   <NarrativeHighlightsSection />
   <BenefitsSection />
   <CTAWaitlistSection />
+  <ChangelogPreviewSection />
 </BaseLayout>
