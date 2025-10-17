@@ -49,7 +49,7 @@ function formatDate(date: Date | undefined): string {
           Product Changelog
         </h1>
         <p class="mt-6 text-xl leading-8 text-muted-foreground">
-          Track updates across all Lossless Group products. See what's new, what's fixed, and what's coming next.
+          Track updates across all products and projects at Parslee. See what's new, what's fixed, and what's coming next.
         </p>
 
         <!-- Filter tabs -->
@@ -215,7 +215,7 @@ function formatDate(date: Date | undefined): string {
   // Filter functionality
   document.addEventListener('DOMContentLoaded', () => {
     const tabs = document.querySelectorAll('.changelog-filter-tab');
-    const entries = document.querySelectorAll('.changelog-entry');
+    const entries = document.querySelectorAll('.changelog-entry') as NodeListOf<HTMLElement>;
 
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
@@ -230,7 +230,7 @@ function formatDate(date: Date | undefined): string {
         tab.classList.remove('bg-background', 'text-foreground');
 
         // Filter entries
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           const product = entry.getAttribute('data-product');
           if (filter === 'all' || product === filter) {
             entry.style.display = 'block';
