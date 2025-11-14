@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config'
 import tailwind from '@tailwindcss/vite'
 import { fileURLToPath } from 'node:url'
 import { existsSync } from 'node:fs'
+import node from '@astrojs/node'
 
 // https://docs.astro.build/en/guides/integrations-guide/tailwind/#tailwind-v4
 // Detect if we're in the monorepo with local workspace packages available.
@@ -24,6 +25,10 @@ const aliases = {
 }
 
 export default defineConfig({
+  output: 'server',
+  adapter: node({
+    mode: 'standalone'
+  }),
   vite: {
     plugins: [tailwind()],
     // In monorepo dev, allow reading shared packages; omit in standalone.

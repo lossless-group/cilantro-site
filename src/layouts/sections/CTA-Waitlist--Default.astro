@@ -148,19 +148,72 @@ const bullets = ['Early beta access', 'Product updates', 'Investor news'];
       }, { rootMargin: '-100px 0px' });
       revealEls.forEach((el) => io.observe(el));
 
-      // Simple waitlist mock submission
+      // Newsletter submission to Twenty CRM
       const form = document.getElementById('waitlist-form');
       const success = document.getElementById('waitlist-success');
-      form?.addEventListener('submit', (evt) => {
+      const submitButton = form?.querySelector('button[type="submit"]');
+      const originalButtonText = submitButton?.querySelector('span')?.textContent;
+
+      form?.addEventListener('submit', async (evt) => {
         evt.preventDefault();
-        form.setAttribute('hidden', '');
-        success?.removeAttribute('hidden');
-        window.setTimeout(() => {
-          success?.setAttribute('hidden', '');
-          form?.removeAttribute('hidden');
-          const input = document.getElementById('waitlist-email');
-          if (input && 'value' in input) { input.value = ''; }
-        }, 3000);
+
+        const input = document.getElementById('waitlist-email');
+        const email = input?.value;
+
+        if (!email) return;
+
+        // Disable button and show loading state
+        if (submitButton) {
+          submitButton.disabled = true;
+          const span = submitButton.querySelector('span');
+          if (span) span.textContent = 'Subscribing...';
+        }
+
+        try {
+          const response = await fetch('/api/newsletter', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+          });
+
+          const result = await response.json();
+
+          if (response.ok && result.success) {
+            // Show success message
+            form.setAttribute('hidden', '');
+            success?.removeAttribute('hidden');
+
+            // Reset form after 5 seconds
+            window.setTimeout(() => {
+              success?.setAttribute('hidden', '');
+              form?.removeAttribute('hidden');
+              if (input && 'value' in input) { input.value = ''; }
+              if (submitButton) {
+                submitButton.disabled = false;
+                const span = submitButton.querySelector('span');
+                if (span && originalButtonText) span.textContent = originalButtonText;
+              }
+            }, 5000);
+          } else {
+            // Show error
+            alert(result.error || 'Failed to subscribe. Please try again.');
+            if (submitButton) {
+              submitButton.disabled = false;
+              const span = submitButton.querySelector('span');
+              if (span && originalButtonText) span.textContent = originalButtonText;
+            }
+          }
+        } catch (error) {
+          console.error('Subscription error:', error);
+          alert('An error occurred. Please try again.');
+          if (submitButton) {
+            submitButton.disabled = false;
+            const span = submitButton.querySelector('span');
+            if (span && originalButtonText) span.textContent = originalButtonText;
+          }
+        }
       });
     });
   </script>
